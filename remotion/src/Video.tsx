@@ -44,7 +44,7 @@ const useDivisao = () => {
   );
 };
 
-const Orador: React.FC<{ divisao: number }> = ({ divisao }) => {
+const Orador: React.FC<{ divisao: number; semVoz: boolean }> = ({ divisao, semVoz }) => {
   const frame = useCurrentFrame();
   const { segmentos, mapa, dentro } = useMontagem();
   // Zoom alternado (100% / 112%) a cada jump cut original e a cada corte entre frases, ancorado na cara.
@@ -64,7 +64,7 @@ const Orador: React.FC<{ divisao: number }> = ({ divisao }) => {
               src={staticFile("original.mp4")}
               trimBefore={Math.round(s.ini * 30)}
               // micro-fade de 2 frames em cada corte para não haver estalos no áudio
-              volume={(fr) => interpolate(fr, [0, 2, dur - 2, dur], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}
+              volume={(fr) => (semVoz ? 0 : interpolate(fr, [0, 2, dur - 2, dur], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }))}
               style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover" }}
             />
           </Sequence>
@@ -87,13 +87,13 @@ const cenas: [keyof typeof CENAS, React.FC<{ a: number }>][] = [
   ["plano", Plano],
 ];
 
-export const Video: React.FC<{ chipInicial?: boolean }> = ({ chipInicial = true }) => {
+export const Video: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = ({ chipInicial = true, semVoz = false }) => {
   const frame = useCurrentFrame();
   const divisao = useDivisao();
   const montagem = useMontagem();
   return (
     <AbsoluteFill style={{ backgroundColor: COR.fundo, fontFamily: FONTE }}>
-      <Orador divisao={divisao} />
+      <Orador divisao={divisao} semVoz={semVoz} />
 
       {/* Painel de gráficos */}
       <AbsoluteFill

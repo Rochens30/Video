@@ -6,7 +6,7 @@ cd "$(dirname "$0")/.."
 COMP="${1:-Consistencia}"
 BROWSER_ARGS=()
 [ -n "${REMOTION_BROWSER:-}" ] && BROWSER_ARGS=(--browser-executable="$REMOTION_BROWSER")
-npx remotion render "$COMP" "out/render_$COMP.mp4" "${BROWSER_ARGS[@]}" --log=error
+npx remotion render "$COMP" "out/render_$COMP.mp4" --codec=h264 --crf=18 "${BROWSER_ARGS[@]}" --log=error
 I=$(ffmpeg -hide_banner -i "out/render_$COMP.mp4" -af ebur128 -f null - 2>&1 | awk '/^ +I:/{print $2}' | tail -1)
 GANHO=$(python3 -c "print(round(-14 - float('$I'), 2))")
 echo "Loudness medido: $I LUFS -> ganho ${GANHO} dB"

@@ -20,7 +20,8 @@ export const duracaoTotal = (v: Versao) => {
   return c.intro + c.montagem.duracao + c.cta - SOBREPOSICAO_CTA;
 };
 
-export const Final: React.FC<{ versao: Versao }> = ({ versao }) => {
+/** `semVoz`: diagnóstico — renderiza só a faixa de efeitos (ex.: --props='{"versao":"curta","semVoz":true}'). */
+export const Final: React.FC<{ versao: Versao; semVoz?: boolean }> = ({ versao, semVoz = false }) => {
   const c = CONFIG[versao];
   const inicioCta = c.intro + c.montagem.duracao - SOBREPOSICAO_CTA;
   return (
@@ -32,7 +33,7 @@ export const Final: React.FC<{ versao: Versao }> = ({ versao }) => {
           </Sequence>
         )}
         <Sequence from={f(c.intro)} durationInFrames={f(c.montagem.duracao)}>
-          <Video chipInicial={c.gancho === 0} />
+          <Video chipInicial={c.gancho === 0} semVoz={semVoz} />
           {c.gancho > 0 && <Gancho duracao={c.gancho} />}
         </Sequence>
         <Sequence from={f(inicioCta)} durationInFrames={f(c.cta)}>
