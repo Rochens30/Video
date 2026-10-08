@@ -1,6 +1,6 @@
 """Gera legendas .ass (3 estilos) a partir de transcricoes/transcricao_palavras.json.
 
-Uso: python3 scripts/legendas.py transcricoes/transcricao_palavras.json exemplos/
+Uso: python3 ferramentas/legendas_ass.py transcricoes/transcricao_palavras.json PASTA_SAIDA/
 Os ficheiros .ass assumem um vídeo 1080x1920 (vertical).
 """
 import json, re, sys

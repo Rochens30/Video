@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # Render + normalização linear do áudio para −14 LUFS (mantém o equilíbrio voz/efeitos).
-# Uso: ./scripts/render.sh [Consistencia|Consistencia45]
+# Uso: ./scripts/render.sh [Reel45|Reel45SemEfeitos|ReelCompleto]
 set -euo pipefail
 cd "$(dirname "$0")/.."
-COMP="${1:-Consistencia}"
+COMP="${1:-Reel45}"
 BROWSER_ARGS=()
 [ -n "${REMOTION_BROWSER:-}" ] && BROWSER_ARGS=(--browser-executable="$REMOTION_BROWSER")
 npx remotion render "$COMP" "out/render_$COMP.mp4" --codec=h264 --crf=18 "${BROWSER_ARGS[@]}" --log=error

@@ -1,4 +1,4 @@
-# Vídeo "Consistência" em Remotion
+# Reels Forex Academy Club em Remotion
 
 Vídeo vertical (1080×1920) com o tema visual de forexacademyclub.com (preto quente, dourado, Playfair Display + Manrope), com a estrutura **intro com gancho (2,8 s) → vídeo principal → call to action (6 s)**:
 - legendas palavra a palavra (palavras-chave em itálico dourado), a partir de `src/palavras.json`;
@@ -8,13 +8,21 @@ Vídeo vertical (1080×1920) com o tema visual de forexacademyclub.com (preto qu
 - poucos efeitos sonoros, só nos momentos-chave (`src/Sons.tsx`);
 - intro com gancho (`src/Intro.tsx`) e call to action para homepage.forexacademyclub.com (`src/CTA.tsx`).
 
-## Duas versões
+## Vídeos feitos
+
+| # | Tema | Notas |
+|---|---|---|
+| 1 | Consistência | `videos/01-consistencia/NOTAS.md` (código em `a40b937`) |
+
+Para um vídeo novo segue a skill `.claude/skills/reel-trading/SKILL.md` (ou cola o `PROMPT_NOVO_REEL.md`).
+
+## Versões
 
 | Composição | Duração | O que muda |
 |---|---|---|
-| `Consistencia` | ~75 s | intro em ecrã próprio, vídeo inteiro |
-| `Consistencia45` | ~45 s | gancho por cima do orador desde o 1.º frame, frases repetidas cortadas, pausas longas encurtadas |
-| `Consistencia45SemEfeitos` | ~45 s | igual, sem nenhum efeito sonoro (só a voz) |
+| `ReelCompleto` | ~75 s | intro em ecrã próprio, vídeo inteiro |
+| `Reel45` | ~45 s | gancho por cima do orador desde o 1.º frame, frases repetidas cortadas, pausas longas encurtadas |
+| `Reel45SemEfeitos` | ~45 s | igual, sem nenhum efeito sonoro (só a voz) |
 | `Capa` (imagem) | — | capa do Reel 1080×1920; título e logótipo dentro do recorte 3:4 da grelha |
 
 Os cortes da versão curta são gerados por `scripts/montar_curta.py` (→ `src/montagem_curta.json`); legendas, gráficos e sons são convertidos automaticamente para a nova linha temporal (`src/montagem.ts`).
@@ -26,7 +34,7 @@ npm install
 cp /caminho/para/o/video.mp4 public/original.mp4   # o vídeo não está no git
 ffmpeg -ss 7.5 -i public/original.mp4 -frames:v 1 public/capa_frame.png   # frame usada na capa
 npm run studio      # pré-visualizar e afinar no browser
-./scripts/render.sh Consistencia45   # render + áudio a −14 LUFS → out/Consistencia45.mp4
+./scripts/render.sh Reel45   # render + áudio a −14 LUFS → out/Reel45.mp4
 npx remotion still Capa out/capa_reel.png
 ```
 

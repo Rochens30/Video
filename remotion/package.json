@@ -1,9 +1,9 @@
 {
-  "name": "consistencia-video",
+  "name": "reels-forex-academy-club",
   "private": true,
   "scripts": {
     "studio": "remotion studio",
-    "render": "remotion render Consistencia out/consistencia.mp4"
+    "render": "./scripts/render.sh Reel45"
   },
   "dependencies": {
     "@fontsource/jetbrains-mono": "^5.3.0",

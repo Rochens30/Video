@@ -6,7 +6,7 @@ import { FPS } from "./tempo";
 export const RemotionRoot: React.FC = () => (
   <>
     <Composition
-      id="Consistencia"
+      id="ReelCompleto"
       component={Final}
       defaultProps={{ versao: "completa" as const }}
       durationInFrames={Math.ceil(duracaoTotal("completa") * FPS)}
@@ -15,7 +15,7 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition
-      id="Consistencia45"
+      id="Reel45"
       component={Final}
       defaultProps={{ versao: "curta" as const }}
       durationInFrames={Math.ceil(duracaoTotal("curta") * FPS)}
@@ -24,7 +24,7 @@ export const RemotionRoot: React.FC = () => (
       height={1920}
     />
     <Composition
-      id="Consistencia45SemEfeitos"
+      id="Reel45SemEfeitos"
       component={Final}
       defaultProps={{ versao: "curta" as const, semEfeitos: true }}
       durationInFrames={Math.ceil(duracaoTotal("curta") * FPS)}
