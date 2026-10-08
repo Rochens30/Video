@@ -18,3 +18,10 @@ export const CENAS = {
   saldo: [56.27, 60.5],
   plano: [60.5, 64.1],
 } as const;
+
+// Estrutura final: intro com gancho → vídeo principal → call to action.
+export const INTRO = 2.8;
+export const PRINCIPAL = 67.3;
+export const CTA = 6.0;
+export const SOBREPOSICAO_CTA = 0.4; // o CTA entra por cima dos últimos frames do vídeo
+export const TOTAL = INTRO + PRINCIPAL + CTA - SOBREPOSICAO_CTA;

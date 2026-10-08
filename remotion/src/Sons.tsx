@@ -3,6 +3,9 @@ import { CENAS, f } from "./tempo";
 
 type Som = [segundos: number, ficheiro: string, volume: number];
 
+// Ganho global dos efeitos (0.5 ≈ −6 dB).
+const GANHO = 0.5;
+
 const ui = (nome: string) => `sfx/ui/${nome}.mp3`;
 const sint = (nome: string) => `sfx/${nome}.wav`;
 const fr = (n: number) => n / 30; // frames → segundos (para os atrasos das animações)
@@ -69,7 +72,7 @@ export const Sons: React.FC = () => (
   <>
     {SONS.map(([t, ficheiro, volume], i) => (
       <Sequence key={i} from={Math.max(0, f(t))} layout="none">
-        <Audio src={staticFile(ficheiro)} volume={volume} />
+        <Audio src={staticFile(ficheiro)} volume={volume * GANHO} />
       </Sequence>
     ))}
   </>
