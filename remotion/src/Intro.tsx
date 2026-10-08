@@ -1,7 +1,7 @@
-import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { COR, FONTE, SERIFA } from "./estilo";
 import { f, INTRO } from "./tempo";
-import { Kicker, Ouro, useEntrada } from "./ui";
+import { Ouro, useEntrada } from "./ui";
 
 // Gancho: dor reconhecível → reviravolta que só o vídeo explica.
 const FRASE2 = f(1.25);
@@ -19,8 +19,8 @@ export const Intro: React.FC = () => {
     <AbsoluteFill style={{ background: `radial-gradient(90% 55% at 50% 42%, #24140F 0%, ${COR.fundo} 70%)`, fontFamily: FONTE }}>
       <AbsoluteFill style={{ transform: `scale(${saida}) translateX(${treme}px)`, opacity: opSaida }}>
         <Velas frame={frame} />
-        <div style={{ position: "absolute", top: 300, left: 0, right: 0, display: "flex", justifyContent: "center", opacity: t1 }}>
-          <Kicker cor={COR.positivo}>FOREX ACADEMY CLUB</Kicker>
+        <div style={{ position: "absolute", top: 250, left: 0, right: 0, display: "flex", justifyContent: "center", opacity: t1 }}>
+          <Img src={staticFile("logo.png")} style={{ width: 230 }} />
         </div>
         <div style={{ position: "absolute", top: 420, left: 0, right: 0, textAlign: "center", opacity: t1 }}>
           <span style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 84, color: COR.negativo }}>{Math.round(saldo).toLocaleString("pt-PT")} €</span>

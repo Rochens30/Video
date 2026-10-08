@@ -112,10 +112,10 @@ export const Video: React.FC = () => {
 
       {/* Títulos de abertura e fecho, por cima da parede */}
       <Sequence from={f(0.1)} durationInFrames={f(4.8)} layout="none">
-        <Chip y={150} cor={COR.positivo} texto="CONSISTÊNCIA ≠ GANHAR SEMPRE" />
+        <Chip y={230} cor={COR.positivo} texto="CONSISTÊNCIA ≠ GANHAR SEMPRE" />
       </Sequence>
       <Sequence from={f(64.4)} layout="none">
-        <Chip y={150} cor={COR.positivo} texto="CONSISTÊNCIA = SEGUIR O PLANO" />
+        <Chip y={230} cor={COR.positivo} texto="CONSISTÊNCIA = SEGUIR O PLANO" />
       </Sequence>
 
       <Legendas divisao={divisao} />

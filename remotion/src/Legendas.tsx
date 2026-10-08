@@ -23,7 +23,7 @@ export const Legendas: React.FC<{ divisao: number }> = ({ divisao }) => {
   const w = W[i];
   const s = spring({ frame: frame - f(w.inicio), fps, config: { damping: 11, mass: 0.4 } });
   const chave = CHAVE.has(limpa(w.palavra));
-  const y = interpolate(divisao, [0, 1], [1150, 1480]);
+  const y = interpolate(divisao, [0, 1], [1150, 1440]);
   return (
     <div style={{ position: "absolute", top: y, left: 40, right: 40, display: "flex", justifyContent: "center", transform: "translateY(-50%)" }}>
       <div
