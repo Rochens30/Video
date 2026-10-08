@@ -28,7 +28,7 @@ const SONS: Som[] = [
   // Expectativa: barras a crescer, carimbo "NÃO EXISTE"
   ...serie(7.6, 6, 5, () => ui("progress-step"), 0.4),
   [10.8, ui("blocked"), 0.35],
-  [11.5, sint("impacto"), 0.4],
+  [11.5, sint("impacto"), 0.2],
   [11.5, ui("error"), 0.3],
   [12.25, ui("press"), 0.3],
   // Realidade
@@ -51,7 +51,7 @@ const SONS: Som[] = [
   [47.84, sint("riser"), 0.45],
   [49.44, ui("error"), 0.45],
   // Conta a cair
-  [53.6, sint("queda"), 0.4],
+  [53.6, sint("queda"), 0.22],
   [53.6, ui("delete"), 0.35],
   [53.6 + fr(26), ui("blocked"), 0.45],
   // Saldo a oscilar e riscado
