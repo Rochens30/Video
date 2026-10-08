@@ -1,6 +1,6 @@
 # Vídeo "Consistência" em Remotion
 
-Vídeo vertical (1080×1920), com a estrutura **intro com gancho (2,8 s) → vídeo principal → call to action (6 s)**:
+Vídeo vertical (1080×1920) com o tema visual de forexacademyclub.com (preto quente, dourado, Playfair Display + Manrope), com a estrutura **intro com gancho (2,8 s) → vídeo principal → call to action (6 s)**:
 - legendas palavra a palavra (palavras-chave a amarelo), a partir de `src/palavras.json`;
 - zoom alternado (100% / 112%) em cada jump cut do vídeo original;
 - 10 cenas de motion graphics de trading, sincronizadas com a fala (`src/cenas/`);
@@ -23,7 +23,7 @@ npm run studio      # pré-visualizar e afinar no browser
 |---|---|
 | Início/fim de cada cena gráfica | `src/tempo.ts` (`CENAS`) |
 | Tempos dos jump cuts (zoom) | `src/tempo.ts` (`CORTES`) |
-| Cores e fontes | `src/estilo.ts` |
+| Cores e fontes (tema do site) | `src/estilo.ts` |
 | Palavras destacadas a amarelo | `src/Legendas.tsx` (`CHAVE`) |
 | Cada gráfico | `src/cenas/*.tsx` |
 | Efeitos sonoros (momento, som, volume) | `src/Sons.tsx` (`GANHO` = volume global) |

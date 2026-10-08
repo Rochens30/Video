@@ -1,7 +1,7 @@
 import { AbsoluteFill, Audio, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
-import { COR, FONTE, MONO } from "./estilo";
+import { COR, FONTE, SERIFA } from "./estilo";
 import { f, INTRO } from "./tempo";
-import { useEntrada } from "./ui";
+import { Kicker, Ouro, useEntrada } from "./ui";
 
 // Gancho: dor reconhecível → reviravolta que só o vídeo explica.
 const FRASE2 = f(1.25);
@@ -16,22 +16,27 @@ export const Intro: React.FC = () => {
   const treme = frame < 8 ? Math.sin(frame * 3) * (8 - frame) * 2 : 0;
   const saldo = interpolate(frame, [0, FRASE2], [10000, 8740], { extrapolateRight: "clamp" });
   return (
-    <AbsoluteFill style={{ background: `radial-gradient(90% 60% at 50% 40%, #2a0f12 0%, ${COR.fundo} 70%)`, fontFamily: FONTE }}>
+    <AbsoluteFill style={{ background: `radial-gradient(90% 55% at 50% 42%, #24140F 0%, ${COR.fundo} 70%)`, fontFamily: FONTE }}>
       <AbsoluteFill style={{ transform: `scale(${saida}) translateX(${treme}px)`, opacity: opSaida }}>
         <Velas frame={frame} />
-        <div style={{ position: "absolute", top: 330, left: 0, right: 0, textAlign: "center" }}>
-          <div style={{ fontFamily: MONO, fontSize: 64, color: COR.vermelho, opacity: t1 }}>
-            {Math.round(saldo).toLocaleString("pt-PT")} € <span style={{ fontSize: 44 }}>▼ {(100 - saldo / 100).toFixed(1)}%</span>
-          </div>
+        <div style={{ position: "absolute", top: 300, left: 0, right: 0, display: "flex", justifyContent: "center", opacity: t1 }}>
+          <Kicker cor={COR.positivo}>FOREX ACADEMY CLUB</Kicker>
         </div>
-        <div style={{ position: "absolute", top: 760, left: 60, right: 60, textAlign: "center" }}>
-          <div style={{ color: COR.texto, fontWeight: 900, fontSize: 104, lineHeight: 1.05, transform: `scale(${0.6 + 0.4 * t1})`,
-            opacity: frame < FRASE2 ? 1 : interpolate(frame, [FRASE2, FRASE2 + 5], [1, 0.25], { extrapolateRight: "clamp" }),
-            WebkitTextStroke: "10px #000", paintOrder: "stroke fill" }}>
-            PERDESTE<br />ESTE MÊS?
+        <div style={{ position: "absolute", top: 420, left: 0, right: 0, textAlign: "center", opacity: t1 }}>
+          <span style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 84, color: COR.negativo }}>{Math.round(saldo).toLocaleString("pt-PT")} €</span>
+          <span style={{ fontFamily: SERIFA, fontStyle: "italic", fontSize: 50, color: COR.negativo, marginLeft: 18 }}>−{(100 - saldo / 100).toFixed(1)}%</span>
+        </div>
+        <div style={{ position: "absolute", top: 720, left: 60, right: 60, textAlign: "center" }}>
+          <div
+            style={{
+              color: COR.texto, fontFamily: SERIFA, fontWeight: 900, fontSize: 128, lineHeight: 1.0, transform: `scale(${0.6 + 0.4 * t1})`,
+              opacity: frame < FRASE2 ? 1 : interpolate(frame, [FRASE2, FRASE2 + 5], [1, 0.22], { extrapolateRight: "clamp" }),
+            }}
+          >
+            Perdeste<br /><Ouro cor={COR.negativo}>este mês?</Ouro>
           </div>
-          <div style={{ marginTop: 50, opacity: t2, transform: `translateY(${(1 - t2) * 60}px)`, fontWeight: 900, fontSize: 64, lineHeight: 1.15, color: COR.texto }}>
-            Isso <span style={{ color: COR.amarelo }}>não</span> quer dizer que<br />não és <span style={{ color: COR.verde }}>consistente</span>.
+          <div style={{ marginTop: 56, opacity: t2, transform: `translateY(${(1 - t2) * 60}px)`, fontFamily: SERIFA, fontWeight: 700, fontSize: 70, lineHeight: 1.12, color: COR.texto }}>
+            Isso não quer dizer que<br /><Ouro>não és consistente.</Ouro>
           </div>
         </div>
       </AbsoluteFill>
@@ -43,16 +48,16 @@ export const Intro: React.FC = () => {
 
 // Velas vermelhas a cair ao fundo
 const Velas: React.FC<{ frame: number }> = ({ frame }) => (
-  <svg width={1080} height={1920} style={{ position: "absolute", opacity: 0.35 }}>
+  <svg width={1080} height={1920} style={{ position: "absolute", opacity: 0.28 }}>
     {Array.from({ length: 12 }, (_, i) => {
       const x = 40 + i * 88;
-      const topo = 450 + i * 70 + Math.sin(i * 1.7) * 40;
+      const topo = 560 + i * 70 + Math.sin(i * 1.7) * 40;
       const h = 120 + (i % 3) * 40;
       const s = Math.min(1, Math.max(0, (frame - i * 1.5) / 6));
       return (
         <g key={i} opacity={s}>
-          <line x1={x + 25} x2={x + 25} y1={topo - 40} y2={topo + h + 40} stroke={COR.vermelho} strokeWidth={5} />
-          <rect x={x} y={topo} width={50} height={h * s} rx={6} fill={COR.vermelho} />
+          <line x1={x + 25} x2={x + 25} y1={topo - 40} y2={topo + h + 40} stroke={COR.negativo} strokeWidth={5} />
+          <rect x={x} y={topo} width={50} height={h * s} rx={6} fill={COR.negativo} />
         </g>
       );
     })}

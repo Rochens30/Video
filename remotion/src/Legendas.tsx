@@ -1,6 +1,6 @@
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import palavras from "./palavras.json";
-import { COR, FONTE } from "./estilo";
+import { COR, DOURADO_TEXTO, SERIFA } from "./estilo";
 import { f } from "./tempo";
 
 const CHAVE = new Set(["consistência", "perdes", "garantidos", "traders", "normal", "risco", "critério", "registar",
@@ -28,15 +28,15 @@ export const Legendas: React.FC<{ divisao: number }> = ({ divisao }) => {
     <div style={{ position: "absolute", top: y, left: 40, right: 40, display: "flex", justifyContent: "center", transform: "translateY(-50%)" }}>
       <div
         style={{
-          fontFamily: FONTE,
+          fontFamily: SERIFA,
           fontWeight: 900,
-          fontSize: chave ? 112 : 100,
-          color: chave ? COR.amarelo : COR.texto,
-          textTransform: "uppercase",
-          WebkitTextStroke: "14px #000",
-          paintOrder: "stroke fill",
-          textShadow: "0 8px 24px rgba(0,0,0,0.5)",
-          transform: `scale(${0.7 + 0.3 * s}) rotate(${chave ? -2 : 0}deg)`,
+          fontStyle: chave ? "italic" : "normal",
+          fontSize: chave ? 116 : 104,
+          color: COR.texto,
+          textTransform: chave ? "none" : "uppercase",
+          filter: "drop-shadow(0 0 3px #000) drop-shadow(0 0 3px #000) drop-shadow(0 6px 18px rgba(0,0,0,0.7))",
+          transform: `scale(${0.7 + 0.3 * s})`,
+          ...(chave ? DOURADO_TEXTO : {}),
         }}
       >
         {w.palavra.replace(/[.,:]$/, "")}

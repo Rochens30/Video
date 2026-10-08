@@ -1,6 +1,6 @@
 import { interpolate, useCurrentFrame } from "remotion";
-import { COR, MONO } from "../estilo";
-import { Cena, rel, useEntrada } from "../ui";
+import { COR, DOURADO_GRADIENTE, MONO, SERIFA } from "../estilo";
+import { Cena, rel, useEntrada, Ouro } from "../ui";
 
 const MESES = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN"];
 
@@ -12,7 +12,7 @@ export const Expectativa: React.FC<{ a: number }> = ({ a }) => {
   const carimbo = useEntrada(rel(a, 11.36), 9);
   const melhores = useEntrada(rel(a, 12.25));
   return (
-    <Cena kicker="O QUE A MAIORIA PENSA" titulo={<>Lucro garantido<br />todos os meses</>}>
+    <Cena kicker="O QUE A MAIORIA PENSA" titulo={<>Lucro garantido<br /><Ouro>todos os meses</Ouro></>}>
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", height: 400, filter: `grayscale(${cinza}) brightness(${1 - 0.45 * cinza})` }}>
         {MESES.map((m, i) => (
           <Barra key={m} mes={m} inicio={rel(a, 7.6) + i * 5} />
@@ -26,13 +26,13 @@ export const Expectativa: React.FC<{ a: number }> = ({ a }) => {
       >
         <div
           style={{
-            transform: `scale(${2.2 - 1.2 * carimbo}) rotate(-8deg)`, color: COR.vermelho, border: `10px solid ${COR.vermelho}`,
-            borderRadius: 20, padding: "10px 40px", fontWeight: 900, fontSize: 110, background: "rgba(11,15,23,0.85)",
+            transform: `scale(${2.2 - 1.2 * carimbo}) rotate(-8deg)`, color: COR.negativo, border: `10px solid ${COR.negativo}`,
+            borderRadius: 20, padding: "6px 40px", fontFamily: SERIFA, fontStyle: "italic", fontWeight: 900, fontSize: 116, background: "rgba(10,9,8,0.85)",
           }}
         >
           NÃO EXISTE
         </div>
-        <div style={{ marginTop: 40, opacity: melhores, color: COR.texto, fontWeight: 800, fontSize: 40, background: "rgba(11,15,23,0.85)", padding: "8px 20px", borderRadius: 12 }}>
+        <div style={{ marginTop: 40, opacity: melhores, color: COR.texto, fontWeight: 800, fontSize: 40, background: "rgba(10,9,8,0.85)", padding: "8px 20px", borderRadius: 12 }}>
           …nem para os melhores traders do mundo
         </div>
       </div>
@@ -44,8 +44,8 @@ const Barra: React.FC<{ mes: string; inicio: number }> = ({ mes, inicio }) => {
   const s = useEntrada(inicio, 12);
   return (
     <div style={{ width: 120, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-      <div style={{ fontFamily: MONO, fontSize: 30, color: COR.verde, opacity: s }}>+5%</div>
-      <div style={{ width: 120, height: 280 * s, background: `linear-gradient(${COR.verde}, #15803D)`, borderRadius: 14 }} />
+      <div style={{ fontFamily: MONO, fontSize: 30, color: COR.positivo, opacity: s }}>+5%</div>
+      <div style={{ width: 120, height: 280 * s, background: DOURADO_GRADIENTE, borderRadius: 14 }} />
       <div style={{ fontSize: 26, color: COR.suave, fontWeight: 800 }}>{mes}</div>
     </div>
   );

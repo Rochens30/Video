@@ -1,10 +1,14 @@
-import "@fontsource/montserrat/600.css";
-import "@fontsource/montserrat/800.css";
-import "@fontsource/montserrat/900.css";
+import "@fontsource/manrope/500.css";
+import "@fontsource/manrope/700.css";
+import "@fontsource/manrope/800.css";
+import "@fontsource/playfair-display/700.css";
+import "@fontsource/playfair-display/900.css";
+import "@fontsource/playfair-display/700-italic.css";
+import "@fontsource/playfair-display/900-italic.css";
 import "@fontsource/jetbrains-mono/700.css";
 import { AbsoluteFill, Easing, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { CENAS, CORTES, f } from "./tempo";
-import { COR, FONTE } from "./estilo";
+import { COR, DOURADO_GRADIENTE, FONTE } from "./estilo";
 import { Legendas } from "./Legendas";
 import { Sons } from "./Sons";
 import { Chip } from "./ui";
@@ -87,10 +91,11 @@ export const Video: React.FC = () => {
         style={{
           height: PAINEL,
           transform: `translateY(${(divisao - 1) * (PAINEL + 60)}px)`,
-          background: `radial-gradient(120% 90% at 50% 0%, #172033 0%, ${COR.fundo} 70%)`,
-          borderBottomLeftRadius: 56,
-          borderBottomRightRadius: 56,
-          boxShadow: "0 30px 80px rgba(0,0,0,0.55)",
+          background: `radial-gradient(120% 90% at 50% 0%, #221C10 0%, ${COR.fundo} 70%)`,
+          borderBottomLeftRadius: 48,
+          borderBottomRightRadius: 48,
+          borderBottom: "2px solid rgba(217,180,90,0.45)",
+          boxShadow: "0 30px 80px rgba(0,0,0,0.6), 0 10px 60px rgba(217,180,90,0.12)",
           overflow: "hidden",
         }}
       >
@@ -107,10 +112,10 @@ export const Video: React.FC = () => {
 
       {/* Títulos de abertura e fecho, por cima da parede */}
       <Sequence from={f(0.1)} durationInFrames={f(4.8)} layout="none">
-        <Chip y={150} cor={COR.amarelo} texto="CONSISTÊNCIA ≠ GANHAR SEMPRE" />
+        <Chip y={150} cor={COR.positivo} texto="CONSISTÊNCIA ≠ GANHAR SEMPRE" />
       </Sequence>
       <Sequence from={f(64.4)} layout="none">
-        <Chip y={150} cor={COR.verde} texto="CONSISTÊNCIA = SEGUIR O PLANO" />
+        <Chip y={150} cor={COR.positivo} texto="CONSISTÊNCIA = SEGUIR O PLANO" />
       </Sequence>
 
       <Legendas divisao={divisao} />
@@ -120,14 +125,21 @@ export const Video: React.FC = () => {
   );
 };
 
+// Velas douradas muito ténues ao fundo, como no hero do site.
 const Grelha: React.FC = () => (
-  <AbsoluteFill
-    style={{
-      backgroundImage: `linear-gradient(${COR.linha}55 1px, transparent 1px), linear-gradient(90deg, ${COR.linha}55 1px, transparent 1px)`,
-      backgroundSize: "60px 60px",
-      maskImage: "linear-gradient(to bottom, black 30%, transparent 100%)",
-    }}
-  />
+  <svg width={1080} height={860} style={{ position: "absolute", opacity: 0.08 }}>
+    {Array.from({ length: 34 }, (_, i) => {
+      const x = 10 + i * 32;
+      const meio = 560 + Math.sin(i * 0.55) * 60 + Math.sin(i * 1.9) * 25;
+      const h = 14 + ((i * 37) % 30);
+      return (
+        <g key={i}>
+          <line x1={x + 7} x2={x + 7} y1={meio - h - 14} y2={meio + h + 14} stroke="#D9B45A" strokeWidth={2} />
+          <rect x={x} y={meio - h} width={14} height={h * 2} fill="#D9B45A" />
+        </g>
+      );
+    })}
+  </svg>
 );
 
 const BarraProgresso: React.FC<{ frame: number }> = ({ frame }) => (
@@ -138,7 +150,7 @@ const BarraProgresso: React.FC<{ frame: number }> = ({ frame }) => (
       bottom: 0,
       height: 8,
       width: `${(frame / f(67.25)) * 100}%`,
-      background: `linear-gradient(90deg, ${COR.verde}, ${COR.amarelo})`,
+      background: DOURADO_GRADIENTE,
     }}
   />
 );

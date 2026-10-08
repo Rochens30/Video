@@ -1,6 +1,6 @@
 import { useCurrentFrame } from "remotion";
 import { COR } from "../estilo";
-import { Cena, Etiqueta, rel, useEntrada } from "../ui";
+import { Cena, Etiqueta, rel, useEntrada, Ouro } from "../ui";
 
 // [abertura, fecho, máximo, mínimo] em unidades 0..100 (100 = topo)
 const VELAS: number[][] = [
@@ -18,9 +18,9 @@ export const Perdas: React.FC<{ a: number }> = ({ a }) => {
   const k = frame < troca ? 0 : Math.min(ESTRATEGIAS.length - 1, 1 + Math.floor((frame - troca) / 14));
   const seq = useEntrada(rel(a, 45.36), 10);
   return (
-    <Cena kicker="O ERRO Nº1" titulo={<>Mudar de estratégia<br />a meio das perdas</>} cor={COR.vermelho}>
+    <Cena kicker="O ERRO Nº1" titulo={<>Mudar de estratégia<br /><Ouro>a meio das perdas</Ouro></>} cor={COR.negativo}>
       <div style={{ position: "absolute", right: 0, top: -200 }}>
-        <Etiqueta key={k} cor={k ? COR.vermelho : COR.suave} style={{ fontSize: 28 }}>{ESTRATEGIAS[k]}</Etiqueta>
+        <Etiqueta key={k} cor={k ? COR.negativo : COR.suave} style={{ fontSize: 28 }}>{ESTRATEGIAS[k]}</Etiqueta>
       </div>
       <svg width={940} height={420}>
         {VELAS.map((v, i) => (
@@ -28,7 +28,7 @@ export const Perdas: React.FC<{ a: number }> = ({ a }) => {
         ))}
       </svg>
       <div style={{ position: "absolute", right: 0, bottom: 0, transform: `scale(${seq})` }}>
-        <Etiqueta cor={COR.vermelho} style={{ fontSize: 34, background: "#0B0F17" }}>6 PERDAS SEGUIDAS</Etiqueta>
+        <Etiqueta cor={COR.negativo} style={{ fontSize: 34, background: "#0A0908" }}>6 PERDAS SEGUIDAS</Etiqueta>
       </div>
     </Cena>
   );
@@ -38,7 +38,7 @@ const Vela: React.FC<{ v: number[]; i: number; inicio: number }> = ({ v, i, inic
   const s = useEntrada(inicio, 13);
   const [o, c, h, l] = v;
   const y = (n: number) => 420 - (n / 100) * 420 * 1.25 + 60;
-  const cor = c >= o ? COR.verde : COR.vermelho;
+  const cor = c >= o ? COR.positivo : COR.negativo;
   const x = 20 + i * 70;
   const meio = (y(o) + y(c)) / 2;
   return (

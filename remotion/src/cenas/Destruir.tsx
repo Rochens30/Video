@@ -1,6 +1,6 @@
 import { interpolate, useCurrentFrame } from "remotion";
-import { COR, MONO } from "../estilo";
-import { Cena, Etiqueta, rel, useEntrada } from "../ui";
+import { COR, MONO, SERIFA } from "../estilo";
+import { Cena, Etiqueta, rel, useEntrada, Ouro } from "../ui";
 import { Curva } from "./graficos";
 
 const SUBIDA = [0.1, 0.2, 0.18, 0.3, 0.34, 0.45, 0.42, 0.55, 0.62, 0.7, 0.75];
@@ -16,21 +16,21 @@ export const Destruir: React.FC<{ a: number }> = ({ a }) => {
   const pct = useEntrada(crash + 26, 10);
   const wSub = 940 * (SUBIDA.length - 1) / (SUBIDA.length + QUEDA.length - 2);
   return (
-    <Cena kicker="CONSEQUÊNCIA" titulo={<>Destróis tudo o que<br />estavas a construir</>} cor={COR.vermelho}>
+    <Cena kicker="CONSEQUÊNCIA" titulo={<>Destróis tudo o que<br /><Ouro>estavas a construir</Ouro></>} cor={COR.negativo}>
       <div style={{ position: "relative", transform: `translateX(${treme}px)` }}>
-        <div style={{ fontFamily: MONO, fontSize: 64, color: caiu ? COR.vermelho : COR.verde }}>
+        <div style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 80, color: caiu ? COR.negativo : COR.positivo }}>
           {Math.round(saldo).toLocaleString("pt-PT")} €
         </div>
         <div style={{ position: "relative", height: 330, marginTop: 10 }}>
           <div style={{ position: "absolute", left: 0, top: 0 }}>
-            <Curva vals={SUBIDA} w={wSub} h={330} de={rel(a, 52.1)} ate={crash} cor={COR.verde} />
+            <Curva vals={SUBIDA} w={wSub} h={330} de={rel(a, 52.1)} ate={crash} cor={COR.positivo} />
           </div>
           <div style={{ position: "absolute", left: wSub, top: 0 }}>
-            <Curva vals={QUEDA} w={940 - wSub} h={330} de={crash} ate={crash + 30} cor={COR.vermelho} />
+            <Curva vals={QUEDA} w={940 - wSub} h={330} de={crash} ate={crash + 30} cor={COR.negativo} />
           </div>
         </div>
         <div style={{ position: "absolute", right: 0, top: 0, transform: `scale(${pct})` }}>
-          <Etiqueta cor={COR.vermelho} style={{ fontSize: 40 }}>−69%</Etiqueta>
+          <Etiqueta cor={COR.negativo} style={{ fontSize: 40 }}>−69%</Etiqueta>
         </div>
       </div>
     </Cena>

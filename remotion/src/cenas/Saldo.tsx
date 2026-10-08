@@ -1,6 +1,6 @@
 import { interpolate, random, useCurrentFrame } from "remotion";
-import { COR, MONO } from "../estilo";
-import { Cena, rel } from "../ui";
+import { COR, MONO, SERIFA } from "../estilo";
+import { Cena, rel, Ouro } from "../ui";
 
 /** "Se queres medir a tua consistência, não olhes para o saldo da tua conta." */
 export const Saldo: React.FC<{ a: number }> = ({ a }) => {
@@ -12,10 +12,10 @@ export const Saldo: React.FC<{ a: number }> = ({ a }) => {
   const valor = 10243.5 + (random(`s${passo}`) - 0.5) * 900;
   const pts = Array.from({ length: 24 }, (_, i) => 0.5 + (random(`p${i + passo}`) - 0.5) * 0.8);
   return (
-    <Cena kicker="COMO MEDIR CONSISTÊNCIA" titulo={<>Não olhes para o<br />saldo da conta</>} cor={COR.vermelho}>
-      <div style={{ position: "relative", borderRadius: 30, background: "#ffffff0d", border: `2px solid ${COR.linha}`, padding: 40, opacity: 1 - 0.5 * risco }}>
-        <div style={{ color: COR.suave, fontWeight: 800, fontSize: 28, letterSpacing: 4 }}>SALDO DA CONTA</div>
-        <div style={{ fontFamily: MONO, fontSize: 96, color: COR.texto, marginTop: 6 }}>
+    <Cena kicker="COMO MEDIR CONSISTÊNCIA" titulo={<>Não olhes para o<br /><Ouro>saldo da conta</Ouro></>} cor={COR.negativo}>
+      <div style={{ position: "relative", borderRadius: 30, background: "linear-gradient(180deg, #16130E, #100E0B)", border: "2px solid rgba(217,180,90,0.22)", padding: 40, opacity: 1 - 0.5 * risco }}>
+        <div style={{ color: COR.suave, fontFamily: MONO, fontWeight: 700, fontSize: 24, letterSpacing: 6 }}>SALDO DA CONTA</div>
+        <div style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 104, color: COR.texto, marginTop: 6 }}>
           {valor.toLocaleString("pt-PT", { minimumFractionDigits: 2, maximumFractionDigits: 2 })} €
         </div>
         <svg width={860} height={110} style={{ marginTop: 10 }}>
@@ -23,8 +23,8 @@ export const Saldo: React.FC<{ a: number }> = ({ a }) => {
         </svg>
       </div>
       <svg width={940} height={420} style={{ position: "absolute", left: 0, top: 0 }}>
-        <line x1={20} y1={360} x2={20 + 900 * risco} y2={360 - 320 * risco} stroke={COR.vermelho} strokeWidth={16} strokeLinecap="round" />
-        <line x1={20} y1={40} x2={20 + 900 * risco} y2={40 + 320 * risco} stroke={COR.vermelho} strokeWidth={16} strokeLinecap="round" />
+        <line x1={20} y1={360} x2={20 + 900 * risco} y2={360 - 320 * risco} stroke={COR.negativo} strokeWidth={16} strokeLinecap="round" />
+        <line x1={20} y1={40} x2={20 + 900 * risco} y2={40 + 320 * risco} stroke={COR.negativo} strokeWidth={16} strokeLinecap="round" />
       </svg>
     </Cena>
   );
