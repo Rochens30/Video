@@ -36,7 +36,6 @@ export const Intro: React.FC = () => {
         </div>
       </AbsoluteFill>
       <Sequence layout="none"><Audio src={staticFile("sfx/impacto.wav")} volume={0.18} /></Sequence>
-      <Sequence from={FRASE2 - 2} layout="none"><Audio src={staticFile("sfx/whoosh_curto.wav")} volume={0.18} /></Sequence>
       <Sequence from={fim - 10} layout="none"><Audio src={staticFile("sfx/whoosh_in.wav")} volume={0.2} /></Sequence>
     </AbsoluteFill>
   );
