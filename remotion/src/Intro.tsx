@@ -1,7 +1,7 @@
-import { AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { COR, FONTE, SERIFA } from "./estilo";
 import { f, INTRO } from "./tempo";
-import { Ouro, useEntrada } from "./ui";
+import { Ouro, useEntrada, Efeito } from "./ui";
 
 // Gancho: dor reconhecível → reviravolta que só o vídeo explica.
 const FRASE2 = f(1.25);
@@ -40,8 +40,8 @@ export const Intro: React.FC = () => {
           </div>
         </div>
       </AbsoluteFill>
-      <Sequence layout="none"><Audio src={staticFile("sfx/impacto.wav")} volume={0.18} /></Sequence>
-      <Sequence from={fim - 10} layout="none"><Audio src={staticFile("sfx/whoosh_in.wav")} volume={0.2} /></Sequence>
+      <Efeito src="sfx/impacto.wav" volume={0.18} />
+      <Efeito src="sfx/whoosh_in.wav" volume={0.2} de={fim - 10} />
     </AbsoluteFill>
   );
 };

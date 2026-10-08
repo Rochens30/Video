@@ -4,6 +4,7 @@ import { Intro } from "./Intro";
 import { Gancho } from "./Gancho";
 import { CTA as CallToAction } from "./CTA";
 import { COMPLETA, CURTA, MontagemContext } from "./montagem";
+import { EfeitosContext } from "./ui";
 import { CTA, f, INTRO, SOBREPOSICAO_CTA } from "./tempo";
 
 export type Versao = "completa" | "curta";
@@ -21,25 +22,27 @@ export const duracaoTotal = (v: Versao) => {
 };
 
 /** `semVoz`: diagnóstico — renderiza só a faixa de efeitos (ex.: --props='{"versao":"curta","semVoz":true}'). */
-export const Final: React.FC<{ versao: Versao; semVoz?: boolean }> = ({ versao, semVoz = false }) => {
+export const Final: React.FC<{ versao: Versao; semVoz?: boolean; semEfeitos?: boolean }> = ({ versao, semVoz = false, semEfeitos = false }) => {
   const c = CONFIG[versao];
   const inicioCta = c.intro + c.montagem.duracao - SOBREPOSICAO_CTA;
   return (
-    <MontagemContext.Provider value={c.montagem}>
-      <AbsoluteFill style={{ backgroundColor: "#000" }}>
-        {c.intro > 0 && (
-          <Sequence durationInFrames={f(c.intro)}>
-            <Intro />
+    <EfeitosContext.Provider value={!semEfeitos}>
+      <MontagemContext.Provider value={c.montagem}>
+        <AbsoluteFill style={{ backgroundColor: "#000" }}>
+          {c.intro > 0 && (
+            <Sequence durationInFrames={f(c.intro)}>
+              <Intro />
+            </Sequence>
+          )}
+          <Sequence from={f(c.intro)} durationInFrames={f(c.montagem.duracao)}>
+            <Video chipInicial={c.gancho === 0} semVoz={semVoz} />
+            {c.gancho > 0 && <Gancho duracao={c.gancho} />}
           </Sequence>
-        )}
-        <Sequence from={f(c.intro)} durationInFrames={f(c.montagem.duracao)}>
-          <Video chipInicial={c.gancho === 0} semVoz={semVoz} />
-          {c.gancho > 0 && <Gancho duracao={c.gancho} />}
-        </Sequence>
-        <Sequence from={f(inicioCta)} durationInFrames={f(c.cta)}>
-          <CallToAction />
-        </Sequence>
-      </AbsoluteFill>
-    </MontagemContext.Provider>
+          <Sequence from={f(inicioCta)} durationInFrames={f(c.cta)}>
+            <CallToAction />
+          </Sequence>
+        </AbsoluteFill>
+      </MontagemContext.Provider>
+    </EfeitosContext.Provider>
   );
 };

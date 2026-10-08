@@ -1,7 +1,7 @@
-import { AbsoluteFill, Audio, Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
 import { COR, DOURADO_GRADIENTE, FONTE, MONO, SERIFA } from "./estilo";
 import { f } from "./tempo";
-import { Ouro, useEntrada } from "./ui";
+import { Ouro, useEntrada, Efeito } from "./ui";
 
 const URL = "homepage.forexacademyclub.com";
 const CLIQUE = f(2.9);
@@ -66,8 +66,8 @@ export const CTA: React.FC = () => {
 
       <Faixa frame={frame} />
 
-      <Sequence layout="none"><Audio src={staticFile("sfx/whoosh_in.wav")} volume={0.15} /></Sequence>
-      <Sequence from={CLIQUE - 1} layout="none"><Audio src={staticFile("sfx/clique_rato_1.wav")} volume={0.35} /></Sequence>
+      <Efeito src="sfx/whoosh_in.wav" volume={0.15} />
+      <Efeito src="sfx/clique_rato_1.wav" volume={0.35} de={CLIQUE - 1} />
     </AbsoluteFill>
   );
 };

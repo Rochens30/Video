@@ -14,6 +14,8 @@ Vídeo vertical (1080×1920) com o tema visual de forexacademyclub.com (preto qu
 |---|---|---|
 | `Consistencia` | ~75 s | intro em ecrã próprio, vídeo inteiro |
 | `Consistencia45` | ~45 s | gancho por cima do orador desde o 1.º frame, frases repetidas cortadas, pausas longas encurtadas |
+| `Consistencia45SemEfeitos` | ~45 s | igual, sem nenhum efeito sonoro (só a voz) |
+| `Capa` (imagem) | — | capa do Reel 1080×1920; título e logótipo dentro do recorte 3:4 da grelha |
 
 Os cortes da versão curta são gerados por `scripts/montar_curta.py` (→ `src/montagem_curta.json`); legendas, gráficos e sons são convertidos automaticamente para a nova linha temporal (`src/montagem.ts`).
 
@@ -22,8 +24,10 @@ Os cortes da versão curta são gerados por `scripts/montar_curta.py` (→ `src/
 ```bash
 npm install
 cp /caminho/para/o/video.mp4 public/original.mp4   # o vídeo não está no git
+ffmpeg -ss 7.5 -i public/original.mp4 -frames:v 1 public/capa_frame.png   # frame usada na capa
 npm run studio      # pré-visualizar e afinar no browser
 ./scripts/render.sh Consistencia45   # render + áudio a −14 LUFS → out/Consistencia45.mp4
+npx remotion still Capa out/capa_reel.png
 ```
 
 ## Onde mexer

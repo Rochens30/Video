@@ -1,4 +1,4 @@
-import { Audio, Sequence, staticFile } from "remotion";
+import { Efeito } from "./ui";
 import { f } from "./tempo";
 import { useBlocos, useMontagem } from "./montagem";
 
@@ -51,9 +51,7 @@ export const Sons: React.FC = () => {
   return (
     <>
       {sons.map(([t, ficheiro, volume], i) => (
-        <Sequence key={i} from={Math.max(0, f(t))} layout="none">
-          <Audio src={staticFile(ficheiro)} volume={volume * GANHO} />
-        </Sequence>
+        <Efeito key={i} src={ficheiro} volume={volume * GANHO} de={Math.max(0, f(t))} />
       ))}
     </>
   );

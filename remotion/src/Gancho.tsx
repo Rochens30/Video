@@ -1,7 +1,7 @@
-import { Audio, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
+import { interpolate, useCurrentFrame } from "remotion";
 import { COR, SERIFA } from "./estilo";
 import { f } from "./tempo";
-import { Kicker, Ouro } from "./ui";
+import { Kicker, Ouro, Efeito } from "./ui";
 
 /**
  * Gancho por cima do orador, visível logo no 1.º frame (sem ecrã de intro à parte):
@@ -33,7 +33,7 @@ export const Gancho: React.FC<{ duracao: number }> = ({ duracao }) => {
           </div>
         </div>
       </div>
-      <Sequence from={3} layout="none"><Audio src={staticFile("sfx/impacto.wav")} volume={0.1} /></Sequence>
+      <Efeito src="sfx/impacto.wav" volume={0.1} de={3} />
     </>
   );
 };

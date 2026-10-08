@@ -1,4 +1,5 @@
-import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
+import { createContext, useContext } from "react";
+import { Audio, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { COR, DOURADO_TEXTO, FONTE, MONO, SERIFA } from "./estilo";
 import { f } from "./tempo";
 import { useMontagem } from "./montagem";
@@ -93,3 +94,16 @@ export const Etiqueta: React.FC<{ cor: string; children: React.ReactNode; style?
     {children}
   </span>
 );
+
+/** Liga/desliga todos os efeitos sonoros (a versão "sem efeitos" põe false). */
+export const EfeitosContext = createContext(true);
+
+/** Efeito sonoro a tocar a partir do frame `de` (relativo à Sequence onde está); não toca se os efeitos estiverem desligados. */
+export const Efeito: React.FC<{ src: string; volume: number; de?: number }> = ({ src, volume, de = 0 }) => {
+  if (!useContext(EfeitosContext)) return null;
+  return (
+    <Sequence from={de} layout="none">
+      <Audio src={staticFile(src)} volume={volume} />
+    </Sequence>
+  );
+};
