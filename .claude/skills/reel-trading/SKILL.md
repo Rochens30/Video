@@ -56,6 +56,20 @@ python3 ferramentas/analisar_video.py remotion/public/original.mp4 /tmp/analise
 Vê as `frames_*.png` com o Read. Reporta: resolução (480p é fraco — avisa), jump cuts (vão para `CORTES` em
 `src/tempo.ts`), loudness, enquadramento, o que tapa as mãos/cara, onde está o produto vs. zonas tapadas pela UI.
 
+### 2b. Melhorar a imagem (se o vídeo for < 1080p)
+IA de super-resolução (Real-ESRGAN general-x4v3, em ONNX no CPU, sem PyTorch) misturada 60/40 com o original
+ampliado — 100 % IA deixa a pele "de plástico". ~7 s por frame em 4 núcleos: processar **só as frames usadas** na
+montagem (correr depois do passo 4/`montar_curta.py`) e em background; é retomável.
+```bash
+python3 ferramentas/melhorar_video.py teste  remotion/public/original.mp4 7.5 /tmp/comparacao.png   # mostrar antes|depois
+python3 -c "import json;s=json.load(open('remotion/src/montagem_curta.json'))['segmentos'];json.dump([[a,b] for a,b,_ in s],open('/tmp/iv.json','w'))"
+python3 ferramentas/melhorar_video.py frames remotion/public/original.mp4 /tmp/frames_hd /tmp/iv.json
+python3 ferramentas/melhorar_video.py montar remotion/public/original.mp4 /tmp/frames_hd remotion/public/original_hd.mp4
+```
+`VIDEO_BASE` em `src/tempo.ts` escolhe o vídeo de base. Voz: **medir antes** — com lapela a voz já é limpa
+(~33 dB acima do ruído); redução de ruído + compressão pioraram-na. Só filtro de graves + presença.
+Se o vídeo já for 1080p/4K, saltar este passo e pôr `VIDEO_BASE = "original.mp4"`.
+
 ### 3. Transcrever (tempo de cada palavra)
 ```bash
 python3 ferramentas/transcrever.py remotion/public/original.mp4 transcricoes/

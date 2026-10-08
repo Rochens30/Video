@@ -10,6 +10,7 @@ com legendas palavra a palavra, motion graphics de trading, gancho, call to acti
 | `remotion/` | Projeto de vídeo (Remotion/React): cenas, legendas, sons, gancho, CTA, capa |
 | `ferramentas/transcrever.py` | Transcrição com tempo de cada palavra (Whisper + Parakeet, locais) |
 | `ferramentas/analisar_video.py` | Formato, jump cuts, pausas, loudness e folhas de frames |
+| `ferramentas/melhorar_video.py` | Melhora vídeos de baixa resolução: IA de super-resolução (Real-ESRGAN, CPU) + voz |
 | `ferramentas/legendas_ass.py` | Legendas .ass em 3 estilos (alternativa sem Remotion) |
 | `videos/` | Arquivo de cada vídeo feito (transcrição, notas, escolhas) |
 

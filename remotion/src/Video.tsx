@@ -7,7 +7,7 @@ import "@fontsource/playfair-display/700-italic.css";
 import "@fontsource/playfair-display/900-italic.css";
 import "@fontsource/jetbrains-mono/700.css";
 import { AbsoluteFill, Easing, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from "remotion";
-import { CENAS, CORTES, f } from "./tempo";
+import { CENAS, CORTES, f, VIDEO_BASE } from "./tempo";
 import { useBlocos, useMontagem } from "./montagem";
 import { COR, DOURADO_GRADIENTE, FONTE } from "./estilo";
 import { Legendas } from "./Legendas";
@@ -61,7 +61,7 @@ const Orador: React.FC<{ divisao: number; semVoz: boolean }> = ({ divisao, semVo
         return (
           <Sequence key={s.ini} from={de} durationInFrames={dur} layout="none">
             <OffthreadVideo
-              src={staticFile("original.mp4")}
+              src={staticFile(VIDEO_BASE)}
               trimBefore={Math.round(s.ini * 30)}
               // micro-fade de 2 frames em cada corte para não haver estalos no áudio
               volume={(fr) => (semVoz ? 0 : interpolate(fr, [0, 2, dur - 2, dur], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }))}

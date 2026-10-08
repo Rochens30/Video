@@ -1,5 +1,8 @@
 // Tempos em segundos tirados de transcricoes/transcricao_palavras.json.
 export const FPS = 30;
+
+// Vídeo de base em public/: o melhorado (1080×1920, ferramentas/melhorar_video.py) ou o original.
+export const VIDEO_BASE = "original_hd.mp4";
 export const f = (s: number) => Math.round(s * FPS);
 
 // Jump cuts detetados no vídeo original (análise de frames).
