@@ -6,6 +6,7 @@ import { AbsoluteFill, Easing, interpolate, OffthreadVideo, Sequence, staticFile
 import { CENAS, CORTES, f } from "./tempo";
 import { COR, FONTE } from "./estilo";
 import { Legendas } from "./Legendas";
+import { Sons } from "./Sons";
 import { Chip } from "./ui";
 import { Expectativa } from "./cenas/Expectativa";
 import { Realidade } from "./cenas/Realidade";
@@ -114,6 +115,7 @@ export const Video: React.FC = () => {
 
       <Legendas divisao={divisao} />
       <BarraProgresso frame={frame} />
+      <Sons />
     </AbsoluteFill>
   );
 };

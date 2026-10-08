@@ -4,7 +4,8 @@ Vídeo vertical (1080×1920) com:
 - legendas palavra a palavra (palavras-chave a amarelo), a partir de `src/palavras.json`;
 - zoom alternado (100% / 112%) em cada jump cut do vídeo original;
 - 10 cenas de motion graphics de trading, sincronizadas com a fala (`src/cenas/`);
-- ecrã dividido: o gráfico desce por cima e o orador desce para a metade de baixo.
+- ecrã dividido: o gráfico desce por cima e o orador desce para a metade de baixo;
+- efeitos sonoros sincronizados com cada animação (`src/Sons.tsx`).
 
 ## Como usar
 
@@ -30,6 +31,12 @@ ffmpeg -i out/consistencia.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=7 -c:a a
 | Cores e fontes | `src/estilo.ts` |
 | Palavras destacadas a amarelo | `src/Legendas.tsx` (`CHAVE`) |
 | Cada gráfico | `src/cenas/*.tsx` |
+| Efeitos sonoros (momento, som, volume) | `src/Sons.tsx` |
+
+## Efeitos sonoros
+
+- `public/sfx/*.wav` (whoosh, impacto, queda, riser): sintetizados de raiz por `scripts/sintetizar_sfx.py`, sem direitos de terceiros.
+- `public/sfx/ui/*.mp3`: pacote [uisfx](https://github.com/romainsimon/uisfx) (licença MIT, ver `public/sfx/ui/LICENSE-uisfx.txt`).
 
 Os números nos gráficos (trades, saldos, percentagens) são **exemplos ilustrativos**, não são dados reais.
 
