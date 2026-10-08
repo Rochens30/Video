@@ -8,7 +8,7 @@ export const Risco: React.FC<{ a: number }> = ({ a }) => {
   const frame = useCurrentFrame();
   const t0 = r(47.84), t1 = r(50.9);
   const risco = interpolate(frame, [t0, t1], [1, 6], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const cor = interpolateColors(risco, [1, 2.5, 6], [COR.positivo, COR.destaque, COR.negativo]);
+  const cor = interpolateColors(risco, [1, 2.5, 6], [COR.ganho, COR.destaque, COR.negativo]);
   const aviso = useEntrada(r(49.44), 10);
   const treme = risco > 4 ? Math.sin(frame * 2.3) * (risco - 4) * 3 : 0;
   return (
@@ -18,7 +18,7 @@ export const Risco: React.FC<{ a: number }> = ({ a }) => {
         <div style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 190, color: cor, lineHeight: 1.05 }}>{risco.toFixed(0)}%</div>
       </div>
       <div style={{ height: 44, borderRadius: 22, background: "#ffffff14", overflow: "hidden", marginTop: 10 }}>
-        <div style={{ height: "100%", width: `${(risco / 6) * 100}%`, background: `linear-gradient(90deg, #A8822C, ${cor})`, borderRadius: 22 }} />
+        <div style={{ height: "100%", width: `${(risco / 6) * 100}%`, background: `linear-gradient(90deg, ${COR.ganho}, ${cor})`, borderRadius: 22 }} />
       </div>
       <div style={{ display: "flex", justifyContent: "space-between", color: COR.suave, fontFamily: MONO, fontSize: 24, marginTop: 8 }}>
         <span>1% plano</span><span>6%</span>

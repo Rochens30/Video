@@ -5,10 +5,12 @@ export const COR = {
   linha: "#2A251A",
   texto: "#F4EFE6",
   suave: "#A39C8E",
-  positivo: "#D9B45A", // ganhos e confirmações a dourado (como no site)
-  negativo: "#C2564A", // perdas a vermelho tijolo (como as barras dos 74–84%)
+  positivo: "#D9B45A", // dourado da marca (rótulos, ênfases, confirmações)
+  ganho: "#2EBD85", // velas/valores a subir — verde de plataforma de trading
+  negativo: "#F6465D", // velas/valores a descer — vermelho de plataforma de trading
   destaque: "#E8C873", // dourado claro para palavras-chave
 };
+export const VERDE_GRADIENTE = "linear-gradient(180deg, #4FD8A0 0%, #2EBD85 55%, #1E8C61 100%)";
 export const DOURADO_GRADIENTE = "linear-gradient(180deg, #F0D68A 0%, #D4AF37 55%, #A8822C 100%)";
 export const DOURADO_TEXTO: React.CSSProperties = {
   background: "linear-gradient(180deg, #F3DC97 0%, #D9B45A 50%, #B48A35 100%)",

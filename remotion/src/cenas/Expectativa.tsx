@@ -1,5 +1,5 @@
 import { interpolate, useCurrentFrame } from "remotion";
-import { COR, DOURADO_GRADIENTE, MONO, SERIFA } from "../estilo";
+import { COR, MONO, SERIFA, VERDE_GRADIENTE } from "../estilo";
 import { Cena, useRel, useEntrada, Ouro } from "../ui";
 
 const MESES = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN"];
@@ -45,8 +45,8 @@ const Barra: React.FC<{ mes: string; inicio: number }> = ({ mes, inicio }) => {
   const s = useEntrada(inicio, 12);
   return (
     <div style={{ width: 120, display: "flex", flexDirection: "column", alignItems: "center", gap: 12 }}>
-      <div style={{ fontFamily: MONO, fontSize: 30, color: COR.positivo, opacity: s }}>+5%</div>
-      <div style={{ width: 120, height: 280 * s, background: DOURADO_GRADIENTE, borderRadius: 14 }} />
+      <div style={{ fontFamily: MONO, fontSize: 30, color: COR.ganho, opacity: s }}>+5%</div>
+      <div style={{ width: 120, height: 280 * s, background: VERDE_GRADIENTE, borderRadius: 14 }} />
       <div style={{ fontSize: 26, color: COR.suave, fontWeight: 800 }}>{mes}</div>
     </div>
   );

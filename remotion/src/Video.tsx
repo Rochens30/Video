@@ -138,7 +138,7 @@ export const Video: React.FC<{ chipInicial?: boolean }> = ({ chipInicial = true 
   );
 };
 
-// Velas douradas muito ténues ao fundo, como no hero do site.
+// Velas muito ténues ao fundo, como no hero do site (verde/vermelho de mercado).
 const Grelha: React.FC = () => (
   <svg width={1080} height={860} style={{ position: "absolute", opacity: 0.08 }}>
     {Array.from({ length: 34 }, (_, i) => {
@@ -147,8 +147,8 @@ const Grelha: React.FC = () => (
       const h = 14 + ((i * 37) % 30);
       return (
         <g key={i}>
-          <line x1={x + 7} x2={x + 7} y1={meio - h - 14} y2={meio + h + 14} stroke="#D9B45A" strokeWidth={2} />
-          <rect x={x} y={meio - h} width={14} height={h * 2} fill="#D9B45A" />
+          <line x1={x + 7} x2={x + 7} y1={meio - h - 14} y2={meio + h + 14} stroke={(i * 7) % 3 ? COR.ganho : COR.negativo} strokeWidth={2} />
+          <rect x={x} y={meio - h} width={14} height={h * 2} fill={(i * 7) % 3 ? COR.ganho : COR.negativo} />
         </g>
       );
     })}

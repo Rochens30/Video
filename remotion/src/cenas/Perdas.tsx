@@ -39,7 +39,7 @@ const Vela: React.FC<{ v: number[]; i: number; inicio: number }> = ({ v, i, inic
   const s = useEntrada(inicio, 13);
   const [o, c, h, l] = v;
   const y = (n: number) => 420 - (n / 100) * 420 * 1.25 + 60;
-  const cor = c >= o ? COR.positivo : COR.negativo;
+  const cor = c >= o ? COR.ganho : COR.negativo;
   const x = 20 + i * 70;
   const meio = (y(o) + y(c)) / 2;
   return (

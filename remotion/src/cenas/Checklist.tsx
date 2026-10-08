@@ -34,8 +34,8 @@ const Item: React.FC<{ inicio: number; texto: string; extra: string }> = ({ inic
       }}
     >
       <svg width={70} height={70} viewBox="0 0 70 70">
-        <rect x={3} y={3} width={64} height={64} rx={16} fill={`${COR.positivo}${check > 0 ? "33" : "00"}`} stroke={COR.positivo} strokeWidth={5} />
-        <path d="M18 36 L30 48 L52 22" fill="none" stroke={COR.positivo} strokeWidth={8} strokeLinecap="round" strokeLinejoin="round"
+        <rect x={3} y={3} width={64} height={64} rx={16} fill={`${COR.ganho}${check > 0 ? "33" : "00"}`} stroke={COR.ganho} strokeWidth={5} />
+        <path d="M18 36 L30 48 L52 22" fill="none" stroke={COR.ganho} strokeWidth={8} strokeLinecap="round" strokeLinejoin="round"
           strokeDasharray={60} strokeDashoffset={60 * (1 - check)} />
       </svg>
       <div style={{ flex: 1 }}>

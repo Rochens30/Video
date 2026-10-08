@@ -28,7 +28,7 @@ export const Mensal: React.FC<{ a: number }> = ({ a }) => {
 const Barra: React.FC<{ mes: string; v: number; inicio: number }> = ({ mes, v, inicio }) => {
   const s = useEntrada(inicio, 12);
   const h = Math.abs(v) * ESCALA * s;
-  const cor = v > 0 ? COR.positivo : COR.negativo;
+  const cor = v > 0 ? COR.ganho : COR.negativo;
   return (
     <div style={{ position: "relative", width: 110 }}>
       <div style={{ position: "absolute", left: 0, width: 110, borderRadius: 12, background: cor, height: h, top: v > 0 ? 200 - h : 203 }} />

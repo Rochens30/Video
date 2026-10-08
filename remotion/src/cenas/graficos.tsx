@@ -37,3 +37,37 @@ export const pontoEm = (vals: number[], p: number) => {
   const i = Math.min(vals.length - 2, Math.floor(x));
   return { x: p, y: vals[i] + (vals[i + 1] - vals[i]) * (x - i) };
 };
+
+/** Gráfico de velas a partir de uma série (0..1): cada passo vira uma vela verde (sobe) ou vermelha (desce).
+ * As velas aparecem uma a uma entre os frames `de` e `ate`. */
+export const VelasSerie: React.FC<{ vals: number[]; w: number; h: number; de: number; ate: number; verde: string; vermelho: string }> = ({
+  vals, w, h, de, ate, verde, vermelho,
+}) => {
+  const frame = useCurrentFrame();
+  const n = vals.length - 1;
+  const passo = w / n;
+  const larg = passo * 0.58;
+  const y = (v: number) => (1 - v) * h;
+  return (
+    <svg width={w} height={h} style={{ overflow: "visible" }}>
+      {Array.from({ length: n }, (_, i) => {
+        const o = vals[i], c = vals[i + 1];
+        const sobe = c >= o;
+        const cor = sobe ? verde : vermelho;
+        const amp = Math.abs(c - o);
+        const max = Math.max(o, c) + 0.04 + amp * 0.25, min = Math.min(o, c) - 0.04 - amp * 0.2;
+        const ini = de + ((ate - de) * i) / n;
+        const s = interpolate(frame, [ini, ini + 5], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+        const x = i * passo + (passo - larg) / 2;
+        const topo = y(Math.max(o, c)), base = y(Math.min(o, c));
+        const meio = (topo + base) / 2;
+        return (
+          <g key={i} opacity={s} transform={`translate(0 ${meio}) scale(1 ${s}) translate(0 ${-meio})`}>
+            <line x1={x + larg / 2} x2={x + larg / 2} y1={y(max)} y2={y(min)} stroke={cor} strokeWidth={4} />
+            <rect x={x} y={topo} width={larg} height={Math.max(6, base - topo)} rx={5} fill={cor} />
+          </g>
+        );
+      })}
+    </svg>
+  );
+};

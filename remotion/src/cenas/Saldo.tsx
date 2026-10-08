@@ -23,7 +23,7 @@ export const Saldo: React.FC<{ a: number }> = ({ a }) => {
           <polyline points={pts.map((v, i) => `${(i / 23) * 860},${(1 - v) * 110}`).join(" ")} fill="none" stroke={COR.suave} strokeWidth={5} />
         </svg>
       </div>
-      <svg width={940} height={420} style={{ position: "absolute", left: 0, top: 0 }}>
+      <svg width={940} height={420} style={{ position: "absolute", left: 0, top: 0, opacity: risco > 0 ? 1 : 0 }}>
         <line x1={20} y1={360} x2={20 + 900 * risco} y2={360 - 320 * risco} stroke={COR.negativo} strokeWidth={16} strokeLinecap="round" />
         <line x1={20} y1={40} x2={20 + 900 * risco} y2={40 + 320 * risco} stroke={COR.negativo} strokeWidth={16} strokeLinecap="round" />
       </svg>

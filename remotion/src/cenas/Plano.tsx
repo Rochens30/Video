@@ -24,14 +24,14 @@ export const Plano: React.FC<{ a: number }> = ({ a }) => {
         <div style={{ position: "relative", width: 330, height: 330 }}>
           <svg width={330} height={330} style={{ transform: "rotate(-90deg)" }}>
             <circle cx={165} cy={165} r={140} fill="none" stroke="#ffffff14" strokeWidth={26} />
-            <circle cx={165} cy={165} r={140} fill="none" stroke={COR.positivo} strokeWidth={26} strokeLinecap="round"
+            <circle cx={165} cy={165} r={140} fill="none" stroke={COR.ganho} strokeWidth={26} strokeLinecap="round"
               strokeDasharray={2 * Math.PI * 140} strokeDashoffset={2 * Math.PI * 140 * (1 - anel)} />
           </svg>
           <div style={{ position: "absolute", inset: 0, display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
             <div style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 96, color: COR.texto }}>{noPlano}<span style={{ color: COR.suave, fontSize: 52 }}>/20</span></div>
           </div>
           <div style={{ position: "absolute", left: 0, right: 0, top: 350, display: "flex", justifyContent: "center", transform: `scale(${pct})` }}>
-            <Etiqueta cor={COR.positivo}>90% NO PLANO</Etiqueta>
+            <Etiqueta cor={COR.ganho}>90% NO PLANO</Etiqueta>
           </div>
         </div>
       </div>
@@ -41,7 +41,7 @@ export const Plano: React.FC<{ a: number }> = ({ a }) => {
 
 const Ponto: React.FC<{ visivel: boolean; fora: boolean; inicio: number }> = ({ visivel, fora, inicio }) => {
   const s = useEntrada(inicio, 10);
-  const cor = fora ? COR.negativo : COR.positivo;
+  const cor = fora ? COR.negativo : COR.ganho;
   return (
     <div style={{ width: 76, height: 76, borderRadius: 20, border: `3px solid ${visivel ? cor : COR.linha}`, background: visivel ? `${cor}33` : "transparent",
       display: "flex", alignItems: "center", justifyContent: "center", color: cor, fontWeight: 900, fontSize: 40 }}>
