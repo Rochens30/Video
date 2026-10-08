@@ -4,6 +4,10 @@ import { f } from "./tempo";
 import { Ouro, useEntrada, Efeito } from "./ui";
 
 const URL = "homepage.forexacademyclub.com";
+// Textos do vídeo atual (vídeo 1: "Consistência não é sorte." / "Aprende-se.")
+const LINHA1 = "Avalia decisões,";
+const LINHA2 = "não resultados.";
+const SUB = "Plano, risco e critério de entrada";
 const CLIQUE = f(2.9);
 const FAIXA = ["Consistência", "Mesmo risco", "Mesmo critério", "Diário", "Plano", "Zero promessas milagrosas"];
 
@@ -35,15 +39,15 @@ export const CTA: React.FC = () => {
 
       <div style={{ position: "absolute", top: 560, left: 60, right: 60, textAlign: "center", fontFamily: SERIFA }}>
         <div style={{ color: COR.texto, fontWeight: 700, fontSize: 72, lineHeight: 1.08, opacity: l1, transform: `translateY(${(1 - l1) * 30}px)` }}>
-          Consistência não é sorte.
+          {LINHA1}
         </div>
         <div style={{ marginTop: 14, color: COR.texto, fontWeight: 900, fontSize: 104, lineHeight: 1.02, opacity: l2, transform: `scale(${0.75 + 0.25 * l2})` }}>
-          <Ouro>Aprende-se.</Ouro>
+          <Ouro>{LINHA2}</Ouro>
         </div>
       </div>
 
       <div style={{ position: "absolute", top: 860, left: 90, right: 90, textAlign: "center", color: COR.suave, fontSize: 38, lineHeight: 1.4, opacity: l2 }}>
-        Risco, critério de entrada e diário de trading<br />— <span style={{ color: COR.texto, fontWeight: 700 }}>com método.</span>
+        {SUB}<br />— <span style={{ color: COR.texto, fontWeight: 700 }}>com método.</span>
       </div>
 
       <div style={{ position: "absolute", top: 1040, left: 0, right: 0, display: "flex", justifyContent: "center" }}>

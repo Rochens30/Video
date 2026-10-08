@@ -6,13 +6,14 @@ import "@fontsource/playfair-display/900.css";
 import "@fontsource/playfair-display/700-italic.css";
 import "@fontsource/playfair-display/900-italic.css";
 import "@fontsource/jetbrains-mono/700.css";
-import { AbsoluteFill, Easing, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from "remotion";
-import { CENAS, CORTES, f, VIDEO_BASE } from "./tempo";
+import { AbsoluteFill, Audio, Easing, Img, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
+import { useAudioData, visualizeAudio } from "@remotion/media-utils";
+import { CHIP_FINAL, CHIP_INICIAL, CORTES, f, MODO, VIDEO_BASE, VOZ_BASE } from "./tempo";
 import { useBlocos, useMontagem } from "./montagem";
 import { COR, DOURADO_GRADIENTE, FONTE } from "./estilo";
 import { Legendas } from "./Legendas";
 import { Sons } from "./Sons";
-import { Chip } from "./ui";
+import { Chip, Kicker } from "./ui";
 import { Expectativa } from "./cenas/Expectativa";
 import { Realidade } from "./cenas/Realidade";
 import { Checklist } from "./cenas/Checklist";
@@ -23,6 +24,13 @@ import { Risco } from "./cenas/Risco";
 import { Destruir } from "./cenas/Destruir";
 import { Saldo } from "./cenas/Saldo";
 import { Plano } from "./cenas/Plano";
+import { Gancho2 } from "./cenas/Gancho2";
+import { LucroErro } from "./cenas/LucroErro";
+import { Sorte } from "./cenas/Sorte";
+import { Cerebro } from "./cenas/Cerebro";
+import { Habito } from "./cenas/Habito";
+import { Regra } from "./cenas/Regra";
+import { Matriz } from "./cenas/Matriz";
 
 const PAINEL = 860; // altura do painel de gráficos no modo dividido
 const DESCE = 540; // quanto o orador desce no modo dividido
@@ -74,20 +82,37 @@ const Orador: React.FC<{ divisao: number; semVoz: boolean }> = ({ divisao, semVo
   );
 };
 
-const cenas: [keyof typeof CENAS, React.FC<{ a: number }>][] = [
-  ["expectativa", Expectativa],
-  ["realidade", Realidade],
-  ["checklist", Checklist],
-  ["diario", Diario],
-  ["mensal", Mensal],
-  ["perdas", Perdas],
-  ["risco", Risco],
-  ["destruir", Destruir],
-  ["saldo", Saldo],
-  ["plano", Plano],
-];
+// Catálogo de todas as cenas feitas até agora (o vídeo atual escolhe as suas em tempo.ts → CENAS).
+const CATALOGO: Record<string, React.FC<{ a: number }>> = {
+  // vídeo 1 — Consistência
+  expectativa: Expectativa, realidade: Realidade, checklist: Checklist, diario: Diario, mensal: Mensal,
+  perdas: Perdas, risco: Risco, destruir: Destruir, saldo: Saldo, plano: Plano,
+  // vídeo 2 — Lucro com erro
+  gancho: Gancho2, lucroErro: LucroErro, sorte: Sorte, cerebro: Cerebro, habito: Habito, regra: Regra, matriz: Matriz,
+};
 
-export const Video: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = ({ chipInicial = true, semVoz = false }) => {
+const Cenas: React.FC = () => {
+  const montagem = useMontagem();
+  return (
+    <>
+      {Object.entries(montagem.cenas).map(([nome, janela]) => {
+        const Cena = CATALOGO[nome];
+        if (!janela || !Cena) return null;
+        const [a, b] = janela;
+        return (
+          <Sequence key={nome} from={f(montagem.mapa(a))} durationInFrames={f(montagem.mapa(b)) - f(montagem.mapa(a))} layout="none">
+            <Cena a={a} />
+          </Sequence>
+        );
+      })}
+    </>
+  );
+};
+
+export const Video: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = (props) =>
+  MODO === "audio" ? <VideoAudio semVoz={props.semVoz ?? false} /> : <VideoCamara {...props} />;
+
+const VideoCamara: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = ({ chipInicial = true, semVoz = false }) => {
   const frame = useCurrentFrame();
   const divisao = useDivisao();
   const montagem = useMontagem();
@@ -109,27 +134,20 @@ export const Video: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = ({ c
         }}
       >
         <Grelha />
-        {cenas.map(([nome, Cena]) => {
-          const janela = montagem.cenas[nome];
-          if (!janela) return null;
-          const [a, b] = janela;
-          return (
-            <Sequence key={nome} from={f(montagem.mapa(a))} durationInFrames={f(montagem.mapa(b)) - f(montagem.mapa(a))} layout="none">
-              <Cena a={a} />
-            </Sequence>
-          );
-        })}
+        <Cenas />
       </AbsoluteFill>
 
       {/* Títulos de abertura e fecho, por cima da parede */}
-      {chipInicial && (
+      {chipInicial && CHIP_INICIAL && (
         <Sequence from={f(0.1)} durationInFrames={f(4.8)} layout="none">
-          <Chip y={230} cor={COR.positivo} texto="CONSISTÊNCIA ≠ GANHAR SEMPRE" />
+          <Chip y={230} cor={COR.positivo} texto={CHIP_INICIAL} />
         </Sequence>
       )}
-      <Sequence from={f(montagem.mapa(64.4))} layout="none">
-        <Chip y={230} cor={COR.positivo} texto="CONSISTÊNCIA = SEGUIR O PLANO" />
-      </Sequence>
+      {CHIP_FINAL && (
+        <Sequence from={f(montagem.mapa(CHIP_FINAL.t))} layout="none">
+          <Chip y={230} cor={COR.positivo} texto={CHIP_FINAL.texto} />
+        </Sequence>
+      )}
 
       <Legendas divisao={divisao} />
       <BarraProgresso frame={frame} duracao={montagem.duracao} />
@@ -167,3 +185,98 @@ const BarraProgresso: React.FC<{ frame: number; duracao: number }> = ({ frame, d
     }}
   />
 );
+
+// ---------------------------------------------------------------- modo áudio (só voz)
+const TOPO_PAINEL = 300;
+const PAINEL_AUDIO = 900;
+
+/** Voz por trechos (com as pausas encurtadas) + micro-fade em cada corte. */
+const Voz: React.FC<{ semVoz: boolean }> = ({ semVoz }) => {
+  const { segmentos } = useMontagem();
+  return (
+    <>
+      {segmentos.map((s) => {
+        const de = f(s.saida);
+        const dur = f(s.saida + (s.fim - s.ini)) - de;
+        return (
+          <Sequence key={s.ini} from={de} durationInFrames={dur} layout="none">
+            <Audio
+              src={staticFile(VOZ_BASE)}
+              trimBefore={Math.round(s.ini * 30)}
+              volume={(fr) => (semVoz ? 0 : interpolate(fr, [0, 2, dur - 2, dur], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }))}
+            />
+          </Sequence>
+        );
+      })}
+    </>
+  );
+};
+
+/** Nível da voz neste frame (0..1) e espectro, lidos do ficheiro original no instante correspondente. */
+const useNivelVoz = (barras: number) => {
+  const frame = useCurrentFrame();
+  const { fps } = useVideoConfig();
+  const { segmentos } = useMontagem();
+  const dados = useAudioData(staticFile(VOZ_BASE));
+  const t = frame / fps;
+  const s = segmentos.find((x) => t >= x.saida && t < x.saida + (x.fim - x.ini));
+  if (!dados || !s) return { nivel: 0, espectro: new Array(barras).fill(0) as number[] };
+  const fonte = Math.round((s.ini + (t - s.saida)) * fps);
+  const espectro = visualizeAudio({ fps, frame: fonte, audioData: dados, numberOfSamples: 64, smoothing: true }).slice(0, barras);
+  const nivel = Math.min(1, (espectro.reduce((a, b) => a + b, 0) / barras) * 6);
+  return { nivel, espectro };
+};
+
+const Avatar: React.FC = () => {
+  const { nivel } = useNivelVoz(16);
+  return (
+    <div style={{ position: "absolute", top: 120, left: 0, right: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: 26 }}>
+      <div style={{ position: "relative", width: 130, height: 130 }}>
+        <div style={{ position: "absolute", inset: -8 - 10 * nivel, borderRadius: "50%", border: `3px solid rgba(217,180,90,${0.25 + 0.6 * nivel})` }} />
+        <Img src={staticFile("avatar.png")} style={{ width: 130, height: 130, borderRadius: "50%", border: "4px solid #D9B45A", objectFit: "cover" }} />
+      </div>
+      <div>
+        <Kicker>FOREX ACADEMY CLUB</Kicker>
+        <div style={{ color: COR.suave, fontSize: 28, marginTop: 10, fontWeight: 600 }}>Trading · Mentalidade</div>
+      </div>
+    </div>
+  );
+};
+
+const Onda: React.FC = () => {
+  const { espectro } = useNivelVoz(28);
+  return (
+    <div style={{ position: "absolute", top: 1410, left: 0, right: 0, height: 70, display: "flex", alignItems: "center", justifyContent: "center", gap: 8 }}>
+      {espectro.map((v, i) => {
+        const espelho = espectro[Math.abs(espectro.length - 1 - i)] ?? v;
+        const h = 6 + Math.min(64, (v + espelho) * 260);
+        return <div key={i} style={{ width: 10, height: h, borderRadius: 5, background: "#D9B45A", opacity: 0.85 }} />;
+      })}
+    </div>
+  );
+};
+
+const VideoAudio: React.FC<{ semVoz: boolean }> = ({ semVoz }) => {
+  const frame = useCurrentFrame();
+  const montagem = useMontagem();
+  return (
+    <AbsoluteFill style={{ background: `radial-gradient(90% 55% at 50% 35%, #1E190E 0%, ${COR.fundo} 70%)`, fontFamily: FONTE }}>
+      <Voz semVoz={semVoz} />
+      <Avatar />
+      <AbsoluteFill
+        style={{
+          top: TOPO_PAINEL, height: PAINEL_AUDIO, left: 30, right: 30, width: undefined, borderRadius: 40, overflow: "hidden",
+          border: "2px solid rgba(217,180,90,0.3)", background: "linear-gradient(180deg, #14110C 0%, #0D0B09 100%)",
+          boxShadow: "0 30px 80px rgba(0,0,0,0.55), 0 0 60px rgba(217,180,90,0.08)",
+        }}
+      >
+        <Grelha />
+        <Cenas />
+      </AbsoluteFill>
+      <Legendas divisao={0} y={1320} />
+      <Onda />
+      <BarraProgresso frame={frame} duracao={montagem.duracao} />
+      <Sons />
+    </AbsoluteFill>
+  );
+};

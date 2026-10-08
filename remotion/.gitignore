@@ -2,3 +2,5 @@ node_modules
 out
 public/*.mp4
 public/capa_frame.png
+public/avatar.png
+public/voz.wav

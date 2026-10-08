@@ -14,11 +14,9 @@ def idx(palavra, depois=0.0):
 
 # Frases mantidas: (primeira palavra, tempo mínimo) → (última palavra, tempo mínimo)
 FRASES = [
-    (("Consistência", 0), ("perdes.", 4)),       # Consistência não é ganhar sempre. É repetires o processo mesmo quando perdes.
-    (("O", 14.4), ("jogo.", 18)),                 # O resultado sobe e desce, e isso é normal, faz parte do jogo.
-    (("Consistência", 18.6), ("más.", 30)),       # Consistência real é outra coisa: … as boas e as más.
-    (("O", 37), ("perdas.", 45.9)),               # O problema é que … no meio de uma sequência de perdas.
-    (("Se", 56.3), ("consistente.", 66)),         # Se queres medir … É isso, e só isso, que é ser consistente.
+    # Vídeo 2 ("Lucro com erro"): o áudio tem 35 s, entra tudo — só se encurtam as pausas.
+    # (Vídeo 1: ver videos/01-consistencia/NOTAS.md)
+    (("Ganhei", 0), ("regra.", 34)),
 ]
 PAUSA_MAX = 0.22  # pausas maiores do que isto são encurtadas
 MARGEM = 0.08     # silêncio que fica de cada lado de um corte

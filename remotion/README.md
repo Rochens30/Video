@@ -12,7 +12,8 @@ Vídeo vertical (1080×1920) com o tema visual de forexacademyclub.com (preto qu
 
 | # | Tema | Notas |
 |---|---|---|
-| 1 | Consistência | `videos/01-consistencia/NOTAS.md` (código em `a40b937`) |
+| 1 | Consistência (câmara) | `videos/01-consistencia/NOTAS.md` (código em `a40b937`) |
+| 2 | Lucro com erro (só áudio) | `videos/02-lucro-erro/NOTAS.md` |
 
 Para um vídeo novo segue a skill `.claude/skills/reel-trading/SKILL.md` (ou cola o `PROMPT_NOVO_REEL.md`).
 

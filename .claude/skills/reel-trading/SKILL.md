@@ -56,6 +56,13 @@ python3 ferramentas/analisar_video.py remotion/public/original.mp4 /tmp/analise
 Vê as `frames_*.png` com o Read. Reporta: resolução (480p é fraco — avisa), jump cuts (vão para `CORTES` em
 `src/tempo.ts`), loudness, enquadramento, o que tapa as mãos/cara, onde está o produto vs. zonas tapadas pela UI.
 
+### 2a. Só áudio?
+Se as frames forem pretas (vídeo só com voz), usar `MODO = "audio"` em `src/tempo.ts`: gráficos em ecrã inteiro
+com cenas seguidas a cobrir o vídeo todo (a 1.ª cena é o gancho, com `entrada={false}`), avatar
+(`public/avatar.png`, recorte da cara de uma frame de vídeo antigo) com anel a pulsar com a voz, legendas a y 1320
+e onda de som. Voz: `ffmpeg -i public/original.mp4 -vn -af "highpass=f=75,equalizer=f=3500:t=q:w=1.2:g=2" -ar 48000 -ac 1 public/voz.wav`.
+Exemplo completo: vídeo 2 (`videos/02-lucro-erro/NOTAS.md`).
+
 ### 2b. Melhorar a imagem (se o vídeo for < 1080p)
 IA de super-resolução (Real-ESRGAN general-x4v3, em ONNX no CPU, sem PyTorch) misturada 60/40 com o original
 ampliado — 100 % IA deixa a pele "de plástico". ~7 s por frame em 4 núcleos: processar **só as frames usadas** na
@@ -92,7 +99,9 @@ O texto vem do Whisper e os tempos do Parakeet. **Revê sempre**: termos de trad
   (`r(21.27)`); a montagem converte sozinha para a versão curta.
 - Reutiliza: `Cena` (rótulo + título com `<Ouro>`), `Etiqueta`, `Chip`, `Kicker`, `VelasSerie` (velas verde/vermelho
   a partir de uma série), `Curva` (linha a desenhar-se), `Efeito` (som que respeita a versão sem efeitos).
-- Registar a cena em `Video.tsx` (`cenas`) e em `tempo.ts` (`CENAS`). Sons em `Sons.tsx` (`MOMENTOS`).
+- Registar a cena no `CATALOGO` de `Video.tsx` e as janelas em `tempo.ts` (`CENAS`). Sons em `Sons.tsx` (`MOMENTOS`).
+- Dados por vídeo: `tempo.ts` (modo, cenas, cortes, etiquetas), `Legendas.tsx` (`CHAVE`), `Sons.tsx` (`MOMENTOS`),
+  `CTA.tsx` (`LINHA1/LINHA2/SUB`), `Capa.tsx` (`TITULO`), `Gancho.tsx` (modo câmara), `scripts/montar_curta.py` (`FRASES`).
 - Menos texto por cena: ninguém lê uma tabela de 5 linhas em 3 s no telemóvel.
 - Gancho em `src/Gancho.tsx`, CTA em `src/CTA.tsx`, capa em `src/Capa.tsx` (frame: `ffmpeg -ss T -i public/original.mp4 -frames:v 1 public/capa_frame.png`).
 

@@ -2,6 +2,17 @@ import { AbsoluteFill, Img, staticFile } from "remotion";
 import { COR, FONTE, SERIFA } from "./estilo";
 import { Kicker, Ouro } from "./ui";
 
+// Título do vídeo atual (vídeo 1: "Consistência / não é ganhar / sempre.")
+const TITULO = (
+  <>
+    Ganhei
+    <br />
+    dinheiro.
+    <br />
+    <Ouro>Foi um erro.</Ouro>
+  </>
+);
+
 /**
  * Capa do Reel (1080×1920). Tudo o que importa fica dentro do recorte 3:4 que a grelha do perfil mostra
  * (faixa central de y=240 a y=1680).
@@ -20,11 +31,7 @@ export const Capa: React.FC = () => (
         <Kicker style={{ fontSize: 28 }}>TRADING</Kicker>
       </div>
       <div style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 130, lineHeight: 1.0, color: COR.texto, marginTop: 22 }}>
-        Consistência
-        <br />
-        <Ouro>não é</Ouro> ganhar
-        <br />
-        sempre.
+        {TITULO}
       </div>
     </div>
 

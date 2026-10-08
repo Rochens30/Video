@@ -1,7 +1,7 @@
 import { createContext, useContext } from "react";
 import { Audio, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { COR, DOURADO_TEXTO, FONTE, MONO, SERIFA } from "./estilo";
-import { f } from "./tempo";
+import { f, MODO } from "./tempo";
 import { useMontagem } from "./montagem";
 
 /** Mola de entrada a começar no frame `inicio` (relativo à Sequence). */
@@ -32,24 +32,28 @@ export const Kicker: React.FC<{ cor?: string; children: React.ReactNode; style?:
 );
 
 /** Envolve uma cena: fade/slide de entrada e saída + cabeçalho. */
-export const Cena: React.FC<{ kicker: string; titulo: React.ReactNode; cor?: string; children: React.ReactNode }> = ({
+export const Cena: React.FC<{ kicker: string; titulo: React.ReactNode; cor?: string; entrada?: boolean; children: React.ReactNode }> = ({
   kicker,
   titulo,
   cor = COR.positivo,
+  entrada = true, // false: já visível no frame 0 (gancho/capa)
   children,
 }) => {
   const frame = useCurrentFrame();
   const { durationInFrames } = useVideoConfig();
-  const op = interpolate(frame, [0, 8, durationInFrames - 8, durationInFrames], [0, 1, 1, 0], {
+  const op = interpolate(frame, [0, 8, durationInFrames - 8, durationInFrames], [entrada ? 0 : 1, 1, 1, 0], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
   });
-  const y = interpolate(frame, [0, 10], [40, 0], { extrapolateRight: "clamp" });
+  const y = entrada ? interpolate(frame, [0, 10], [40, 0], { extrapolateRight: "clamp" }) : 0;
   return (
     <div style={{ position: "absolute", inset: 0, opacity: op, transform: `translateY(${y}px)`, padding: "90px 70px 60px", fontFamily: FONTE }}>
       <Kicker cor={cor}>{kicker}</Kicker>
       <div style={{ color: COR.texto, fontFamily: SERIFA, fontWeight: 700, fontSize: 66, lineHeight: 1.08, marginTop: 18 }}>{titulo}</div>
-      <div style={{ position: "absolute", left: 70, right: 70, top: 300, bottom: 70 }}>{children}</div>
+      {/* no modo áudio o painel é mais alto: o conteúdo fica centrado na vertical */}
+      <div style={{ position: "absolute", left: 70, right: 70, top: 300, bottom: 70, ...(MODO === "audio" ? { display: "flex", flexDirection: "column", justifyContent: "center" } : {}) }}>
+        <div>{children}</div>
+      </div>
     </div>
   );
 };

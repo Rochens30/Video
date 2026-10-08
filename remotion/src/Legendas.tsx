@@ -4,13 +4,13 @@ import { COR, DOURADO_TEXTO, SERIFA } from "./estilo";
 import { f } from "./tempo";
 import { useMontagem } from "./montagem";
 
-const CHAVE = new Set(["consistência", "perdes", "garantidos", "traders", "normal", "risco", "critério", "registar",
-  "controlas", "estratégia", "perdas", "arriscar", "loss", "destruir", "saldo", "plano", "consistente"]);
+// Palavras destacadas (vídeo atual). Vídeo 1: consistência, risco, critério, registar, saldo, plano…
+const CHAVE = new Set(["lucro", "erro", "sorte", "competência", "perigo", "cérebro", "decisão", "hábito", "resultado", "regra", "plano"]);
 const limpa = (w: string) => w.toLowerCase().replace(/[^\p{L}]/gu, "");
 
 
 /** Uma palavra de cada vez, com pop; fica no ecrã até à seguinte se a pausa for curta. */
-export const Legendas: React.FC<{ divisao: number }> = ({ divisao }) => {
+export const Legendas: React.FC<{ divisao: number; y?: number }> = ({ divisao, y: yFixo }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
@@ -26,7 +26,7 @@ export const Legendas: React.FC<{ divisao: number }> = ({ divisao }) => {
   const w = W[i];
   const s = spring({ frame: frame - f(w.inicio), fps, config: { damping: 11, mass: 0.4 } });
   const chave = CHAVE.has(limpa(w.palavra));
-  const y = interpolate(divisao, [0, 1], [1150, 1440]);
+  const y = yFixo ?? interpolate(divisao, [0, 1], [1150, 1440]);
   return (
     <div style={{ position: "absolute", top: y, left: 40, right: 40, display: "flex", justifyContent: "center", transform: "translateY(-50%)" }}>
       <div

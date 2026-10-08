@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 import curta from "./montagem_curta.json";
-import { CENAS, PRINCIPAL } from "./tempo";
+import { CENAS, CENAS_CURTA, PRINCIPAL } from "./tempo";
 
 export type NomeCena = keyof typeof CENAS;
 type Segmento = { ini: number; fim: number; saida: number; trocaZoom: boolean };
@@ -37,14 +37,7 @@ const criar = (trechos: [number, number, number?][], cenas: Montagem["cenas"]): 
 
 export const COMPLETA = criar([[0, PRINCIPAL, 0]], CENAS);
 
-export const CURTA = criar(curta.segmentos as [number, number, number][], {
-  realidade: [14.35, 18.47],
-  checklist: [21.1, 28.7],
-  diario: [28.7, 31.36],
-  perdas: [43.0, 46.6],
-  saldo: [56.26, 60.5],
-  plano: [60.5, 64.1],
-});
+export const CURTA = criar(curta.segmentos as [number, number, number][], CENAS_CURTA);
 
 export const MontagemContext = createContext<Montagem>(COMPLETA);
 export const useMontagem = () => useContext(MontagemContext);
