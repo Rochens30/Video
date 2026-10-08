@@ -1,14 +1,15 @@
 import { interpolate, interpolateColors, useCurrentFrame } from "remotion";
 import { COR, MONO, SERIFA } from "../estilo";
-import { Cena, Etiqueta, rel, useEntrada, Ouro } from "../ui";
+import { Cena, Etiqueta, useRel, useEntrada, Ouro } from "../ui";
 
 /** "Ou começa então a arriscar mais por trade para recuperar da loss…" */
 export const Risco: React.FC<{ a: number }> = ({ a }) => {
+  const r = useRel(a);
   const frame = useCurrentFrame();
-  const t0 = rel(a, 47.84), t1 = rel(a, 50.9);
+  const t0 = r(47.84), t1 = r(50.9);
   const risco = interpolate(frame, [t0, t1], [1, 6], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   const cor = interpolateColors(risco, [1, 2.5, 6], [COR.positivo, COR.destaque, COR.negativo]);
-  const aviso = useEntrada(rel(a, 49.44), 10);
+  const aviso = useEntrada(r(49.44), 10);
   const treme = risco > 4 ? Math.sin(frame * 2.3) * (risco - 4) * 3 : 0;
   return (
     <Cena kicker="O ERRO Nº2" titulo={<>Arriscar mais para<br /><Ouro>recuperar a loss</Ouro></>} cor={COR.negativo}>

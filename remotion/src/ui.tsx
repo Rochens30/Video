@@ -1,6 +1,7 @@
 import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import { COR, DOURADO_TEXTO, FONTE, MONO, SERIFA } from "./estilo";
 import { f } from "./tempo";
+import { useMontagem } from "./montagem";
 
 /** Mola de entrada a começar no frame `inicio` (relativo à Sequence). */
 export const useEntrada = (inicio: number, damping = 14) => {
@@ -9,8 +10,12 @@ export const useEntrada = (inicio: number, damping = 14) => {
   return spring({ frame: frame - inicio, fps, config: { damping, mass: 0.6 } });
 };
 
-/** Converte um tempo absoluto (s) num frame relativo ao início da cena `a`. */
-export const rel = (a: number, s: number) => f(s) - f(a);
+/** Devolve uma função que converte um tempo do vídeo original (s) num frame relativo ao início da cena `a`,
+ * já com os cortes da montagem aplicados. */
+export const useRel = (a: number) => {
+  const { mapa } = useMontagem();
+  return (s: number) => f(mapa(s)) - f(mapa(a));
+};
 
 /** Ênfase no estilo do site: itálico com gradiente dourado (ou outra cor). */
 export const Ouro: React.FC<{ children: React.ReactNode; cor?: string }> = ({ children, cor }) => (

@@ -1,5 +1,5 @@
 import { COR, MONO } from "../estilo";
-import { Cena, Etiqueta, rel, useEntrada, Ouro } from "../ui";
+import { Cena, Etiqueta, useRel, useEntrada, Ouro } from "../ui";
 
 const LINHAS: [string, string, number][] = [
   ["#041", "EUR/USD", 2.0],
@@ -11,15 +11,16 @@ const LINHAS: [string, string, number][] = [
 
 /** "…sem exceção, as boas e as más. E isso sim é consistência." */
 export const Diario: React.FC<{ a: number }> = ({ a }) => {
-  const banner = useEntrada(rel(a, 31.46), 12);
+  const r = useRel(a);
+  const banner = useEntrada(r(31.46), 12);
   return (
     <Cena kicker="DIÁRIO DE TRADING" titulo={<>Sem exceção:<br /><Ouro>as boas e as más</Ouro></>}>
       <div style={{ fontFamily: MONO, fontSize: 34, color: COR.texto }}>
         <div style={{ display: "flex", color: COR.suave, fontSize: 24, padding: "0 20px 12px" }}>
           <span style={{ width: 150 }}>TRADE</span><span style={{ flex: 1 }}>ATIVO</span><span style={{ width: 200, textAlign: "right" }}>RESULTADO</span><span style={{ width: 120, textAlign: "right" }}>PLANO</span>
         </div>
-        {LINHAS.map(([id, ativo, r], i) => (
-          <Linha key={id} inicio={rel(a, 28.85) + i * 7} id={id} ativo={ativo} r={r} />
+        {LINHAS.map(([id, ativo, resultado], i) => (
+          <Linha key={id} inicio={r(28.85) + i * 7} id={id} ativo={ativo} r={resultado} />
         ))}
       </div>
       <div style={{ position: "absolute", left: 0, right: 0, bottom: -30, display: "flex", justifyContent: "center", transform: `scale(${banner})` }}>

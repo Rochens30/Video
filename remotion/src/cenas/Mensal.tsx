@@ -1,19 +1,20 @@
 import { COR, MONO } from "../estilo";
-import { Cena, Etiqueta, rel, useEntrada, Ouro } from "../ui";
+import { Cena, Etiqueta, useRel, useEntrada, Ouro } from "../ui";
 
 const MESES: [string, number][] = [["JAN", 4.2], ["FEV", -1.8], ["MAR", 6.1], ["ABR", -2.9], ["MAI", 1.3], ["JUN", 3.4]];
 const ESCALA = 28; // px por 1%
 
 /** "O resultado de cada mês, esse, tu não controlas." */
 export const Mensal: React.FC<{ a: number }> = ({ a }) => {
-  const tag = useEntrada(rel(a, 35.65), 10);
+  const r = useRel(a);
+  const tag = useEntrada(r(35.65), 10);
   return (
     <Cena kicker="RESULTADO MENSAL" titulo={<>Isto tu <Ouro cor={COR.negativo}>não controlas</Ouro></>} cor={COR.suave}>
       <div style={{ position: "relative", height: 440 }}>
         <div style={{ position: "absolute", left: 0, right: 0, top: 200, height: 3, background: COR.suave }} />
         <div style={{ display: "flex", justifyContent: "space-between", height: "100%" }}>
           {MESES.map(([m, v], i) => (
-            <Barra key={m} mes={m} v={v} inicio={rel(a, 33.76) + i * 4} />
+            <Barra key={m} mes={m} v={v} inicio={r(33.76) + i * 4} />
           ))}
         </div>
         <div style={{ position: "absolute", right: 0, top: -30, transform: `scale(${tag}) rotate(4deg)` }}>

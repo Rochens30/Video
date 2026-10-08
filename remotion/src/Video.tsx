@@ -8,6 +8,7 @@ import "@fontsource/playfair-display/900-italic.css";
 import "@fontsource/jetbrains-mono/700.css";
 import { AbsoluteFill, Easing, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { CENAS, CORTES, f } from "./tempo";
+import { useBlocos, useMontagem } from "./montagem";
 import { COR, DOURADO_GRADIENTE, FONTE } from "./estilo";
 import { Legendas } from "./Legendas";
 import { Sons } from "./Sons";
@@ -27,20 +28,9 @@ const PAINEL = 860; // altura do painel de gráficos no modo dividido
 const DESCE = 540; // quanto o orador desce no modo dividido
 const TRANS = 12; // frames da transição
 
-// Junta cenas seguidas num só bloco para o painel não fechar e reabrir entre elas.
-const blocos = (() => {
-  const xs = Object.values(CENAS).map(([a, b]) => [a, b]).sort((p, q) => p[0] - q[0]);
-  const out: number[][] = [];
-  for (const [a, b] of xs) {
-    const ult = out[out.length - 1];
-    if (ult && a - ult[1] < 0.3) ult[1] = Math.max(ult[1], b);
-    else out.push([a, b]);
-  }
-  return out;
-})();
-
 const useDivisao = () => {
   const frame = useCurrentFrame();
+  const blocos = useBlocos();
   const ease = Easing.bezier(0.65, 0, 0.35, 1);
   return Math.max(
     0,
@@ -56,12 +46,30 @@ const useDivisao = () => {
 
 const Orador: React.FC<{ divisao: number }> = ({ divisao }) => {
   const frame = useCurrentFrame();
-  // Zoom alternado (100% / 112%) a cada jump cut, ancorado na cara.
-  const segmento = CORTES.filter((c) => frame >= f(c)).length;
-  const zoom = interpolate(divisao, [0, 1], [segmento % 2 ? 1.12 : 1, 1]);
+  const { segmentos, mapa, dentro } = useMontagem();
+  // Zoom alternado (100% / 112%) a cada jump cut original e a cada corte entre frases, ancorado na cara.
+  const t = frame / 30;
+  const trocas =
+    segmentos.filter((s) => s.trocaZoom && s.saida + (s.fim - s.ini) <= t + 1e-3).length +
+    CORTES.filter((c) => dentro(c) && mapa(c) <= t).length;
+  const zoom = interpolate(divisao, [0, 1], [trocas % 2 ? 1.12 : 1, 1]);
   return (
     <AbsoluteFill style={{ transform: `translateY(${divisao * DESCE}px) scale(${zoom})`, transformOrigin: "50% 30%" }}>
-      <OffthreadVideo src={staticFile("original.mp4")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
+      {segmentos.map((s) => {
+        const de = f(s.saida);
+        const dur = f(s.saida + (s.fim - s.ini)) - de;
+        return (
+          <Sequence key={s.ini} from={de} durationInFrames={dur} layout="none">
+            <OffthreadVideo
+              src={staticFile("original.mp4")}
+              trimBefore={Math.round(s.ini * 30)}
+              // micro-fade de 2 frames em cada corte para não haver estalos no áudio
+              volume={(fr) => interpolate(fr, [0, 2, dur - 2, dur], [0, 1, 1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" })}
+              style={{ position: "absolute", width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          </Sequence>
+        );
+      })}
     </AbsoluteFill>
   );
 };
@@ -79,9 +87,10 @@ const cenas: [keyof typeof CENAS, React.FC<{ a: number }>][] = [
   ["plano", Plano],
 ];
 
-export const Video: React.FC = () => {
+export const Video: React.FC<{ chipInicial?: boolean }> = ({ chipInicial = true }) => {
   const frame = useCurrentFrame();
   const divisao = useDivisao();
+  const montagem = useMontagem();
   return (
     <AbsoluteFill style={{ backgroundColor: COR.fundo, fontFamily: FONTE }}>
       <Orador divisao={divisao} />
@@ -101,9 +110,11 @@ export const Video: React.FC = () => {
       >
         <Grelha />
         {cenas.map(([nome, Cena]) => {
-          const [a, b] = CENAS[nome];
+          const janela = montagem.cenas[nome];
+          if (!janela) return null;
+          const [a, b] = janela;
           return (
-            <Sequence key={nome} from={f(a)} durationInFrames={f(b) - f(a)} layout="none">
+            <Sequence key={nome} from={f(montagem.mapa(a))} durationInFrames={f(montagem.mapa(b)) - f(montagem.mapa(a))} layout="none">
               <Cena a={a} />
             </Sequence>
           );
@@ -111,15 +122,17 @@ export const Video: React.FC = () => {
       </AbsoluteFill>
 
       {/* Títulos de abertura e fecho, por cima da parede */}
-      <Sequence from={f(0.1)} durationInFrames={f(4.8)} layout="none">
-        <Chip y={230} cor={COR.positivo} texto="CONSISTÊNCIA ≠ GANHAR SEMPRE" />
-      </Sequence>
-      <Sequence from={f(64.4)} layout="none">
+      {chipInicial && (
+        <Sequence from={f(0.1)} durationInFrames={f(4.8)} layout="none">
+          <Chip y={230} cor={COR.positivo} texto="CONSISTÊNCIA ≠ GANHAR SEMPRE" />
+        </Sequence>
+      )}
+      <Sequence from={f(montagem.mapa(64.4))} layout="none">
         <Chip y={230} cor={COR.positivo} texto="CONSISTÊNCIA = SEGUIR O PLANO" />
       </Sequence>
 
       <Legendas divisao={divisao} />
-      <BarraProgresso frame={frame} />
+      <BarraProgresso frame={frame} duracao={montagem.duracao} />
       <Sons />
     </AbsoluteFill>
   );
@@ -142,14 +155,14 @@ const Grelha: React.FC = () => (
   </svg>
 );
 
-const BarraProgresso: React.FC<{ frame: number }> = ({ frame }) => (
+const BarraProgresso: React.FC<{ frame: number; duracao: number }> = ({ frame, duracao }) => (
   <div
     style={{
       position: "absolute",
       left: 0,
       bottom: 0,
       height: 8,
-      width: `${(frame / f(67.25)) * 100}%`,
+      width: `${(frame / f(duracao)) * 100}%`,
       background: DOURADO_GRADIENTE,
     }}
   />

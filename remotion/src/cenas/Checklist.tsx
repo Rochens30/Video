@@ -1,6 +1,6 @@
 import { interpolate, useCurrentFrame } from "remotion";
 import { COR } from "../estilo";
-import { Cena, Etiqueta, rel, useEntrada, Ouro } from "../ui";
+import { Cena, Etiqueta, useRel, useEntrada, Ouro } from "../ui";
 
 const ITENS: [number, string, string][] = [
   [21.27, "Mesmo risco em todas as trades", "1% / trade"],
@@ -9,15 +9,18 @@ const ITENS: [number, string, string][] = [
 ];
 
 /** "Consistência real é outra coisa: é usar o mesmo risco…" */
-export const Checklist: React.FC<{ a: number }> = ({ a }) => (
+export const Checklist: React.FC<{ a: number }> = ({ a }) => {
+  const r = useRel(a);
+  return (
   <Cena kicker="CONSISTÊNCIA REAL" titulo={<>É <Ouro>outra coisa:</Ouro></>} cor={COR.positivo}>
     <div style={{ display: "flex", flexDirection: "column", gap: 34, marginTop: 10 }}>
       {ITENS.map(([t, texto, extra]) => (
-        <Item key={texto} inicio={rel(a, t)} texto={texto} extra={extra} />
+        <Item key={texto} inicio={r(t)} texto={texto} extra={extra} />
       ))}
     </div>
   </Cena>
-);
+  );
+};
 
 const Item: React.FC<{ inicio: number; texto: string; extra: string }> = ({ inicio, texto, extra }) => {
   const frame = useCurrentFrame();

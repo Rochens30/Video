@@ -1,16 +1,17 @@
 import { interpolate, useCurrentFrame } from "remotion";
 import { COR, MONO, SERIFA } from "../estilo";
-import { Cena, Etiqueta, rel, useEntrada, Ouro } from "../ui";
+import { Cena, Etiqueta, useRel, useEntrada, Ouro } from "../ui";
 
 const FORA = new Set([6, 14]); // as 2 trades que não seguiram o plano
 
 /** "Olha para quantas trades seguiram mesmo o teu plano." */
 export const Plano: React.FC<{ a: number }> = ({ a }) => {
+  const r = useRel(a);
   const frame = useCurrentFrame();
-  const t0 = rel(a, 61.1), passo = 3;
+  const t0 = r(61.1), passo = 3;
   const feitos = Math.max(0, Math.min(20, Math.floor((frame - t0) / passo) + 1));
   const noPlano = Array.from({ length: feitos }, (_, i) => i).filter((i) => !FORA.has(i)).length;
-  const pct = useEntrada(rel(a, 63.28), 10);
+  const pct = useEntrada(r(63.28), 10);
   const anel = interpolate(noPlano, [0, 20], [0, 1]);
   return (
     <Cena kicker="OLHA PARA ISTO" titulo={<>Trades que seguiram<br /><Ouro>o teu plano</Ouro></>} cor={COR.positivo}>

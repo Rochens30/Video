@@ -1,6 +1,6 @@
 import { useCurrentFrame } from "remotion";
 import { COR } from "../estilo";
-import { Cena, Etiqueta, rel, useEntrada, Ouro } from "../ui";
+import { Cena, Etiqueta, useRel, useEntrada, Ouro } from "../ui";
 
 // [abertura, fecho, máximo, mínimo] em unidades 0..100 (100 = topo)
 const VELAS: number[][] = [
@@ -13,10 +13,11 @@ const ESTRATEGIAS = ["ESTRATÉGIA A", "ESTRATÉGIA B", "ESTRATÉGIA C", "ESTRAT�
 
 /** "…acaba por mudar de estratégia no meio de uma sequência de perdas." */
 export const Perdas: React.FC<{ a: number }> = ({ a }) => {
+  const r = useRel(a);
   const frame = useCurrentFrame();
-  const troca = rel(a, 43.12);
+  const troca = r(43.12);
   const k = frame < troca ? 0 : Math.min(ESTRATEGIAS.length - 1, 1 + Math.floor((frame - troca) / 14));
-  const seq = useEntrada(rel(a, 45.36), 10);
+  const seq = useEntrada(r(45.36), 10);
   return (
     <Cena kicker="O ERRO Nº1" titulo={<>Mudar de estratégia<br /><Ouro>a meio das perdas</Ouro></>} cor={COR.negativo}>
       <div style={{ position: "absolute", right: 0, top: -200 }}>
@@ -24,7 +25,7 @@ export const Perdas: React.FC<{ a: number }> = ({ a }) => {
       </div>
       <svg width={940} height={420}>
         {VELAS.map((v, i) => (
-          <Vela key={i} v={v} i={i} inicio={rel(a, 43.1) + i * 6} />
+          <Vela key={i} v={v} i={i} inicio={r(43.1) + i * 6} />
         ))}
       </svg>
       <div style={{ position: "absolute", right: 0, bottom: 0, transform: `scale(${seq})` }}>

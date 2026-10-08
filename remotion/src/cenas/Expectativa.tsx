@@ -1,21 +1,22 @@
 import { interpolate, useCurrentFrame } from "remotion";
 import { COR, DOURADO_GRADIENTE, MONO, SERIFA } from "../estilo";
-import { Cena, rel, useEntrada, Ouro } from "../ui";
+import { Cena, useRel, useEntrada, Ouro } from "../ui";
 
 const MESES = ["JAN", "FEV", "MAR", "ABR", "MAI", "JUN"];
 
 /** "resultados certos e garantidos todos os meses" → "Mas isso nem existe" */
 export const Expectativa: React.FC<{ a: number }> = ({ a }) => {
+  const r = useRel(a);
   const frame = useCurrentFrame();
-  const quebra = rel(a, 10.8);
+  const quebra = r(10.8);
   const cinza = interpolate(frame, [quebra, quebra + 8], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
-  const carimbo = useEntrada(rel(a, 11.36), 9);
-  const melhores = useEntrada(rel(a, 12.25));
+  const carimbo = useEntrada(r(11.36), 9);
+  const melhores = useEntrada(r(12.25));
   return (
     <Cena kicker="O QUE A MAIORIA PENSA" titulo={<>Lucro garantido<br /><Ouro>todos os meses</Ouro></>}>
       <div style={{ display: "flex", alignItems: "flex-end", justifyContent: "space-between", height: 400, filter: `grayscale(${cinza}) brightness(${1 - 0.45 * cinza})` }}>
         {MESES.map((m, i) => (
-          <Barra key={m} mes={m} inicio={rel(a, 7.6) + i * 5} />
+          <Barra key={m} mes={m} inicio={r(7.6) + i * 5} />
         ))}
       </div>
       <div

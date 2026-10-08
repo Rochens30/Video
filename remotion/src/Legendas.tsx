@@ -2,18 +2,21 @@ import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import palavras from "./palavras.json";
 import { COR, DOURADO_TEXTO, SERIFA } from "./estilo";
 import { f } from "./tempo";
+import { useMontagem } from "./montagem";
 
 const CHAVE = new Set(["consistência", "perdes", "garantidos", "traders", "normal", "risco", "critério", "registar",
   "controlas", "estratégia", "perdas", "arriscar", "loss", "destruir", "saldo", "plano", "consistente"]);
 const limpa = (w: string) => w.toLowerCase().replace(/[^\p{L}]/gu, "");
 
-const W = palavras.palavras;
 
 /** Uma palavra de cada vez, com pop; fica no ecrã até à seguinte se a pausa for curta. */
 export const Legendas: React.FC<{ divisao: number }> = ({ divisao }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
+  const { dentro, mapa } = useMontagem();
+  // Só as palavras que ficam na montagem, com os tempos já convertidos.
+  const W = palavras.palavras.filter((w) => dentro(w.inicio)).map((w) => ({ ...w, inicio: mapa(w.inicio), fim: mapa(w.fim) }));
   const i = W.findIndex((w, k) => {
     const prox = W[k + 1]?.inicio ?? w.fim + 0.5;
     const fim = prox - w.fim < 0.35 ? prox : w.fim + 0.25;

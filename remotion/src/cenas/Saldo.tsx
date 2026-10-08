@@ -1,11 +1,12 @@
 import { interpolate, random, useCurrentFrame } from "remotion";
 import { COR, MONO, SERIFA } from "../estilo";
-import { Cena, rel, Ouro } from "../ui";
+import { Cena, useRel, Ouro } from "../ui";
 
 /** "Se queres medir a tua consistência, não olhes para o saldo da tua conta." */
 export const Saldo: React.FC<{ a: number }> = ({ a }) => {
+  const r = useRel(a);
   const frame = useCurrentFrame();
-  const corte = rel(a, 58.4);
+  const corte = r(58.4);
   const risco = interpolate(frame, [corte, corte + 12], [0, 1], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
   // O saldo oscila a cada 3 frames: é ruído, não é medida de consistência.
   const passo = Math.floor(Math.min(frame, corte) / 3);
