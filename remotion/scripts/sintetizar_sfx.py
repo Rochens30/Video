@@ -1,4 +1,4 @@
-"""Sintetiza os efeitos sonoros "cinematográficos" (whoosh, impacto, queda, riser).
+"""Sintetiza os efeitos sonoros "cinematográficos" (whoosh, impacto, queda) e o clique de rato.
 
 Gerados de raiz, sem samples de terceiros: podem ser usados sem restrições.
 Uso: python3 scripts/sintetizar_sfx.py public/sfx
@@ -48,7 +48,6 @@ def whoosh(dur, f0, f1, pico):
 # Whoosh de entrada e saída do painel
 guarda("whoosh_in", whoosh(0.55, 250, 4000, 0.65))
 guarda("whoosh_out", whoosh(0.5, 3500, 220, 0.35))
-guarda("whoosh_curto", whoosh(0.28, 600, 5000, 0.5), pico=0.7)
 
 # Impacto (carimbo "NÃO EXISTE"): grave com descida de tom + transiente de ruído
 n = int(0.9 * SR); t = np.arange(n) / SR
@@ -71,10 +70,26 @@ cai = glide(700, 90, n)
 tom = (np.sin(2 * np.pi * np.cumsum(cai) / SR) + 0.4 * np.sin(4 * np.pi * np.cumsum(cai) / SR)) * np.exp(-t / 0.7) * 0.6
 guarda("queda", np.tanh(1.5 * (sub + ronco + estalo + tom)))
 
-# Riser (risco a subir): ruído a abrir + tom a subir, termina no máximo
-n = int(3.1 * SR); t = np.arange(n) / SR
-ruido = passa_banda(rng.standard_normal(n), glide(300, 6000, n), q=2.5)
-tom = np.sin(2 * np.pi * np.cumsum(glide(160, 640, n)) / SR) * 0.35
-trem = 1 + 0.25 * np.sin(2 * np.pi * np.cumsum(glide(4, 18, n)) / SR)   # tremolo a acelerar
-guarda("riser", (ruido * 0.8 + tom) * trem * (t / t[-1]) ** 2.2, pico=0.8)
+
+
+# Clique de rato: microinterruptor = transiente seco + ressonâncias do plástico (2–9 kHz) a decair em poucos ms.
+# "Clic" ao carregar e "clac" mais suave e agudo ao soltar, ~85 ms depois.
+def estalido(n, freqs, tau, ganho, brilho=1.0):
+    t = np.arange(n) / SR
+    y = np.zeros(n)
+    for k, fr in enumerate(freqs):
+        y += np.sin(2 * np.pi * fr * brilho * t + rng.random() * 6.28) * np.exp(-t / (tau * (1 - 0.15 * k))) / (1 + 0.6 * k)
+    ruido = passa_banda(rng.standard_normal(n), np.full(n, 4500.0 * brilho), q=0.8) * np.exp(-t / 0.0015) * 2.5
+    corpo = np.sin(2 * np.pi * 190 * t) * np.exp(-t / 0.012) * 0.35
+    return (y + ruido + corpo) * ganho
+
+for v, (brilho, atraso) in enumerate([(0.82, 0.085), (0.88, 0.078)]):
+    n = int(0.22 * SR)
+    clique = np.zeros(n)
+    carregar = estalido(int(0.05 * SR), [3200, 5600, 8300], 0.0045, 1.0, brilho)
+    soltar = estalido(int(0.05 * SR), [3600, 6200, 9100], 0.0035, 0.45, brilho)
+    i = int(atraso * SR)
+    clique[: len(carregar)] += carregar
+    clique[i : i + len(soltar)] += soltar
+    guarda(f"clique_rato_{v + 1}", clique, pico=0.85)
 print("ok")

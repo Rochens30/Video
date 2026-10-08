@@ -43,7 +43,8 @@ npm run studio      # pré-visualizar e afinar no browser
 
 ## Efeitos sonoros
 
-- `public/sfx/*.wav` (whoosh, impacto, queda): sintetizados de raiz por `scripts/sintetizar_sfx.py`, sem direitos de terceiros.
+- `public/sfx/*.wav` (whoosh, impacto, queda, clique de rato): sintetizados de raiz por `scripts/sintetizar_sfx.py`, sem direitos de terceiros.
+- `public/sfx/teclado/*.mp3`: gravações reais de teclado mecânico (Holy Panda) do projeto [kbsim](https://github.com/tplai/kbsim), licença MIT (ver `public/sfx/teclado/`).
 - `public/sfx/ui/*.mp3`: pacote [uisfx](https://github.com/romainsimon/uisfx) (licença MIT, ver `public/sfx/ui/LICENSE-uisfx.txt`).
 
 Os números nos gráficos (trades, saldos, percentagens) são **exemplos ilustrativos**, não são dados reais.

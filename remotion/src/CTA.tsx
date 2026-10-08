@@ -67,7 +67,7 @@ export const CTA: React.FC = () => {
       <Faixa frame={frame} />
 
       <Sequence layout="none"><Audio src={staticFile("sfx/whoosh_in.wav")} volume={0.15} /></Sequence>
-      <Sequence from={CLIQUE} layout="none"><Audio src={staticFile("sfx/ui/press.mp3")} volume={0.3} /></Sequence>
+      <Sequence from={CLIQUE - 1} layout="none"><Audio src={staticFile("sfx/clique_rato_1.wav")} volume={0.35} /></Sequence>
     </AbsoluteFill>
   );
 };

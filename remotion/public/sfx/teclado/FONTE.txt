@@ -1,0 +1,3 @@
+Gravações reais de um teclado mecânico (switches Holy Panda).
+Fonte: https://github.com/tplai/kbsim (via https://github.com/hainguyents13/mechvibes, src/audio/holy-pandas).
+Licença MIT — ver LICENSE-kbsim.txt.
