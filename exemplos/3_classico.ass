@@ -1,0 +1,50 @@
+[Script Info]
+ScriptType: v4.00+
+PlayResX: 1080
+PlayResY: 1920
+WrapStyle: 0
+ScaledBorderAndShadow: yes
+
+[V4+ Styles]
+Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
+Style: Classico,Montserrat ExtraBold,58,&H00FFFFFF,&H00FFFFFF,&H64000000,&H64000000,0,0,0,0,100,100,0,0,3,14,0,5,90,90,0,1
+
+[Events]
+Format: Layer, Start, End, Style, Name, MarginL, MarginR, MarginV, Effect, Text
+Dialogue: 0,0:00:00.00,0:00:02.03,Classico,,0,0,0,,{\pos(540,1150)}Consistência não\Né ganhar sempre.
+Dialogue: 0,0:00:02.19,0:00:05.00,Classico,,0,0,0,,{\pos(540,1150)}É repetires o processo\Nmesmo quando perdes.
+Dialogue: 0,0:00:05.00,0:00:05.69,Classico,,0,0,0,,{\pos(540,1150)}A maioria
+Dialogue: 0,0:00:05.83,0:00:08.48,Classico,,0,0,0,,{\pos(540,1150)}ouve consistência e\Npensa logo em resultados
+Dialogue: 0,0:00:08.48,0:00:10.80,Classico,,0,0,0,,{\pos(540,1150)}certos e garantidos\Ntodos os meses.
+Dialogue: 0,0:00:10.80,0:00:12.25,Classico,,0,0,0,,{\pos(540,1150)}Mas isso nem existe,
+Dialogue: 0,0:00:12.25,0:00:14.30,Classico,,0,0,0,,{\pos(540,1150)}nem para os melhores\Ntraders do mundo.
+Dialogue: 0,0:00:14.45,0:00:16.27,Classico,,0,0,0,,{\pos(540,1150)}O resultado\Nsobe e desce,
+Dialogue: 0,0:00:16.27,0:00:17.36,Classico,,0,0,0,,{\pos(540,1150)}e isso é normal,
+Dialogue: 0,0:00:17.36,0:00:18.64,Classico,,0,0,0,,{\pos(540,1150)}faz parte do jogo.
+Dialogue: 0,0:00:18.64,0:00:21.07,Classico,,0,0,0,,{\pos(540,1150)}Consistência real\Né outra coisa:
+Dialogue: 0,0:00:21.27,0:00:24.19,Classico,,0,0,0,,{\pos(540,1150)}é usar o mesmo risco\Nem todas as trades,
+Dialogue: 0,0:00:24.19,0:00:26.76,Classico,,0,0,0,,{\pos(540,1150)}é seguir o mesmo\Ncritério de entrada,
+Dialogue: 0,0:00:26.76,0:00:28.80,Classico,,0,0,0,,{\pos(540,1150)}é registar todas\Nas trades,
+Dialogue: 0,0:00:28.80,0:00:29.82,Classico,,0,0,0,,{\pos(540,1150)}sem exceção,
+Dialogue: 0,0:00:29.82,0:00:31.46,Classico,,0,0,0,,{\pos(540,1150)}as boas e as más.
+Dialogue: 0,0:00:31.46,0:00:33.60,Classico,,0,0,0,,{\pos(540,1150)}E isso sim é\Nconsistência.
+Dialogue: 0,0:00:33.60,0:00:35.15,Classico,,0,0,0,,{\pos(540,1150)}O resultado de cada mês,
+Dialogue: 0,0:00:35.15,0:00:35.65,Classico,,0,0,0,,{\pos(540,1150)}esse,
+Dialogue: 0,0:00:35.65,0:00:36.88,Classico,,0,0,0,,{\pos(540,1150)}tu não controlas.
+Dialogue: 0,0:00:37.04,0:00:39.52,Classico,,0,0,0,,{\pos(540,1150)}O problema é que quem\Nanda à procura de
+Dialogue: 0,0:00:39.52,0:00:41.23,Classico,,0,0,0,,{\pos(540,1150)}resultados\Nsempre iguais,
+Dialogue: 0,0:00:41.23,0:00:42.56,Classico,,0,0,0,,{\pos(540,1150)}mais cedo ou mais tarde,
+Dialogue: 0,0:00:42.56,0:00:44.36,Classico,,0,0,0,,{\pos(540,1150)}acaba por mudar\Nde estratégia
+Dialogue: 0,0:00:44.60,0:00:46.80,Classico,,0,0,0,,{\pos(540,1150)}no meio de uma\Nsequência de perdas.
+Dialogue: 0,0:00:46.80,0:00:49.44,Classico,,0,0,0,,{\pos(540,1150)}Ou começa então a arriscar\Nmais por trade para
+Dialogue: 0,0:00:49.44,0:00:52.08,Classico,,0,0,0,,{\pos(540,1150)}recuperar da loss o\Nmais rápido possível.
+Dialogue: 0,0:00:52.08,0:00:52.84,Classico,,0,0,0,,{\pos(540,1150)}E aí
+Dialogue: 0,0:00:52.84,0:00:55.12,Classico,,0,0,0,,{\pos(540,1150)}é que começa a destruir\Ntudo o que estava
+Dialogue: 0,0:00:55.12,0:00:56.36,Classico,,0,0,0,,{\pos(540,1150)}a construir antes.
+Dialogue: 0,0:00:56.36,0:00:58.40,Classico,,0,0,0,,{\pos(540,1150)}Se queres medir a\Ntua consistência,
+Dialogue: 0,0:00:58.40,0:01:00.58,Classico,,0,0,0,,{\pos(540,1150)}não olhes para o\Nsaldo da tua conta.
+Dialogue: 0,0:01:00.58,0:01:03.60,Classico,,0,0,0,,{\pos(540,1150)}Olha para quantas trades\Nseguiram mesmo o teu
+Dialogue: 0,0:01:03.60,0:01:04.21,Classico,,0,0,0,,{\pos(540,1150)}plano.
+Dialogue: 0,0:01:04.21,0:01:04.95,Classico,,0,0,0,,{\pos(540,1150)}É isso,
+Dialogue: 0,0:01:04.95,0:01:05.76,Classico,,0,0,0,,{\pos(540,1150)}e só isso,
+Dialogue: 0,0:01:05.76,0:01:07.35,Classico,,0,0,0,,{\pos(540,1150)}que é ser consistente.

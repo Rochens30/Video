@@ -26,11 +26,11 @@
   {
    "palavra": "sempre.",
    "inicio": 1.52,
-   "fim": 2.08
+   "fim": 1.78
   },
   {
    "palavra": "É",
-   "inicio": 2.08,
+   "inicio": 2.19,
    "fim": 2.32
   },
   {
@@ -46,11 +46,11 @@
   {
    "palavra": "processo",
    "inicio": 3.12,
-   "fim": 3.6
+   "fim": 3.56
   },
   {
    "palavra": "mesmo",
-   "inicio": 3.68,
+   "inicio": 3.71,
    "fim": 4.0
   },
   {
@@ -61,11 +61,11 @@
   {
    "palavra": "perdes.",
    "inicio": 4.32,
-   "fim": 4.96
+   "fim": 4.77
   },
   {
    "palavra": "A",
-   "inicio": 4.96,
+   "inicio": 5.0,
    "fim": 5.12
   },
   {
@@ -75,13 +75,13 @@
   },
   {
    "palavra": "ouve",
-   "inicio": 5.68,
+   "inicio": 5.83,
    "fim": 6.16
   },
   {
    "palavra": "consistência",
    "inicio": 6.16,
-   "fim": 6.8
+   "fim": 6.83
   },
   {
    "palavra": "e",
@@ -121,7 +121,7 @@
   {
    "palavra": "garantidos",
    "inicio": 9.04,
-   "fim": 9.6
+   "fim": 9.62
   },
   {
    "palavra": "todos",
@@ -136,7 +136,7 @@
   {
    "palavra": "meses.",
    "inicio": 10.24,
-   "fim": 10.8
+   "fim": 10.57
   },
   {
    "palavra": "Mas",
@@ -156,11 +156,11 @@
   {
    "palavra": "existe,",
    "inicio": 11.6,
-   "fim": 12.24
+   "fim": 12.03
   },
   {
    "palavra": "nem",
-   "inicio": 12.24,
+   "inicio": 12.25,
    "fim": 12.48
   },
   {
@@ -191,11 +191,11 @@
   {
    "palavra": "mundo.",
    "inicio": 13.92,
-   "fim": 14.4
+   "fim": 14.05
   },
   {
    "palavra": "O",
-   "inicio": 14.4,
+   "inicio": 14.45,
    "fim": 14.56
   },
   {
@@ -205,7 +205,7 @@
   },
   {
    "palavra": "sobe",
-   "inicio": 15.2,
+   "inicio": 15.31,
    "fim": 15.52
   },
   {
@@ -216,11 +216,11 @@
   {
    "palavra": "desce,",
    "inicio": 15.83,
-   "fim": 16.24
+   "fim": 16.11
   },
   {
    "palavra": "e",
-   "inicio": 16.24,
+   "inicio": 16.27,
    "fim": 16.4
   },
   {
@@ -236,7 +236,7 @@
   {
    "palavra": "normal,",
    "inicio": 16.8,
-   "fim": 17.36
+   "fim": 17.14
   },
   {
    "palavra": "faz",
@@ -256,7 +256,7 @@
   {
    "palavra": "jogo.",
    "inicio": 18.08,
-   "fim": 18.64
+   "fim": 18.32
   },
   {
    "palavra": "Consistência",
@@ -266,11 +266,11 @@
   {
    "palavra": "real",
    "inicio": 19.44,
-   "fim": 19.76
+   "fim": 19.73
   },
   {
    "palavra": "é",
-   "inicio": 19.92,
+   "inicio": 20.01,
    "fim": 20.16
   },
   {
@@ -281,11 +281,11 @@
   {
    "palavra": "coisa:",
    "inicio": 20.48,
-   "fim": 21.12
+   "fim": 20.82
   },
   {
    "palavra": "é",
-   "inicio": 21.12,
+   "inicio": 21.27,
    "fim": 21.36
   },
   {
@@ -306,7 +306,7 @@
   {
    "palavra": "risco",
    "inicio": 22.24,
-   "fim": 22.72
+   "fim": 22.52
   },
   {
    "palavra": "em",
@@ -326,11 +326,11 @@
   {
    "palavra": "trades,",
    "inicio": 23.44,
-   "fim": 24.08
+   "fim": 23.85
   },
   {
    "palavra": "é",
-   "inicio": 24.08,
+   "inicio": 24.19,
    "fim": 24.32
   },
   {
@@ -361,21 +361,21 @@
   {
    "palavra": "entrada,",
    "inicio": 26.0,
-   "fim": 26.64
+   "fim": 26.42
   },
   {
    "palavra": "é",
-   "inicio": 26.64,
+   "inicio": 26.76,
    "fim": 26.96
   },
   {
    "palavra": "registar",
    "inicio": 26.96,
-   "fim": 27.68
+   "fim": 27.54
   },
   {
    "palavra": "todas",
-   "inicio": 27.68,
+   "inicio": 27.7,
    "fim": 27.92
   },
   {
@@ -396,21 +396,21 @@
   {
    "palavra": "exceção,",
    "inicio": 29.04,
-   "fim": 29.76
+   "fim": 29.55
   },
   {
    "palavra": "as",
-   "inicio": 29.76,
+   "inicio": 29.82,
    "fim": 30.0
   },
   {
    "palavra": "boas",
    "inicio": 30.0,
-   "fim": 30.4
+   "fim": 30.44
   },
   {
    "palavra": "e",
-   "inicio": 30.4,
+   "inicio": 30.56,
    "fim": 30.64
   },
   {
@@ -421,11 +421,11 @@
   {
    "palavra": "más.",
    "inicio": 30.88,
-   "fim": 31.28
+   "fim": 31.21
   },
   {
    "palavra": "E",
-   "inicio": 31.44,
+   "inicio": 31.46,
    "fim": 31.6
   },
   {
@@ -436,7 +436,7 @@
   {
    "palavra": "sim",
    "inicio": 31.92,
-   "fim": 32.24
+   "fim": 32.15
   },
   {
    "palavra": "é",
@@ -446,7 +446,7 @@
   {
    "palavra": "consistência.",
    "inicio": 32.64,
-   "fim": 33.6
+   "fim": 33.32
   },
   {
    "palavra": "O",
@@ -471,16 +471,16 @@
   {
    "palavra": "mês,",
    "inicio": 34.72,
-   "fim": 34.96
+   "fim": 35.0
   },
   {
    "palavra": "esse,",
-   "inicio": 35.12,
+   "inicio": 35.15,
    "fim": 35.36
   },
   {
    "palavra": "tu",
-   "inicio": 35.52,
+   "inicio": 35.65,
    "fim": 35.76
   },
   {
@@ -491,11 +491,11 @@
   {
    "palavra": "controlas.",
    "inicio": 36.0,
-   "fim": 36.96
+   "fim": 36.63
   },
   {
    "palavra": "O",
-   "inicio": 36.96,
+   "inicio": 37.04,
    "fim": 37.28
   },
   {
@@ -511,11 +511,11 @@
   {
    "palavra": "que",
    "inicio": 38.08,
-   "fim": 38.24
+   "fim": 38.19
   },
   {
    "palavra": "quem",
-   "inicio": 38.24,
+   "inicio": 38.39,
    "fim": 38.56
   },
   {
@@ -551,11 +551,11 @@
   {
    "palavra": "iguais,",
    "inicio": 40.48,
-   "fim": 41.04
+   "fim": 40.9
   },
   {
    "palavra": "mais",
-   "inicio": 41.04,
+   "inicio": 41.23,
    "fim": 41.36
   },
   {
@@ -576,7 +576,7 @@
   {
    "palavra": "tarde,",
    "inicio": 42.08,
-   "fim": 42.56
+   "fim": 42.34
   },
   {
    "palavra": "acaba",
@@ -601,11 +601,11 @@
   {
    "palavra": "estratégia",
    "inicio": 43.68,
-   "fim": 44.48
+   "fim": 44.11
   },
   {
    "palavra": "no",
-   "inicio": 44.48,
+   "inicio": 44.6,
    "fim": 44.72
   },
   {
@@ -636,11 +636,11 @@
   {
    "palavra": "perdas.",
    "inicio": 46.0,
-   "fim": 46.64
+   "fim": 46.45
   },
   {
    "palavra": "Ou",
-   "inicio": 46.64,
+   "inicio": 46.8,
    "fim": 46.96
   },
   {
@@ -676,11 +676,11 @@
   {
    "palavra": "trade",
    "inicio": 48.8,
-   "fim": 49.28
+   "fim": 48.99
   },
   {
    "palavra": "para",
-   "inicio": 49.28,
+   "inicio": 49.29,
    "fim": 49.44
   },
   {
@@ -711,26 +711,26 @@
   {
    "palavra": "rápido",
    "inicio": 50.96,
-   "fim": 51.44
+   "fim": 51.29
   },
   {
    "palavra": "possível.",
    "inicio": 51.44,
-   "fim": 52.0
+   "fim": 51.81
   },
   {
    "palavra": "E",
-   "inicio": 52.0,
+   "inicio": 52.08,
    "fim": 52.24
   },
   {
    "palavra": "aí",
    "inicio": 52.24,
-   "fim": 52.72
+   "fim": 52.54
   },
   {
    "palavra": "é",
-   "inicio": 52.72,
+   "inicio": 52.84,
    "fim": 52.96
   },
   {
@@ -786,11 +786,11 @@
   {
    "palavra": "antes.",
    "inicio": 55.76,
-   "fim": 56.24
+   "fim": 56.02
   },
   {
    "palavra": "Se",
-   "inicio": 56.24,
+   "inicio": 56.36,
    "fim": 56.48
   },
   {
@@ -816,7 +816,7 @@
   {
    "palavra": "consistência,",
    "inicio": 57.6,
-   "fim": 58.4
+   "fim": 58.26
   },
   {
    "palavra": "não",
@@ -856,11 +856,11 @@
   {
    "palavra": "conta.",
    "inicio": 60.0,
-   "fim": 60.48
+   "fim": 60.32
   },
   {
    "palavra": "Olha",
-   "inicio": 60.48,
+   "inicio": 60.58,
    "fim": 60.8
   },
   {
@@ -901,21 +901,21 @@
   {
    "palavra": "plano.",
    "inicio": 63.6,
-   "fim": 64.16
+   "fim": 63.94
   },
   {
    "palavra": "É",
-   "inicio": 64.16,
+   "inicio": 64.21,
    "fim": 64.48
   },
   {
    "palavra": "isso,",
    "inicio": 64.48,
-   "fim": 64.72
+   "fim": 64.75
   },
   {
    "palavra": "e",
-   "inicio": 64.8,
+   "inicio": 64.95,
    "fim": 65.04
   },
   {
@@ -926,7 +926,7 @@
   {
    "palavra": "isso,",
    "inicio": 65.44,
-   "fim": 65.76
+   "fim": 65.71
   },
   {
    "palavra": "que",
@@ -946,7 +946,7 @@
   {
    "palavra": "consistente.",
    "inicio": 66.48,
-   "fim": 67.2
+   "fim": 67.1
   }
  ]
 }
