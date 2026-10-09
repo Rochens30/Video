@@ -2,16 +2,18 @@ import { AbsoluteFill, Img, staticFile } from "remotion";
 import { COR, FONTE, SERIFA } from "./estilo";
 import { Kicker, Ouro } from "./ui";
 
-// Título do vídeo atual (vídeo 1: "Consistência / não é ganhar / sempre.")
+// Título do vídeo atual (vídeo 1: "Consistência / não é ganhar / sempre."; vídeo 2: "Ganhei / dinheiro. / Foi um erro.")
 const TITULO = (
   <>
-    Ganhei
+    60% de acerto
     <br />
-    dinheiro.
+    e a conta
     <br />
-    <Ouro>Foi um erro.</Ouro>
+    <Ouro>a descer?</Ouro>
   </>
 );
+// Aproximação da foto (frame em public/capa_frame.png): vídeo 3 é um plano largo → 2×.
+const FOTO = { zoom: 2.0, origem: "50% 30%" };
 
 /**
  * Capa do Reel (1080×1920). Tudo o que importa fica dentro do recorte 3:4 que a grelha do perfil mostra
@@ -20,7 +22,7 @@ const TITULO = (
 export const Capa: React.FC = () => (
   <AbsoluteFill style={{ backgroundColor: COR.fundo, fontFamily: FONTE }}>
     {/* foto: aproximada e com a cara no terço superior */}
-    <AbsoluteFill style={{ transform: "scale(1.3)", transformOrigin: "50% 22%" }}>
+    <AbsoluteFill style={{ transform: `scale(${FOTO.zoom})`, transformOrigin: FOTO.origem }}>
       <Img src={staticFile("capa_frame.png")} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
     </AbsoluteFill>
     {/* escurecer em baixo para o título ler bem */}

@@ -5,7 +5,7 @@ import { Gancho } from "./Gancho";
 import { CTA as CallToAction } from "./CTA";
 import { COMPLETA, CURTA, MontagemContext } from "./montagem";
 import { EfeitosContext } from "./ui";
-import { CTA, f, GANCHO_FIM, INTRO, MODO, SOBREPOSICAO_CTA } from "./tempo";
+import { CTA, CTA_CURTA, f, GANCHO_FIM, INTRO, MODO, SOBREPOSICAO_CTA } from "./tempo";
 
 export type Versao = "completa" | "curta";
 
@@ -14,7 +14,7 @@ const CONFIG = {
   completa: { montagem: COMPLETA, intro: MODO === "camara" ? INTRO : 0, cta: CTA, gancho: 0 },
   // ~45 s: gancho por cima do orador desde o 1.º frame, frases repetidas cortadas, pausas encurtadas
   // (no modo áudio o gancho é a 1.ª cena do painel, não um cartão por cima)
-  curta: { montagem: CURTA, intro: 0, cta: 5.0, gancho: MODO === "camara" ? CURTA.mapa(GANCHO_FIM) : 0 },
+  curta: { montagem: CURTA, intro: 0, cta: CTA_CURTA, gancho: MODO === "camara" ? CURTA.mapa(GANCHO_FIM) : 0 },
 } as const;
 
 export const duracaoTotal = (v: Versao) => {

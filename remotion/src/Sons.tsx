@@ -17,22 +17,25 @@ const clique = (i: number) => sint(`clique_rato_${(i % 2) + 1}`);
 const tecla = (i: number) => `sfx/teclado/tecla_${(i * 3) % 5}.mp3`; // varia a tecla para não soar a loop (diários/tabelas)
 
 // Momentos-chave do vídeo atual, em tempo do ficheiro original (os que caem em trechos cortados não tocam).
-// Vídeo 1 (Consistência): ver o histórico do git em videos/01-consistencia/NOTAS.md.
+// Vídeos anteriores: ver o histórico do git (videos/NN-*/NOTAS.md).
 const MOMENTOS: Som[] = [
-  // Carimbo "ERRO" na trade com lucro
-  [5.76 + fr(4), sint("impacto"), 0.2],
-  // "Competência" riscada
-  [7.76, ui("invalid-drop"), 0.45],
-  // Cada nova trade sem plano: clique de rato (a "entrar" na trade)
-  ...HABITO_TRADES.map((t, i): Som => [t, clique(i), 0.6]),
-  // "HÁBITO FORMADO"
-  [22.96, ui("warning"), 0.5],
-  // Resultado riscado / decisão com visto
-  [26.08, ui("invalid-drop"), 0.4],
-  [28.16, clique(1), 0.6],
-  // "ESTA TRADE" na matriz
-  [33.44, ui("warning"), 0.45],
+  // Anatomia da trade: um clique por linha (entrada, stop, take profit)
+  [8.72, clique(0), 0.55],
+  [12.48, clique(1), 0.55],
+  [13.92, clique(0), 0.55],
+  // "no papel" ✓ / "na prática" ✕
+  [29.44, clique(1), 0.5],
+  [32.08, ui("invalid-drop"), 0.45],
+  // "sem se aperceber"
+  [43.36, ui("warning"), 0.45],
+  // 10 trades a entrar na grelha: teclado
+  ...Array.from({ length: 10 }, (_, i): Som => [53.55 + fr(i * 2), tecla(i), 0.4]),
+  // "4 são perdas"
+  [62.82, ui("warning"), 0.5],
+  // "+3R"
+  [69.85, clique(0), 0.55],
 ];
+
 
 export const Sons: React.FC = () => {
   const { dentro, mapa } = useMontagem();

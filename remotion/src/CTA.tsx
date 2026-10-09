@@ -1,18 +1,77 @@
-import { AbsoluteFill, Img, interpolate, staticFile, useCurrentFrame } from "remotion";
+import { AbsoluteFill, Img, interpolate, Sequence, staticFile, useCurrentFrame } from "remotion";
 import { COR, DOURADO_GRADIENTE, FONTE, MONO, SERIFA } from "./estilo";
 import { f } from "./tempo";
 import { Ouro, useEntrada, Efeito } from "./ui";
 
 const URL = "homepage.forexacademyclub.com";
-// Textos do vídeo atual (vídeo 1: "Consistência não é sorte." / "Aprende-se.")
-const LINHA1 = "Avalia decisões,";
-const LINHA2 = "não resultados.";
-const SUB = "Plano, risco e critério de entrada";
+// Textos do vídeo atual (vídeo 1: "Consistência não é sorte." / "Aprende-se."; vídeo 2: "Avalia decisões," / "não resultados.")
+const LINHA1 = "Acertar não chega.";
+const LINHA2 = "Respeita o plano.";
+const SUB = "Risco, Stop Loss e Take Profit";
+
+// Conta final antes do CTA (null = sem conta). Vídeo 3: a gravação acaba em "ganhámos 3R" —
+// a conta termina com os números que ele próprio deu (6 × 0,5R e 4 × −1R).
+const CONTA: { dur: number; linhas: { texto: string; valor: string; cor: "ganho" | "negativo" }[]; total: string; nota: string } | null = {
+  dur: 3.0,
+  linhas: [
+    { texto: "6 ganhos × 0,5R", valor: "+3R", cor: "ganho" },
+    { texto: "4 perdas × 1R", valor: "−4R", cor: "negativo" },
+  ],
+  total: "−1R",
+  nota: "com 60% de acerto",
+};
 const CLIQUE = f(2.9);
 const FAIXA = ["Consistência", "Mesmo risco", "Mesmo critério", "Diário", "Plano", "Zero promessas milagrosas"];
 
-/** CTA final: logótipo → promessa curta → botão "QUERO SABER MAIS" com toque → link na bio. */
+/** CTA: (conta final) → logótipo → promessa curta → botão "QUERO SABER MAIS" com toque → link na bio. */
 export const CTA: React.FC = () => {
+  const entrada = useEntrada(0, 16);
+  if (!CONTA) return <CTAFinal deslizar />;
+  return (
+    <AbsoluteFill style={{ transform: `translateY(${(1 - entrada) * 1920}px)`, background: `radial-gradient(90% 50% at 50% 35%, #241D0F 0%, ${COR.fundo} 68%)` }}>
+      <Sequence durationInFrames={f(CONTA.dur) + 8} layout="none">
+        <Conta conta={CONTA} />
+      </Sequence>
+      <Sequence from={f(CONTA.dur)} layout="none">
+        <CTAFinal deslizar={false} />
+      </Sequence>
+    </AbsoluteFill>
+  );
+};
+
+const Conta: React.FC<{ conta: NonNullable<typeof CONTA> }> = ({ conta }) => {
+  const frame = useCurrentFrame();
+  const fim = f(conta.dur);
+  const saida = interpolate(frame, [fim - 4, fim + 6], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
+  const total = useEntrada(f(1.5), 9);
+  return (
+    <AbsoluteFill style={{ fontFamily: FONTE, opacity: saida, filter: saida < 0.98 ? `blur(${(1 - saida) * 10}px)` : undefined,
+      display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", paddingBottom: 260 }}>
+      <div style={{ fontFamily: MONO, fontWeight: 700, fontSize: 28, letterSpacing: 8, color: COR.positivo, marginBottom: 40 }}>— A CONTA FINAL</div>
+      {conta.linhas.map((l, i) => <LinhaConta key={l.texto} {...l} inicio={f(0.25 + i * 0.6)} />)}
+      <div style={{ width: 760, height: 4, background: "#2A251A", margin: "26px 0 20px" }} />
+      <div style={{ display: "flex", alignItems: "baseline", gap: 30, opacity: total, transform: `scale(${0.6 + 0.4 * total})` }}>
+        <span style={{ fontFamily: MONO, fontWeight: 700, fontSize: 40, letterSpacing: 6, color: COR.texto }}>TOTAL</span>
+        <span style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 170, color: COR.negativo, lineHeight: 1 }}>{conta.total}</span>
+      </div>
+      <div style={{ marginTop: 18, fontFamily: SERIFA, fontStyle: "italic", fontSize: 50, color: COR.suave, opacity: total }}>{conta.nota}</div>
+      <Efeito src="sfx/impacto.wav" volume={0.15} de={f(1.5) + 3} />
+    </AbsoluteFill>
+  );
+};
+
+const LinhaConta: React.FC<{ texto: string; valor: string; cor: "ganho" | "negativo"; inicio: number }> = ({ texto, valor, cor, inicio }) => {
+  const s = useEntrada(inicio, 12);
+  return (
+    <div style={{ width: 760, display: "flex", justifyContent: "space-between", alignItems: "baseline", opacity: s, transform: `translateX(${(1 - s) * -60}px)`, margin: "8px 0" }}>
+      <span style={{ fontFamily: SERIFA, fontWeight: 700, fontSize: 58, color: COR.texto }}>{texto}</span>
+      <span style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 80, color: COR[cor] }}>{valor}</span>
+    </div>
+  );
+};
+
+/** Logótipo → promessa curta → botão "QUERO SABER MAIS" com toque → link na bio. */
+const CTAFinal: React.FC<{ deslizar: boolean }> = ({ deslizar }) => {
   const frame = useCurrentFrame();
   const entrada = useEntrada(0, 16);
   const logo = useEntrada(f(0.25), 12);
@@ -29,7 +88,8 @@ export const CTA: React.FC = () => {
   return (
     <AbsoluteFill
       style={{
-        fontFamily: FONTE, transform: `translateY(${(1 - entrada) * 1920}px)`,
+        fontFamily: FONTE,
+        ...(deslizar ? { transform: `translateY(${(1 - entrada) * 1920}px)` } : { opacity: interpolate(frame, [0, 8], [0, 1], { extrapolateRight: "clamp" }) }),
         background: `radial-gradient(90% 50% at 50% 25%, #241D0F 0%, ${COR.fundo} 68%)`,
       }}
     >

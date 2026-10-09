@@ -8,7 +8,8 @@ import "@fontsource/playfair-display/900-italic.css";
 import "@fontsource/jetbrains-mono/700.css";
 import { AbsoluteFill, Audio, Easing, Img, interpolate, OffthreadVideo, Sequence, staticFile, useCurrentFrame, useVideoConfig } from "remotion";
 import { useAudioData, visualizeAudio } from "@remotion/media-utils";
-import { CHIP_FINAL, CHIP_INICIAL, CORTES, f, MODO, VIDEO_BASE, VOZ_BASE } from "./tempo";
+import { CHIP_FINAL, CHIP_INICIAL, CORTES, f, MODO, ORIGEM_ZOOM, VIDEO_BASE, VOZ_BASE, ZOOM_BASE, ZOOM_GANCHO } from "./tempo";
+import { Icones } from "./Icones";
 import { useBlocos, useMontagem } from "./montagem";
 import { COR, DOURADO_GRADIENTE, FONTE } from "./estilo";
 import { Legendas } from "./Legendas";
@@ -31,14 +32,15 @@ import { Cerebro } from "./cenas/Cerebro";
 import { Habito } from "./cenas/Habito";
 import { Regra } from "./cenas/Regra";
 import { Matriz } from "./cenas/Matriz";
+import { Posicao } from "./cenas/Posicao";
+import { RiscoRetorno } from "./cenas/RiscoRetorno";
+import { Numeros } from "./cenas/Numeros";
 
 const PAINEL = 860; // altura do painel de gráficos no modo dividido
 const DESCE = 540; // quanto o orador desce no modo dividido
 const TRANS = 12; // frames da transição
 
-const useDivisao = () => {
-  const frame = useCurrentFrame();
-  const blocos = useBlocos();
+const divisaoEm = (frame: number, blocos: number[][]) => {
   const ease = Easing.bezier(0.65, 0, 0.35, 1);
   return Math.max(
     0,
@@ -52,6 +54,15 @@ const useDivisao = () => {
   );
 };
 
+/** Quanto o ecrã está dividido (0..1) e a velocidade da transição (para o motion blur). */
+const useDivisao = () => {
+  const frame = useCurrentFrame();
+  const blocos = useBlocos();
+  const d = divisaoEm(frame, blocos);
+  const velocidade = Math.abs(divisaoEm(frame + 1, blocos) - divisaoEm(frame - 1, blocos)) / 2;
+  return { d, velocidade };
+};
+
 const Orador: React.FC<{ divisao: number; semVoz: boolean }> = ({ divisao, semVoz }) => {
   const frame = useCurrentFrame();
   const { segmentos, mapa, dentro } = useMontagem();
@@ -60,9 +71,11 @@ const Orador: React.FC<{ divisao: number; semVoz: boolean }> = ({ divisao, semVo
   const trocas =
     segmentos.filter((s) => s.trocaZoom && s.saida + (s.fim - s.ini) <= t + 1e-3).length +
     CORTES.filter((c) => dentro(c) && mapa(c) <= t).length;
-  const zoom = interpolate(divisao, [0, 1], [trocas % 2 ? 1.12 : 1, 1]);
+  // Gancho: aproximação suave até ZOOM_GANCHO.ate, mantida até ao 1.º corte de frase.
+  const gancho = trocas === 0 ? interpolate(t, [0, ZOOM_GANCHO.ate], [1, ZOOM_GANCHO.fator], { extrapolateRight: "clamp", easing: Easing.out(Easing.quad) }) : 1;
+  const zoom = ZOOM_BASE * interpolate(divisao, [0, 1], [(trocas % 2 ? 1.12 : 1) * gancho, 1]);
   return (
-    <AbsoluteFill style={{ transform: `translateY(${divisao * DESCE}px) scale(${zoom})`, transformOrigin: "50% 30%" }}>
+    <AbsoluteFill style={{ transform: `translateY(${divisao * DESCE}px) scale(${zoom})`, transformOrigin: ORIGEM_ZOOM }}>
       {segmentos.map((s) => {
         const de = f(s.saida);
         const dur = f(s.saida + (s.fim - s.ini)) - de;
@@ -89,6 +102,8 @@ const CATALOGO: Record<string, React.FC<{ a: number }>> = {
   perdas: Perdas, risco: Risco, destruir: Destruir, saldo: Saldo, plano: Plano,
   // vídeo 2 — Lucro com erro
   gancho: Gancho2, lucroErro: LucroErro, sorte: Sorte, cerebro: Cerebro, habito: Habito, regra: Regra, matriz: Matriz,
+  // vídeo 3 — 60% de acerto
+  posicao: Posicao, rr: RiscoRetorno, numeros: Numeros,
 };
 
 const Cenas: React.FC = () => {
@@ -114,7 +129,7 @@ export const Video: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = (pro
 
 const VideoCamara: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = ({ chipInicial = true, semVoz = false }) => {
   const frame = useCurrentFrame();
-  const divisao = useDivisao();
+  const { d: divisao, velocidade } = useDivisao();
   const montagem = useMontagem();
   return (
     <AbsoluteFill style={{ backgroundColor: COR.fundo, fontFamily: FONTE }}>
@@ -125,6 +140,8 @@ const VideoCamara: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = ({ ch
         style={{
           height: PAINEL,
           transform: `translateY(${(divisao - 1) * (PAINEL + 60)}px)`,
+          // motion blur leve enquanto o painel entra/sai
+          filter: velocidade > 0.01 ? `blur(${Math.min(10, velocidade * 70)}px)` : undefined,
           background: `radial-gradient(120% 90% at 50% 0%, #221C10 0%, ${COR.fundo} 70%)`,
           borderBottomLeftRadius: 48,
           borderBottomRightRadius: 48,
@@ -149,6 +166,7 @@ const VideoCamara: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = ({ ch
         </Sequence>
       )}
 
+      <Icones divisao={divisao} />
       <Legendas divisao={divisao} />
       <BarraProgresso frame={frame} duracao={montagem.duracao} />
       <Sons />

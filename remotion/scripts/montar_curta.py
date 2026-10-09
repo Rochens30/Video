@@ -14,12 +14,12 @@ def idx(palavra, depois=0.0):
 
 # Frases mantidas: (primeira palavra, tempo mínimo) → (última palavra, tempo mínimo)
 FRASES = [
-    # Vídeo 2 ("Lucro com erro"): o áudio tem 35 s, entra tudo — só se encurtam as pausas.
-    # (Vídeo 1: ver videos/01-consistencia/NOTAS.md)
-    (("Ganhei", 0), ("regra.", 34)),
+    # Vídeo 3 ("60% de acerto"): tudo até "ganhámos 3R." (o resto da gravação é um engano).
+    # (Vídeo 1: ver videos/01-consistencia/NOTAS.md · vídeo 2: videos/02-lucro-erro/NOTAS.md)
+    (("Acertas", 0), ("R.", 71)),
 ]
-PAUSA_MAX = 0.22  # pausas maiores do que isto são encurtadas
-MARGEM = 0.08     # silêncio que fica de cada lado de um corte
+PAUSA_MAX = 0.20  # pausas maiores do que isto são encurtadas
+MARGEM = 0.05     # silêncio que fica de cada lado de um corte
 
 def silencio_em(t):
     return next(((a, b) for a, b in SIL if a - 0.05 <= t <= b + 0.05), None)
@@ -35,8 +35,9 @@ for (p0, t0), (p1, t1) in FRASES:
     # pausas longas dentro da frase
     cortes = [(a + MARGEM, b - MARGEM) for a, b in SIL if a > ini + 0.2 and b < fim - 0.2 and b - a > PAUSA_MAX]
     pos = ini
+    fim_frase = lambda t: any(w["fim"] <= t + 0.15 and w["fim"] >= t - 0.6 and w["palavra"][-1] in ".?!" for w in W)
     for a, b in cortes:
-        segmentos.append([round(pos, 3), round(a, 3), 0]); pos = b
+        segmentos.append([round(pos, 3), round(a, 3), 1 if fim_frase(a) else 0]); pos = b
     segmentos.append([round(pos, 3), round(fim, 3), 1])  # 1 = fim de frase (troca de zoom)
 
 dur = sum(b - a for a, b, _ in segmentos)

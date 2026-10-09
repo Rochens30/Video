@@ -46,8 +46,13 @@ export const Cena: React.FC<{ kicker: string; titulo: React.ReactNode; cor?: str
     extrapolateRight: "clamp",
   });
   const y = entrada ? interpolate(frame, [0, 10], [40, 0], { extrapolateRight: "clamp" }) : 0;
+  // motion blur leve na entrada e na saída da cena
+  const desfoque = Math.max(
+    entrada ? interpolate(frame, [0, 7], [8, 0], { extrapolateRight: "clamp" }) : 0,
+    interpolate(frame, [durationInFrames - 7, durationInFrames], [0, 6], { extrapolateLeft: "clamp", extrapolateRight: "clamp" }),
+  );
   return (
-    <div style={{ position: "absolute", inset: 0, opacity: op, transform: `translateY(${y}px)`, padding: "90px 70px 60px", fontFamily: FONTE }}>
+    <div style={{ position: "absolute", inset: 0, opacity: op, transform: `translateY(${y}px)`, filter: desfoque > 0.2 ? `blur(${desfoque}px)` : undefined, padding: "90px 70px 60px", fontFamily: FONTE }}>
       <Kicker cor={cor}>{kicker}</Kicker>
       <div style={{ color: COR.texto, fontFamily: SERIFA, fontWeight: 700, fontSize: 66, lineHeight: 1.08, marginTop: 18 }}>{titulo}</div>
       {/* no modo áudio o painel é mais alto: o conteúdo fica centrado na vertical */}

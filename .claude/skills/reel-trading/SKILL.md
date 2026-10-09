@@ -24,8 +24,9 @@ O projeto `remotion/` é a **base**: para um vídeo novo trocam-se os dados e as
 |---|---|
 | Formato | 9:16, 1080×1920, 30 fps, áudio normalizado a −14 LUFS, ficheiro < 30 MB para envio |
 | Versões a entregar | `Reel45` (≈45 s, principal) + `Reel45SemEfeitos` + imagem `Capa`; `ReelCompleto` (vídeo inteiro) só se pedir |
-| Gancho | Texto por cima do orador **desde o 1.º frame** (sem ecrã de intro à parte); afirmação contra o senso comum, verdadeira, ligada à 1.ª frase |
-| Legendas | Uma palavra de cada vez, Playfair Display 900 em maiúsculas; palavras-chave em *itálico dourado* (`CHAVE` em `Legendas.tsx`) |
+| Gancho | Texto por cima do orador **desde o 1.º frame** (sem ecrã de intro à parte), com **elemento de destaque** (ex.: anel/brilho a pulsar) e **zoom de aproximação suave** nos primeiros ~2,8 s (`ZOOM_GANCHO`) |
+| Ritmo | Cortar **todos os silêncios > 0,2 s**, gaguejos e erros (`PAUSA_MAX = 0.20`, `MARGEM = 0.05`); troca de zoom a cada fim de frase; ícones (`ICONES` em `tempo.ts`) a saltar nas palavras-chave quando o orador está em ecrã inteiro; motion blur leve nas transições |
+| Legendas | **(atualizado no vídeo 3)** centradas, **máx. 3 palavras** por ecrã, **sem serifa em negrito** (Montserrat 900, maiúsculas, contorno preto); a palavra a ser dita muda de cor (amarelo `#FFD43B`; verde nas palavras de `CHAVE`) |
 | Gráficos | Painel escuro desce de cima e o orador desce para baixo (ecrã dividido); **alternar** com o orador em ecrã inteiro (não ficar >70 % do tempo dividido) |
 | Cores | Tema do site: preto quente `#0A0908`, dourado só para a **marca** (títulos em itálico, rótulos, botões); **dados de mercado a verde `#2EBD85` / vermelho `#F6465D`** (velas, barras, curvas, vistos) — ele achou "muito dourado" quando tudo era dourado |
 | Tipografia | Títulos Playfair Display (ênfase em itálico dourado), texto Manrope, rótulos JetBrains Mono maiúsculo espaçado com traço "— " |
@@ -62,6 +63,10 @@ com cenas seguidas a cobrir o vídeo todo (a 1.ª cena é o gancho, com `entrada
 (`public/avatar.png`, recorte da cara de uma frame de vídeo antigo) com anel a pulsar com a voz, legendas a y 1320
 e onda de som. Voz: `ffmpeg -i public/original.mp4 -vn -af "highpass=f=75,equalizer=f=3500:t=q:w=1.2:g=2" -ar 48000 -ac 1 public/voz.wav`.
 Exemplo completo: vídeo 2 (`videos/02-lucro-erro/NOTAS.md`).
+
+### 2c. Enquadramento
+Se o plano for largo (cara pequena), definir `ZOOM_BASE` e `ORIGEM_ZOOM` em `tempo.ts` para a cara ficar com
+~460 px de altura e o topo da cabeça a y ≈ 350–380 (como no vídeo 1). Medir com uma frame e uma régua.
 
 ### 2b. Melhorar a imagem (se o vídeo for < 1080p)
 IA de super-resolução (Real-ESRGAN general-x4v3, em ONNX no CPU, sem PyTorch) misturada 60/40 com o original
@@ -135,6 +140,9 @@ de trabalho. Na resposta: o que mudou, o que verificaste, limitações, e a tua 
 (ex.: testar 2 versões com Trial Reels; ver retenção aos 3 s).
 
 ## Lições aprendidas
+- Gravações podem acabar a meio (vídeo 3): cortar no último ponto limpo e, se faltar a conclusão, completá-la
+  num gráfico só com números/ideias que o orador já disse — e dizer-lhe isso, oferecendo regravar a frase.
+- O ASR pode pôr as últimas palavras dentro de um silêncio: confirmar com o nível de som e corrigir os tempos.
 - Parakeet: tempos bons, texto fraco. Whisper: texto bom, sem tempos fiáveis. Usar os dois.
 - Sons sintetizados "de interface" soam artificiais — preferir gravações reais (teclado: `public/sfx/teclado/`, MIT)
   ou síntese que imite o objeto real (clique de rato em `scripts/sintetizar_sfx.py`). Graves < 100 Hz não se ouvem no telemóvel.
