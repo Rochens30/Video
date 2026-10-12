@@ -12,6 +12,7 @@ com legendas palavra a palavra, motion graphics de trading, gancho, call to acti
 | `ferramentas/analisar_video.py` | Formato, jump cuts, pausas, loudness e folhas de frames |
 | `ferramentas/melhorar_video.py` | Melhora vídeos de baixa resolução: IA de super-resolução (Real-ESRGAN, CPU) + voz |
 | `ferramentas/legendas_ass.py` | Legendas .ass em 3 estilos (alternativa sem Remotion) |
+| `ferramentas/discord_bahamas.py` | Cria no Discord os cargos, categorias e canais do Bahamas (via bot) |
 | `videos/` | Arquivo de cada vídeo feito (transcrição, notas, escolhas) |
 
 Os vídeos (`*.mp4`) não vão para o git.
