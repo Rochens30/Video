@@ -140,6 +140,12 @@ de trabalho. Na resposta: o que mudou, o que verificaste, limitações, e a tua 
 (ex.: testar 2 versões com Trial Reels; ver retenção aos 3 s).
 
 ## Lições aprendidas
+- Versão "cinematográfica" sem painel (vídeo 5, `src/promo/`): quando ele pedir "menos Remotion / mais efeitos",
+  usar `roteiro.ts` (planos B-roll, títulos cinéticos, relógio, carimbo, comentário, flashes, tremores, fugas de luz)
+  em vez das cenas de gráficos. Medir a largura dos títulos (`largura()`) — "AMANHÃ" a 250 px saía do ecrã.
+- Higgsfield (e outros geradores de vídeo IA) estão bloqueados pelo proxy e sem conector: dizer logo, fazer os efeitos
+  aqui e entregar prompts para ele gerar os planos lá e enviar (entram como `PLANOS` em `roteiro.ts`).
+- Na capa, escolher a frame com olhos abertos e boca fechada (folha de caras `crop` + `tile` com o tempo escrito).
 - B-roll (vídeo 4): `BROLLS`/`BROLL_TEXTOS` em `tempo.ts` cortam para outro vídeo enquanto a voz continua (`src/BRolls.tsx`).
   O 1.º frame não leva blur (é a capa). Ficheiros em `public/broll/` (fora do git).
 - Salas com eco: o detetor de pausas a −40 dB não apanha nada → baixar para −35 dB e validar com retranscrição.

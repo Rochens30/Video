@@ -16,6 +16,7 @@ Vídeo vertical (1080×1920) com o tema visual de forexacademyclub.com (preto qu
 | 2 | Lucro com erro (só áudio) | `videos/02-lucro-erro/NOTAS.md` (código em `677443f`) |
 | 3 | 60% de acerto (câmara, plano largo) | `videos/03-60-acerto/NOTAS.md` (código em `2768bcc`) |
 | 4 | Evento Lisboa (câmara + B-roll) | `videos/04-evento-lisboa/NOTAS.md` |
+| 5 | Promo do evento (cinematográfica, sem painel) | `videos/05-evento-promo/NOTAS.md` · `src/promo/` · `ReelPromo` |
 
 Para um vídeo novo segue a skill `.claude/skills/reel-trading/SKILL.md` (ou cola o `PROMPT_NOVO_REEL.md`).
 

@@ -92,4 +92,40 @@ for v, (brilho, atraso) in enumerate([(0.82, 0.085), (0.88, 0.078)]):
     clique[: len(carregar)] += carregar
     clique[i : i + len(soltar)] += soltar
     guarda(f"clique_rato_{v + 1}", clique, pico=0.85)
+
+# --- Vídeo 5 (promo do evento): sons de trailer ---
+# Boom: pancada grave de trailer (sub a cair 70 → 32 Hz com cauda longa + corpo médio + transiente)
+n = int(1.8 * SR); t = np.arange(n) / SR
+sub = np.sin(2 * np.pi * np.cumsum(glide(70, 32, n)) / SR) * np.exp(-t / 0.55)
+corpo = np.sin(2 * np.pi * np.cumsum(glide(190, 80, n)) / SR) * np.exp(-t / 0.12) * 0.7
+ar = passa_baixo(rng.standard_normal(n), 900) * np.exp(-t / 0.35) * 3
+estalo = passa_baixo(rng.standard_normal(n), 4000) * np.exp(-t / 0.008) * 2.5
+guarda("boom", np.tanh(2.2 * (sub + corpo + ar + estalo)))
+
+# Glitch digital: pedaços de 20-45 ms de tons quadrados/ruído reduzidos a poucos bits
+pecas = []
+for k in range(7):
+    m = int(rng.uniform(0.02, 0.045) * SR); tt = np.arange(m) / SR
+    if k % 3 == 2:
+        x = rng.standard_normal(m) * 0.6
+    else:
+        x = np.sign(np.sin(2 * np.pi * rng.uniform(180, 1400) * tt)) * 0.7
+    x = np.round(x * 4) / 4  # bitcrush
+    if k % 4 == 3:
+        x *= 0  # buraco
+    pecas.append(x)
+glitch = np.concatenate(pecas)
+guarda("glitch", passa_baixo(glitch, 7000), pico=0.7)
+
+# Tique de relógio: clique agudo curto + "toc" de corpo
+n = int(0.08 * SR); t = np.arange(n) / SR
+tique = (np.sin(2 * np.pi * 3100 * t) * np.exp(-t / 0.004) + 0.6 * np.sin(2 * np.pi * 1700 * t) * np.exp(-t / 0.01)
+         + passa_banda(rng.standard_normal(n), np.full(n, 5000.0), q=1.0) * np.exp(-t / 0.002) * 1.5)
+guarda("tique", tique, pico=0.8)
+
+# Subida (riser): ruído filtrado a subir 250 → 7000 Hz com crescendo, corta seco no fim
+n = int(1.3 * SR); t = np.linspace(0, 1, n)
+subida = passa_banda(rng.standard_normal(n), glide(250, 7000, n), q=2.2) * t ** 2.2
+tom = np.sin(2 * np.pi * np.cumsum(glide(110, 440, n)) / SR) * t ** 3 * 0.25
+guarda("subida", subida + tom)
 print("ok")

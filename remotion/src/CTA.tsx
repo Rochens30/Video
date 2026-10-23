@@ -69,7 +69,7 @@ const LinhaConta: React.FC<{ texto: string; valor: string; cor: "ganho" | "negat
 };
 
 /** Logótipo → promessa curta → botão "QUERO SABER MAIS" com toque → link na bio. */
-const CTAFinal: React.FC<{ deslizar: boolean }> = ({ deslizar }) => {
+export const CTAFinal: React.FC<{ deslizar: boolean }> = ({ deslizar }) => {
   const frame = useCurrentFrame();
   const entrada = useEntrada(0, 16);
   const logo = useEntrada(f(0.25), 12);

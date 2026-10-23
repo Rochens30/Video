@@ -3,6 +3,8 @@ import { Capa } from "./Capa";
 import { DURACOES, Story1, Story2, Story3, Story4, Story5 } from "./stories/Stories";
 import { duracaoTotal, Final } from "./Final";
 import { FPS } from "./tempo";
+import { duracaoPromo, Promo } from "./promo/Promo";
+import { CapaPromo } from "./promo/CapaPromo";
 
 export const RemotionRoot: React.FC = () => (
   <>
@@ -36,6 +38,10 @@ export const RemotionRoot: React.FC = () => (
     {[Story1, Story2, Story3, Story4, Story5].map((C, i) => (
       <Composition key={i} id={`Story${i + 1}`} component={C} durationInFrames={DURACOES[i] * FPS} fps={FPS} width={1080} height={1920} />
     ))}
+    {/* Vídeo 5: promo cinematográfica do evento (mesma gravação do vídeo 4) */}
+    <Composition id="ReelPromo" component={Promo} defaultProps={{}} durationInFrames={Math.ceil(duracaoPromo() * FPS)} fps={FPS} width={1080} height={1920} />
+    <Composition id="ReelPromoSemEfeitos" component={Promo} defaultProps={{ semEfeitos: true }} durationInFrames={Math.ceil(duracaoPromo() * FPS)} fps={FPS} width={1080} height={1920} />
+    <Still id="CapaPromo" component={CapaPromo} width={1080} height={1920} />
     <Still id="Capa" component={Capa} width={1080} height={1920} />
   </>
 );
