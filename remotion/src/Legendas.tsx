@@ -4,6 +4,7 @@ import { interpolate, spring, useCurrentFrame, useVideoConfig } from "remotion";
 import palavras from "./palavras.json";
 import { f } from "./tempo";
 import { useMontagem } from "./montagem";
+import { larguraBloco } from "./estilo";
 
 // Palavras-chave do vídeo atual: quando ditas ficam verdes em vez de amarelas.
 const CHAVE = new Set(["amanhã", "24", "outubro", "sala", "profissionais", "100", "história", "inconsistência", "dinheiro", "erros",
@@ -30,8 +31,9 @@ const grupos = (W: Palavra[]) => {
   return out;
 };
 
-/** Legendas em frases muito curtas, centradas; a palavra que está a ser dita muda de cor. */
-export const Legendas: React.FC<{ divisao: number; y?: number }> = ({ divisao, y: yFixo }) => {
+/** Legendas em frases muito curtas, centradas; a palavra que está a ser dita muda de cor.
+ * `largura`: largura útil máxima (px), centrada — a letra encolhe se a palavra mais comprida não couber (margens do Reel). */
+export const Legendas: React.FC<{ divisao: number; y?: number; largura?: number }> = ({ divisao, y: yFixo, largura }) => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
   const t = frame / fps;
@@ -47,8 +49,10 @@ export const Legendas: React.FC<{ divisao: number; y?: number }> = ({ divisao, y
   const g = G[gi];
   const s = spring({ frame: frame - f(g[0].inicio), fps, config: { damping: 12, mass: 0.4 } });
   const y = yFixo ?? interpolate(divisao, [0, 1], [1150, 1440]);
+  const margem = largura ? (1080 - largura) / 2 : 50;
+  const tamanho = largura ? Math.min(92, largura / Math.max(...g.map((w) => larguraBloco(w.palavra.replace(/[.,:;]$/, ""))))) : 92;
   return (
-    <div style={{ position: "absolute", top: y, left: 50, right: 50, display: "flex", justifyContent: "center", transform: `translateY(-50%) scale(${0.85 + 0.15 * s})` }}>
+    <div style={{ position: "absolute", top: y, left: margem, right: margem, display: "flex", justifyContent: "center", transform: `translateY(-50%) scale(${0.85 + 0.15 * s})` }}>
       <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "0 26px", textAlign: "center" }}>
         {g.map((w, k) => {
           const ativa = t >= w.inicio && (k === g.length - 1 || t < g[k + 1].inicio);
@@ -57,8 +61,8 @@ export const Legendas: React.FC<{ divisao: number; y?: number }> = ({ divisao, y
             <span
               key={k}
               style={{
-                fontFamily: "Montserrat, sans-serif", fontWeight: 900, fontSize: 92, lineHeight: 1.1, textTransform: "uppercase", color: cor,
-                WebkitTextStroke: "12px #000", paintOrder: "stroke fill", textShadow: "0 8px 24px rgba(0,0,0,0.55)",
+                fontFamily: "Montserrat, sans-serif", fontWeight: 900, fontSize: tamanho, lineHeight: 1.1, textTransform: "uppercase", color: cor,
+                WebkitTextStroke: `${Math.round(tamanho * 0.13)}px #000`, paintOrder: "stroke fill", textShadow: "0 8px 24px rgba(0,0,0,0.55)",
               }}
             >
               {w.palavra.replace(/[.,:;]$/, "")}

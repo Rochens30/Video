@@ -143,6 +143,13 @@ de trabalho. Na resposta: o que mudou, o que verificaste, limitações, e a tua 
 - Versão "cinematográfica" sem painel (vídeo 5, `src/promo/`): quando ele pedir "menos Remotion / mais efeitos",
   usar `roteiro.ts` (planos B-roll, títulos cinéticos, relógio, carimbo, comentário, flashes, tremores, fugas de luz)
   em vez das cenas de gráficos. Medir a largura dos títulos (`largura()`) — "AMANHÃ" a 250 px saía do ecrã.
+- Timing profissional (vídeo 5 v2): cortar **no início de uma palavra**, 2 frames antes, com o tempo afinado ao ataque
+  do som (`afinar_palavras.py`); o B-roll volta ao orador também no início de uma palavra, nunca a meio de uma frase.
+  Transições = os dois planos a moverem-se juntos (nunca um plano a deslizar sobre preto).
+- Margens do Reel: texto numa coluna de 840 px (120 px de cada lado), nada importante acima de y=250 nem abaixo de y=1580.
+  Centrar a cara com `seguir_cara.py` (a câmara raramente está centrada).
+- Sons: ele prefere **um** som natural e baixo (sopro de ar, ~12 dB abaixo da voz, ~14 por vídeo) a vários efeitos de trailer.
+- Ferramentas Python: `ferramentas/requirements.txt` (a sessão na nuvem é apagada: reinstalar ou pôr no setup script).
 - Higgsfield (e outros geradores de vídeo IA) estão bloqueados pelo proxy e sem conector: dizer logo, fazer os efeitos
   aqui e entregar prompts para ele gerar os planos lá e enviar (entram como `PLANOS` em `roteiro.ts`).
 - Na capa, escolher a frame com olhos abertos e boca fechada (folha de caras `crop` + `tile` com o tempo escrito).

@@ -1,0 +1,11 @@
+# Ferramentas Python da edição de Reels (instalar com: pip install -r ferramentas/requirements.txt)
+# O ffmpeg e o Node/Remotion são instalados à parte (apt / npm install em remotion/).
+numpy
+pillow
+sherpa-onnx          # transcrição (Parakeet + Whisper), ver transcrever.py
+onnxruntime          # melhorar_video.py (Real-ESRGAN)
+librosa              # afinar o início das palavras ao ataque do som (remotion/scripts/afinar_palavras.py)
+opencv-python-headless<5   # seguir a cara do orador (remotion/scripts/seguir_cara.py) — a 5.x não traz os Haar cascades
+scenedetect          # detetar cortes/planos em vídeos recebidos
+auto-editor          # cortar silêncios rapidamente (alternativa ao montar_curta.py)
+pydub

@@ -128,4 +128,29 @@ n = int(1.3 * SR); t = np.linspace(0, 1, n)
 subida = passa_banda(rng.standard_normal(n), glide(250, 7000, n), q=2.2) * t ** 2.2
 tom = np.sin(2 * np.pi * np.cumsum(glide(110, 440, n)) / SR) * t ** 3 * 0.25
 guarda("subida", subida + tom)
+
+# Sopro (vídeo 5, v2): whoosh de ar natural e suave, em estéreo (passa da esquerda para a direita).
+# Ruído rosado num passa-banda largo que sobe e desce (efeito Doppler) + corpo grave muito leve.
+# O pico fica a 55 % da duração (o som é posto para o pico coincidir com o corte).
+def rosado(n):
+    b = np.zeros(n); w = rng.standard_normal(n); acc = 0.0
+    for i in range(n):
+        acc = 0.985 * acc + w[i] * 0.12; b[i] = acc + w[i] * 0.04
+    return b
+
+for v, (dur, fc) in enumerate([(0.42, 1300), (0.5, 1000), (0.36, 1600)]):
+    n = int(dur * SR); t = np.linspace(0, 1, n)
+    curva = np.where(t < 0.55, t / 0.55, (1 - t) / 0.45)
+    freqs = 350 + (fc - 350) * curva ** 1.5
+    ar = passa_banda(rosado(n), freqs, q=0.7)
+    corpo = passa_baixo(rng.standard_normal(n), 180) * 2.0
+    envol = np.sin(np.pi * np.clip(np.where(t < 0.55, t / 0.55 * 0.5, 0.5 + (t - 0.55) / 0.45 * 0.5), 0, 1)) ** 2
+    mono = (ar + corpo * 0.25) * envol
+    mono = mono / (np.max(np.abs(mono)) + 1e-9) * 0.8
+    pan = 0.25 + 0.5 * t  # esquerda → direita
+    est = np.stack([mono * np.sqrt(1 - pan), mono * np.sqrt(pan)], axis=1)
+    m = int(0.005 * SR); est[:m] *= np.linspace(0, 1, m)[:, None]; est[-m:] *= np.linspace(1, 0, m)[:, None]
+    with wave.open(f"{out}/sopro_{v + 1}.wav", "wb") as w:
+        w.setnchannels(2); w.setsampwidth(2); w.setframerate(SR)
+        w.writeframes((est * 32767).astype(np.int16).tobytes())
 print("ok")

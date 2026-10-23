@@ -69,7 +69,8 @@ const LinhaConta: React.FC<{ texto: string; valor: string; cor: "ganho" | "negat
 };
 
 /** Logótipo → promessa curta → botão "QUERO SABER MAIS" com toque → link na bio. */
-export const CTAFinal: React.FC<{ deslizar: boolean }> = ({ deslizar }) => {
+/** `desce`: empurra o conteúdo para baixo (px) para sair da zona do topo do Reel; `sons`: false = sem whoosh/clique. */
+export const CTAFinal: React.FC<{ deslizar: boolean; desce?: number; sons?: boolean }> = ({ deslizar, desce = 0, sons = true }) => {
   const frame = useCurrentFrame();
   const entrada = useEntrada(0, 16);
   const logo = useEntrada(f(0.25), 12);
@@ -91,6 +92,7 @@ export const CTAFinal: React.FC<{ deslizar: boolean }> = ({ deslizar }) => {
         background: `radial-gradient(90% 50% at 50% 25%, #241D0F 0%, ${COR.fundo} 68%)`,
       }}
     >
+      <AbsoluteFill style={{ transform: desce ? `translateY(${desce}px)` : undefined }}>
       <div style={{ position: "absolute", top: 230, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
         <Img src={staticFile("logo.png")} style={{ width: 400, opacity: logo, transform: `scale(${0.8 + 0.2 * logo})`, filter: "drop-shadow(0 10px 40px rgba(217,180,90,0.25))" }} />
       </div>
@@ -128,9 +130,10 @@ export const CTAFinal: React.FC<{ deslizar: boolean }> = ({ deslizar }) => {
       </svg>
 
       <Faixa frame={frame} />
+      </AbsoluteFill>
 
-      <Efeito src="sfx/whoosh_in.wav" volume={0.15} />
-      <Efeito src="sfx/clique_rato_1.wav" volume={0.35} de={CLIQUE - 1} />
+      {sons && <Efeito src="sfx/whoosh_in.wav" volume={0.15} />}
+      {sons && <Efeito src="sfx/clique_rato_1.wav" volume={0.35} de={CLIQUE - 1} />}
     </AbsoluteFill>
   );
 };

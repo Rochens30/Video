@@ -21,3 +21,7 @@ export const DOURADO_TEXTO: React.CSSProperties = {
 export const FONTE = "Manrope, sans-serif";
 export const SERIFA = "'Playfair Display', serif";
 export const MONO = "'JetBrains Mono', monospace";
+
+/** Largura aproximada (em "em") de uma linha em Montserrat 900 maiúsculas — para o texto caber nas margens. */
+export const larguraBloco = (l: string) =>
+  [...l.toUpperCase()].reduce((w, c) => w + (/[MWAÁÃÂÀHNOÓÕÔQDGUÚCÇV]/.test(c) ? 0.86 : /[I1Í]/.test(c) ? 0.38 : c === " " ? 0.3 : 0.74), 0) + 0.03 * l.length;
