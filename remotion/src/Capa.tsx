@@ -2,18 +2,18 @@ import { AbsoluteFill, Img, staticFile } from "remotion";
 import { COR, FONTE, SERIFA } from "./estilo";
 import { Kicker, Ouro } from "./ui";
 
-// Título do vídeo atual (vídeo 1: "Consistência / não é ganhar / sempre."; vídeo 2: "Ganhei / dinheiro. / Foi um erro.")
+// Título do vídeo atual (vídeo 3: "60% de acerto / e a conta / a descer?")
 const TITULO = (
   <>
-    60% de acerto
+    5 traders.
     <br />
-    e a conta
+    Uma sala.
     <br />
-    <Ouro>a descer?</Ouro>
+    <Ouro>Amanhã.</Ouro>
   </>
 );
 // Aproximação da foto (frame em public/capa_frame.png): vídeo 3 é um plano largo → 2×.
-const FOTO = { zoom: 2.0, origem: "50% 30%" };
+const FOTO = { zoom: 1.7, origem: "45% 34%" };
 
 /**
  * Capa do Reel (1080×1920). Tudo o que importa fica dentro do recorte 3:4 que a grelha do perfil mostra
@@ -30,7 +30,7 @@ export const Capa: React.FC = () => (
 
     <div style={{ position: "absolute", top: 1020, left: 60, right: 60, textAlign: "center" }}>
       <div style={{ display: "flex", justifyContent: "center" }}>
-        <Kicker style={{ fontSize: 28 }}>TRADING</Kicker>
+        <Kicker style={{ fontSize: 28 }}>EVENTO · LISBOA · 24 OUT</Kicker>
       </div>
       <div style={{ fontFamily: SERIFA, fontWeight: 900, fontSize: 130, lineHeight: 1.0, color: COR.texto, marginTop: 22 }}>
         {TITULO}

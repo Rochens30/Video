@@ -140,6 +140,13 @@ de trabalho. Na resposta: o que mudou, o que verificaste, limitações, e a tua 
 (ex.: testar 2 versões com Trial Reels; ver retenção aos 3 s).
 
 ## Lições aprendidas
+- B-roll (vídeo 4): `BROLLS`/`BROLL_TEXTOS` em `tempo.ts` cortam para outro vídeo enquanto a voz continua (`src/BRolls.tsx`).
+  O 1.º frame não leva blur (é a capa). Ficheiros em `public/broll/` (fora do git).
+- Salas com eco: o detetor de pausas a −40 dB não apanha nada → baixar para −35 dB e validar com retranscrição.
+- O Whisper pode saltar um trecho inteiro (vídeo 4, 13 s): comparar a energia do áudio com os tempos das palavras
+  e retranscrever o buraco com `trecho.py`-style (parakeet + whisper só nesse intervalo).
+- Música: hosts de música livre (Pixabay, FMA, archive.org…) e a pesquisa do GitHub estão bloqueados; usar `MUSICA` em
+  `tempo.ts` só com um MP3 licenciado enviado pelo utilizador, senão ele junta na app.
 - Gravações podem acabar a meio (vídeo 3): cortar no último ponto limpo e, se faltar a conclusão, completá-la
   num gráfico só com números/ideias que o orador já disse — e dizer-lhe isso, oferecendo regravar a frase.
 - O ASR pode pôr as últimas palavras dentro de um silêncio: confirmar com o nível de som e corrigir os tempos.

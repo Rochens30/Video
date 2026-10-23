@@ -10,6 +10,7 @@ import { AbsoluteFill, Audio, Easing, Img, interpolate, OffthreadVideo, Sequence
 import { useAudioData, visualizeAudio } from "@remotion/media-utils";
 import { CHIP_FINAL, CHIP_INICIAL, CORTES, f, MODO, ORIGEM_ZOOM, VIDEO_BASE, VOZ_BASE, ZOOM_BASE, ZOOM_GANCHO } from "./tempo";
 import { Icones } from "./Icones";
+import { BRolls } from "./BRolls";
 import { useBlocos, useMontagem } from "./montagem";
 import { COR, DOURADO_GRADIENTE, FONTE } from "./estilo";
 import { Legendas } from "./Legendas";
@@ -35,6 +36,9 @@ import { Matriz } from "./cenas/Matriz";
 import { Posicao } from "./cenas/Posicao";
 import { RiscoRetorno } from "./cenas/RiscoRetorno";
 import { Numeros } from "./cenas/Numeros";
+import { Percurso } from "./cenas/Percurso";
+import { Aprender1, Aprender2 } from "./cenas/Aprender";
+import { Bilhete } from "./cenas/Bilhete";
 
 const PAINEL = 860; // altura do painel de gráficos no modo dividido
 const DESCE = 540; // quanto o orador desce no modo dividido
@@ -104,6 +108,8 @@ const CATALOGO: Record<string, React.FC<{ a: number }>> = {
   gancho: Gancho2, lucroErro: LucroErro, sorte: Sorte, cerebro: Cerebro, habito: Habito, regra: Regra, matriz: Matriz,
   // vídeo 3 — 60% de acerto
   posicao: Posicao, rr: RiscoRetorno, numeros: Numeros,
+  // vídeo 4 — evento Lisboa
+  percurso: Percurso, aprender1: Aprender1, aprender2: Aprender2, bilhete: Bilhete,
 };
 
 const Cenas: React.FC = () => {
@@ -134,6 +140,7 @@ const VideoCamara: React.FC<{ chipInicial?: boolean; semVoz?: boolean }> = ({ ch
   return (
     <AbsoluteFill style={{ backgroundColor: COR.fundo, fontFamily: FONTE }}>
       <Orador divisao={divisao} semVoz={semVoz} />
+      <BRolls divisao={divisao} />
 
       {/* Painel de gráficos */}
       <AbsoluteFill

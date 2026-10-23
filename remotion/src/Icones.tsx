@@ -57,6 +57,7 @@ const Desenho: React.FC<{ icone: Icone; cor: string }> = ({ icone, cor }) => {
       {icone === "cruz" && <path d="M24 24 L72 72 M72 24 L24 72" {...p} strokeWidth={10} />}
       {icone === "visto" && <path d="M18 50 L40 72 L80 26" {...p} strokeWidth={10} />}
       {icone === "aviso" && (<><path d="M48 10 L88 82 H8 Z" {...p} /><path d="M48 36 V58" {...p} /><circle cx={48} cy={70} r={4} fill={cor} /></>)}
+      {icone === "balao" && (<><path d="M14 18 H82 V64 H44 L26 80 V64 H14 Z" {...p} /><path d="M30 34 H66 M30 48 H56" {...p} strokeWidth={5} /></>)}
       {icone === "pessoas" && (<><circle cx={48} cy={30} r={12} {...p} /><path d="M24 78 C24 56 72 56 72 78" {...p} /><circle cx={20} cy={40} r={9} {...p} strokeWidth={5} /><circle cx={76} cy={40} r={9} {...p} strokeWidth={5} /></>)}
     </svg>
   );

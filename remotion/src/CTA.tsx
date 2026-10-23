@@ -3,25 +3,23 @@ import { COR, DOURADO_GRADIENTE, FONTE, MONO, SERIFA } from "./estilo";
 import { f } from "./tempo";
 import { Ouro, useEntrada, Efeito } from "./ui";
 
-const URL = "homepage.forexacademyclub.com";
-// Textos do vídeo atual (vídeo 1: "Consistência não é sorte." / "Aprende-se."; vídeo 2: "Avalia decisões," / "não resultados.")
-const LINHA1 = "Acertar não chega.";
-const LINHA2 = "Respeita o plano.";
-const SUB = "Risco, Stop Loss e Take Profit";
+const URL = "forexacademyclub.com/cursoiniciante";
+// Textos do vídeo atual (vídeo 1: "Consistência não é sorte." / "Aprende-se."; vídeo 3: "Acertar não chega." / "Respeita o plano.")
+const LINHA1 = "Amanhã, às 14h.";
+const LINHA2 = "Últimos lugares.";
+const SUB = "5 traders profissionais · DoubleTree by Hilton";
+const SUB2 = "Lisboa · 14h às 19h"; // 2.ª linha do subtítulo (vídeo 1–3: "— com método.")
+const BOTAO = "GARANTIR LUGAR →"; // o mesmo texto do botão do site
+const EXTRA: string | null = "ou comenta \"EVENTO\""; // CTA alternativo dito no vídeo
 
 // Conta final antes do CTA (null = sem conta). Vídeo 3: a gravação acaba em "ganhámos 3R" —
 // a conta termina com os números que ele próprio deu (6 × 0,5R e 4 × −1R).
-const CONTA: { dur: number; linhas: { texto: string; valor: string; cor: "ganho" | "negativo" }[]; total: string; nota: string } | null = {
-  dur: 3.0,
-  linhas: [
-    { texto: "6 ganhos × 0,5R", valor: "+3R", cor: "ganho" },
-    { texto: "4 perdas × 1R", valor: "−4R", cor: "negativo" },
-  ],
-  total: "−1R",
-  nota: "com 60% de acerto",
-};
+type Conta = { dur: number; linhas: { texto: string; valor: string; cor: "ganho" | "negativo" }[]; total: string; nota: string };
+// Vídeo 3 tinha uma conta final (6 × 0,5R = +3R; 4 × −1R = −4R; total −1R). Vídeo 4: sem conta.
+const CONTA = null as Conta | null;
 const CLIQUE = f(2.9);
-const FAIXA = ["Consistência", "Mesmo risco", "Mesmo critério", "Diário", "Plano", "Zero promessas milagrosas"];
+// Faixa ✦ (vídeo 4: a mesma do site do evento)
+const FAIXA = ["24 Outubro", "Lisboa", "5 Traders Profissionais", "5 Horas", "Uma Sala", "Zero Promessas Milagrosas"];
 
 /** CTA: (conta final) → logótipo → promessa curta → botão "QUERO SABER MAIS" com toque → link na bio. */
 export const CTA: React.FC = () => {
@@ -30,7 +28,7 @@ export const CTA: React.FC = () => {
   return (
     <AbsoluteFill style={{ transform: `translateY(${(1 - entrada) * 1920}px)`, background: `radial-gradient(90% 50% at 50% 35%, #241D0F 0%, ${COR.fundo} 68%)` }}>
       <Sequence durationInFrames={f(CONTA.dur) + 8} layout="none">
-        <Conta conta={CONTA} />
+        <ContaFinal conta={CONTA} />
       </Sequence>
       <Sequence from={f(CONTA.dur)} layout="none">
         <CTAFinal deslizar={false} />
@@ -39,7 +37,7 @@ export const CTA: React.FC = () => {
   );
 };
 
-const Conta: React.FC<{ conta: NonNullable<typeof CONTA> }> = ({ conta }) => {
+const ContaFinal: React.FC<{ conta: Conta }> = ({ conta }) => {
   const frame = useCurrentFrame();
   const fim = f(conta.dur);
   const saida = interpolate(frame, [fim - 4, fim + 6], [1, 0], { extrapolateLeft: "clamp", extrapolateRight: "clamp" });
@@ -107,14 +105,14 @@ const CTAFinal: React.FC<{ deslizar: boolean }> = ({ deslizar }) => {
       </div>
 
       <div style={{ position: "absolute", top: 860, left: 90, right: 90, textAlign: "center", color: COR.suave, fontSize: 38, lineHeight: 1.4, opacity: l2 }}>
-        {SUB}<br />— <span style={{ color: COR.texto, fontWeight: 700 }}>com método.</span>
+        {SUB}<br /><span style={{ color: COR.texto, fontWeight: 700 }}>{SUB2}</span>
       </div>
 
       <div style={{ position: "absolute", top: 1040, left: 0, right: 0, display: "flex", justifyContent: "center" }}>
         <div style={{ position: "relative", transform: `scale(${botao * pulso * premido})` }}>
           <div style={{ position: "absolute", inset: -22 * onda, borderRadius: 999, border: "4px solid #D9B45A", opacity: 1 - onda }} />
           <div style={{ background: DOURADO_GRADIENTE, color: "#15110A", borderRadius: 999, padding: "32px 70px", fontWeight: 800, fontSize: 46, letterSpacing: 5, boxShadow: "0 0 60px rgba(217,180,90,0.4)" }}>
-            QUERO SABER MAIS →
+            {BOTAO}
           </div>
         </div>
       </div>
@@ -122,6 +120,7 @@ const CTAFinal: React.FC<{ deslizar: boolean }> = ({ deslizar }) => {
       <div style={{ position: "absolute", top: 1215, left: 0, right: 0, textAlign: "center", opacity: url, transform: `translateY(${(1 - url) * 20}px)` }}>
         <div style={{ fontFamily: MONO, fontSize: 32, color: COR.suave, letterSpacing: 1 }}>{URL}</div>
         <div style={{ marginTop: 16, fontFamily: MONO, fontWeight: 700, fontSize: 30, letterSpacing: 6, color: COR.positivo }}>↑ LINK NA BIO</div>
+        {EXTRA && <div style={{ marginTop: 14, fontFamily: MONO, fontWeight: 700, fontSize: 26, letterSpacing: 4, color: COR.suave }}>{EXTRA.toUpperCase()}</div>}
       </div>
 
       <svg width={86} height={106} viewBox="0 0 24 30" style={{ position: "absolute", left: cx, top: cy, opacity: frame > f(2.2) && frame < f(4.2) ? 1 : 0, filter: "drop-shadow(0 6px 10px rgba(0,0,0,.6))" }}>

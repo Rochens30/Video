@@ -1,0 +1,628 @@
+{
+ "fonte": "IMG_6479.MOV",
+ "duracao_s": 49.83,
+ "idioma": "pt-PT",
+ "palavras": [
+  {
+   "palavra": "É",
+   "inicio": 5.12,
+   "fim": 5.36
+  },
+  {
+   "palavra": "já",
+   "inicio": 5.38,
+   "fim": 5.6
+  },
+  {
+   "palavra": "amanhã,",
+   "inicio": 5.6,
+   "fim": 6.16
+  },
+  {
+   "palavra": "dia",
+   "inicio": 6.16,
+   "fim": 6.48
+  },
+  {
+   "palavra": "24",
+   "inicio": 6.48,
+   "fim": 7.04
+  },
+  {
+   "palavra": "de",
+   "inicio": 7.04,
+   "fim": 7.2
+  },
+  {
+   "palavra": "outubro,",
+   "inicio": 7.2,
+   "fim": 7.68
+  },
+  {
+   "palavra": "que",
+   "inicio": 7.68,
+   "fim": 7.84
+  },
+  {
+   "palavra": "eu",
+   "inicio": 7.84,
+   "fim": 7.92
+  },
+  {
+   "palavra": "vou",
+   "inicio": 7.92,
+   "fim": 8.08
+  },
+  {
+   "palavra": "estar",
+   "inicio": 8.08,
+   "fim": 8.32
+  },
+  {
+   "palavra": "nesta",
+   "inicio": 8.32,
+   "fim": 8.56
+  },
+  {
+   "palavra": "sala",
+   "inicio": 8.56,
+   "fim": 8.8
+  },
+  {
+   "palavra": "com",
+   "inicio": 8.8,
+   "fim": 8.96
+  },
+  {
+   "palavra": "mais",
+   "inicio": 8.96,
+   "fim": 9.2
+  },
+  {
+   "palavra": "4",
+   "inicio": 9.2,
+   "fim": 9.36
+  },
+  {
+   "palavra": "traders",
+   "inicio": 9.52,
+   "fim": 10.0
+  },
+  {
+   "palavra": "profissionais",
+   "inicio": 10.0,
+   "fim": 10.8
+  },
+  {
+   "palavra": "e",
+   "inicio": 10.88,
+   "fim": 11.12
+  },
+  {
+   "palavra": "mais",
+   "inicio": 11.12,
+   "fim": 11.36
+  },
+  {
+   "palavra": "de",
+   "inicio": 11.36,
+   "fim": 11.52
+  },
+  {
+   "palavra": "100",
+   "inicio": 11.52,
+   "fim": 11.92
+  },
+  {
+   "palavra": "traders",
+   "inicio": 11.92,
+   "fim": 12.32
+  },
+  {
+   "palavra": "de",
+   "inicio": 12.4,
+   "fim": 12.56
+  },
+  {
+   "palavra": "todo",
+   "inicio": 12.56,
+   "fim": 12.8
+  },
+  {
+   "palavra": "o",
+   "inicio": 12.8,
+   "fim": 12.88
+  },
+  {
+   "palavra": "país,",
+   "inicio": 12.88,
+   "fim": 13.36
+  },
+  {
+   "palavra": "onde",
+   "inicio": 13.36,
+   "fim": 13.52
+  },
+  {
+   "palavra": "vamos",
+   "inicio": 13.68,
+   "fim": 13.84
+  },
+  {
+   "palavra": "estar",
+   "inicio": 14.0,
+   "fim": 14.16
+  },
+  {
+   "palavra": "aqui",
+   "inicio": 14.16,
+   "fim": 14.32
+  },
+  {
+   "palavra": "a",
+   "inicio": 14.32,
+   "fim": 14.48
+  },
+  {
+   "palavra": "explicar",
+   "inicio": 14.48,
+   "fim": 14.96
+  },
+  {
+   "palavra": "a",
+   "inicio": 14.96,
+   "fim": 15.04
+  },
+  {
+   "palavra": "nossa",
+   "inicio": 15.04,
+   "fim": 15.36
+  },
+  {
+   "palavra": "história,",
+   "inicio": 15.36,
+   "fim": 15.92
+  },
+  {
+   "palavra": "como",
+   "inicio": 15.92,
+   "fim": 16.08
+  },
+  {
+   "palavra": "é",
+   "inicio": 16.08,
+   "fim": 16.24
+  },
+  {
+   "palavra": "que",
+   "inicio": 16.24,
+   "fim": 16.32
+  },
+  {
+   "palavra": "nós",
+   "inicio": 16.32,
+   "fim": 16.48
+  },
+  {
+   "palavra": "fomos",
+   "inicio": 16.48,
+   "fim": 16.8
+  },
+  {
+   "palavra": "da",
+   "inicio": 16.8,
+   "fim": 17.04
+  },
+  {
+   "palavra": "inconsistência",
+   "inicio": 17.04,
+   "fim": 17.84
+  },
+  {
+   "palavra": "de",
+   "inicio": 17.84,
+   "fim": 18.0
+  },
+  {
+   "palavra": "perder",
+   "inicio": 18.0,
+   "fim": 18.32
+  },
+  {
+   "palavra": "dinheiro",
+   "inicio": 18.32,
+   "fim": 18.72
+  },
+  {
+   "palavra": "até",
+   "inicio": 18.72,
+   "fim": 19.2
+  },
+  {
+   "palavra": "sermos",
+   "inicio": 19.2,
+   "fim": 19.52
+  },
+  {
+   "palavra": "traders",
+   "inicio": 19.68,
+   "fim": 20.16
+  },
+  {
+   "palavra": "profissionais",
+   "inicio": 20.16,
+   "fim": 20.88
+  },
+  {
+   "palavra": "e",
+   "inicio": 20.88,
+   "fim": 21.04
+  },
+  {
+   "palavra": "se",
+   "inicio": 21.04,
+   "fim": 21.2
+  },
+  {
+   "palavra": "tu",
+   "inicio": 21.2,
+   "fim": 21.36
+  },
+  {
+   "palavra": "queres",
+   "inicio": 21.36,
+   "fim": 21.68
+  },
+  {
+   "palavra": "aprender",
+   "inicio": 21.68,
+   "fim": 22.16
+  },
+  {
+   "palavra": "como",
+   "inicio": 22.32,
+   "fim": 22.48
+  },
+  {
+   "palavra": "é",
+   "inicio": 22.48,
+   "fim": 22.56
+  },
+  {
+   "palavra": "que",
+   "inicio": 22.64,
+   "fim": 22.8
+  },
+  {
+   "palavra": "nós",
+   "inicio": 22.8,
+   "fim": 23.04
+  },
+  {
+   "palavra": "conseguimos",
+   "inicio": 23.04,
+   "fim": 23.52
+  },
+  {
+   "palavra": "os",
+   "inicio": 23.92,
+   "fim": 24.16
+  },
+  {
+   "palavra": "erros",
+   "inicio": 24.16,
+   "fim": 24.48
+  },
+  {
+   "palavra": "que",
+   "inicio": 24.48,
+   "fim": 24.64
+  },
+  {
+   "palavra": "nós",
+   "inicio": 24.64,
+   "fim": 24.88
+  },
+  {
+   "palavra": "cometemos",
+   "inicio": 24.88,
+   "fim": 25.36
+  },
+  {
+   "palavra": "para",
+   "inicio": 25.44,
+   "fim": 25.6
+  },
+  {
+   "palavra": "tu",
+   "inicio": 25.6,
+   "fim": 25.76
+  },
+  {
+   "palavra": "não",
+   "inicio": 25.76,
+   "fim": 25.92
+  },
+  {
+   "palavra": "teres",
+   "inicio": 25.92,
+   "fim": 26.24
+  },
+  {
+   "palavra": "de",
+   "inicio": 26.24,
+   "fim": 26.4
+  },
+  {
+   "palavra": "cometer",
+   "inicio": 26.4,
+   "fim": 26.72
+  },
+  {
+   "palavra": "e",
+   "inicio": 26.96,
+   "fim": 27.12
+  },
+  {
+   "palavra": "se",
+   "inicio": 27.12,
+   "fim": 27.28
+  },
+  {
+   "palavra": "queres",
+   "inicio": 27.28,
+   "fim": 27.6
+  },
+  {
+   "palavra": "aprender",
+   "inicio": 27.6,
+   "fim": 28.0
+  },
+  {
+   "palavra": "análise",
+   "inicio": 28.0,
+   "fim": 28.56
+  },
+  {
+   "palavra": "gráfica",
+   "inicio": 28.56,
+   "fim": 29.02
+  },
+  {
+   "palavra": "avançada,",
+   "inicio": 29.24,
+   "fim": 30.28
+  },
+  {
+   "palavra": "as",
+   "inicio": 30.28,
+   "fim": 30.52
+  },
+  {
+   "palavra": "metodologias",
+   "inicio": 30.52,
+   "fim": 31.32
+  },
+  {
+   "palavra": "que",
+   "inicio": 31.32,
+   "fim": 31.48
+  },
+  {
+   "palavra": "nós",
+   "inicio": 31.48,
+   "fim": 31.72
+  },
+  {
+   "palavra": "precisamos",
+   "inicio": 31.72,
+   "fim": 32.28
+  },
+  {
+   "palavra": "de",
+   "inicio": 32.28,
+   "fim": 32.44
+  },
+  {
+   "palavra": "fazer",
+   "inicio": 32.44,
+   "fim": 32.68
+  },
+  {
+   "palavra": "e",
+   "inicio": 32.76,
+   "fim": 32.92
+  },
+  {
+   "palavra": "as",
+   "inicio": 32.92,
+   "fim": 33.08
+  },
+  {
+   "palavra": "rotinas",
+   "inicio": 33.08,
+   "fim": 33.48
+  },
+  {
+   "palavra": "de",
+   "inicio": 33.48,
+   "fim": 33.64
+  },
+  {
+   "palavra": "um",
+   "inicio": 33.64,
+   "fim": 33.72
+  },
+  {
+   "palavra": "trader",
+   "inicio": 33.8,
+   "fim": 34.28
+  },
+  {
+   "palavra": "profissional,",
+   "inicio": 34.28,
+   "fim": 35.0
+  },
+  {
+   "palavra": "conceitos",
+   "inicio": 35.0,
+   "fim": 35.48
+  },
+  {
+   "palavra": "avançados",
+   "inicio": 35.56,
+   "fim": 36.12
+  },
+  {
+   "palavra": "de",
+   "inicio": 36.12,
+   "fim": 36.28
+  },
+  {
+   "palavra": "Smart",
+   "inicio": 36.28,
+   "fim": 36.6
+  },
+  {
+   "palavra": "Money,",
+   "inicio": 36.6,
+   "fim": 37.08
+  },
+  {
+   "palavra": "ICT",
+   "inicio": 37.08,
+   "fim": 37.31
+  },
+  {
+   "palavra": "Concepts,",
+   "inicio": 37.31,
+   "fim": 38.0
+  },
+  {
+   "palavra": "Garante",
+   "inicio": 38.0,
+   "fim": 38.62
+  },
+  {
+   "palavra": "já",
+   "inicio": 38.62,
+   "fim": 38.7
+  },
+  {
+   "palavra": "o",
+   "inicio": 38.7,
+   "fim": 38.77
+  },
+  {
+   "palavra": "teu",
+   "inicio": 38.77,
+   "fim": 39.0
+  },
+  {
+   "palavra": "bilhete,",
+   "inicio": 39.16,
+   "fim": 39.64
+  },
+  {
+   "palavra": "amanhã",
+   "inicio": 39.64,
+   "fim": 40.04
+  },
+  {
+   "palavra": "às",
+   "inicio": 40.12,
+   "fim": 40.36
+  },
+  {
+   "palavra": "14",
+   "inicio": 40.36,
+   "fim": 40.84
+  },
+  {
+   "palavra": "horas",
+   "inicio": 40.84,
+   "fim": 41.32
+  },
+  {
+   "palavra": "são",
+   "inicio": 41.32,
+   "fim": 41.56
+  },
+  {
+   "palavra": "os",
+   "inicio": 41.56,
+   "fim": 41.72
+  },
+  {
+   "palavra": "últimos",
+   "inicio": 41.72,
+   "fim": 42.12
+  },
+  {
+   "palavra": "lugares.",
+   "inicio": 42.12,
+   "fim": 42.52
+  },
+  {
+   "palavra": "Comenta",
+   "inicio": 42.83,
+   "fim": 43.12
+  },
+  {
+   "palavra": "\"evento\"",
+   "inicio": 43.44,
+   "fim": 43.68
+  },
+  {
+   "palavra": "aqui",
+   "inicio": 43.92,
+   "fim": 44.16
+  },
+  {
+   "palavra": "abaixo",
+   "inicio": 44.16,
+   "fim": 44.48
+  },
+  {
+   "palavra": "para",
+   "inicio": 44.56,
+   "fim": 44.72
+  },
+  {
+   "palavra": "estares",
+   "inicio": 44.72,
+   "fim": 44.88
+  },
+  {
+   "palavra": "amanhã",
+   "inicio": 45.12,
+   "fim": 45.52
+  },
+  {
+   "palavra": "connosco",
+   "inicio": 45.52,
+   "fim": 46.04
+  },
+  {
+   "palavra": "nesta",
+   "inicio": 46.17,
+   "fim": 46.56
+  },
+  {
+   "palavra": "sala,",
+   "inicio": 46.56,
+   "fim": 46.95
+  },
+  {
+   "palavra": "neste",
+   "inicio": 47.13,
+   "fim": 47.52
+  },
+  {
+   "palavra": "evento.",
+   "inicio": 47.52,
+   "fim": 48.5
+  }
+ ],
+ "nota": "Trecho 29–42,6 s retranscrito à parte (o modelo tinha-o saltado)."
+}

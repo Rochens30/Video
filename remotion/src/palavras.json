@@ -1,698 +1,628 @@
 {
- "fonte": "IMG_3086.MOV",
- "duracao_s": 78.3,
+ "fonte": "IMG_6479.MOV",
+ "duracao_s": 49.83,
  "idioma": "pt-PT",
  "palavras": [
   {
-   "palavra": "Acertas",
-   "inicio": 0.94,
-   "fim": 1.52
+   "palavra": "É",
+   "inicio": 5.12,
+   "fim": 5.36
   },
   {
-   "palavra": "em",
-   "inicio": 1.52,
-   "fim": 1.84
+   "palavra": "já",
+   "inicio": 5.38,
+   "fim": 5.6
   },
   {
-   "palavra": "60%",
-   "inicio": 1.84,
-   "fim": 2.48
+   "palavra": "amanhã,",
+   "inicio": 5.6,
+   "fim": 6.16
   },
   {
-   "palavra": "das",
-   "inicio": 2.64,
-   "fim": 2.88
+   "palavra": "dia",
+   "inicio": 6.16,
+   "fim": 6.48
   },
   {
-   "palavra": "tuas",
-   "inicio": 2.88,
-   "fim": 3.12
+   "palavra": "24",
+   "inicio": 6.48,
+   "fim": 7.04
   },
   {
-   "palavra": "trades",
-   "inicio": 3.12,
-   "fim": 3.52
+   "palavra": "de",
+   "inicio": 7.04,
+   "fim": 7.2
   },
   {
-   "palavra": "e",
-   "inicio": 3.6,
-   "fim": 3.76
-  },
-  {
-   "palavra": "mesmo",
-   "inicio": 3.76,
-   "fim": 4.0
-  },
-  {
-   "palavra": "assim",
-   "inicio": 4.0,
-   "fim": 4.16
-  },
-  {
-   "palavra": "perdes",
-   "inicio": 4.32,
-   "fim": 4.64
-  },
-  {
-   "palavra": "dinheiro?",
-   "inicio": 4.8,
-   "fim": 5.09
-  },
-  {
-   "palavra": "Eu",
-   "inicio": 5.28,
-   "fim": 5.52
-  },
-  {
-   "palavra": "vou",
-   "inicio": 5.52,
-   "fim": 5.68
-  },
-  {
-   "palavra": "te",
-   "inicio": 5.68,
-   "fim": 5.84
-  },
-  {
-   "palavra": "explicar",
-   "inicio": 5.84,
-   "fim": 6.32
-  },
-  {
-   "palavra": "porquê.",
-   "inicio": 6.32,
-   "fim": 6.61
-  },
-  {
-   "palavra": "Quando",
-   "inicio": 7.44,
-   "fim": 7.84
-  },
-  {
-   "palavra": "entramos",
-   "inicio": 7.84,
-   "fim": 8.32
-  },
-  {
-   "palavra": "numa",
-   "inicio": 8.32,
-   "fim": 8.72
-  },
-  {
-   "palavra": "trade,",
-   "inicio": 8.72,
-   "fim": 8.96
-  },
-  {
-   "palavra": "temos",
-   "inicio": 9.33,
-   "fim": 9.6
-  },
-  {
-   "palavra": "sempre",
-   "inicio": 9.6,
-   "fim": 9.84
-  },
-  {
-   "palavra": "o",
-   "inicio": 9.84,
-   "fim": 10.0
-  },
-  {
-   "palavra": "nosso",
-   "inicio": 10.0,
-   "fim": 10.32
-  },
-  {
-   "palavra": "risco,",
-   "inicio": 10.32,
-   "fim": 10.55
+   "palavra": "outubro,",
+   "inicio": 7.2,
+   "fim": 7.68
   },
   {
    "palavra": "que",
-   "inicio": 10.8,
-   "fim": 10.96
+   "inicio": 7.68,
+   "fim": 7.84
   },
   {
-   "palavra": "é",
-   "inicio": 10.96,
+   "palavra": "eu",
+   "inicio": 7.84,
+   "fim": 7.92
+  },
+  {
+   "palavra": "vou",
+   "inicio": 7.92,
+   "fim": 8.08
+  },
+  {
+   "palavra": "estar",
+   "inicio": 8.08,
+   "fim": 8.32
+  },
+  {
+   "palavra": "nesta",
+   "inicio": 8.32,
+   "fim": 8.56
+  },
+  {
+   "palavra": "sala",
+   "inicio": 8.56,
+   "fim": 8.8
+  },
+  {
+   "palavra": "com",
+   "inicio": 8.8,
+   "fim": 8.96
+  },
+  {
+   "palavra": "mais",
+   "inicio": 8.96,
+   "fim": 9.2
+  },
+  {
+   "palavra": "4",
+   "inicio": 9.2,
+   "fim": 9.36
+  },
+  {
+   "palavra": "traders",
+   "inicio": 9.52,
+   "fim": 10.0
+  },
+  {
+   "palavra": "profissionais",
+   "inicio": 10.0,
+   "fim": 10.8
+  },
+  {
+   "palavra": "e",
+   "inicio": 10.88,
    "fim": 11.12
   },
   {
-   "palavra": "o",
+   "palavra": "mais",
    "inicio": 11.12,
    "fim": 11.36
   },
   {
-   "palavra": "R,",
+   "palavra": "de",
    "inicio": 11.36,
-   "fim": 11.47
+   "fim": 11.52
   },
   {
-   "palavra": "temos",
-   "inicio": 12.09,
+   "palavra": "100",
+   "inicio": 11.52,
+   "fim": 11.92
+  },
+  {
+   "palavra": "traders",
+   "inicio": 11.92,
    "fim": 12.32
   },
   {
+   "palavra": "de",
+   "inicio": 12.4,
+   "fim": 12.56
+  },
+  {
+   "palavra": "todo",
+   "inicio": 12.56,
+   "fim": 12.8
+  },
+  {
    "palavra": "o",
-   "inicio": 12.32,
-   "fim": 12.48
+   "inicio": 12.8,
+   "fim": 12.88
   },
   {
-   "palavra": "Stop",
-   "inicio": 12.48,
-   "fim": 12.64
-  },
-  {
-   "palavra": "Loss",
+   "palavra": "país,",
    "inicio": 12.88,
-   "fim": 13.21
+   "fim": 13.36
   },
   {
-   "palavra": "e",
-   "inicio": 13.42,
+   "palavra": "onde",
+   "inicio": 13.36,
    "fim": 13.52
   },
   {
-   "palavra": "temos",
-   "inicio": 13.52,
-   "fim": 13.76
+   "palavra": "vamos",
+   "inicio": 13.68,
+   "fim": 13.84
   },
   {
-   "palavra": "o",
-   "inicio": 13.76,
-   "fim": 13.92
+   "palavra": "estar",
+   "inicio": 14.0,
+   "fim": 14.16
   },
   {
-   "palavra": "Take",
-   "inicio": 13.92,
-   "fim": 14.12
-  },
-  {
-   "palavra": "Profit.",
-   "inicio": 14.32,
-   "fim": 14.8
-  },
-  {
-   "palavra": "A",
-   "inicio": 15.76,
-   "fim": 15.84
-  },
-  {
-   "palavra": "relação",
-   "inicio": 16.08,
-   "fim": 16.56
-  },
-  {
-   "palavra": "entre",
-   "inicio": 16.56,
-   "fim": 16.8
-  },
-  {
-   "palavra": "stop",
-   "inicio": 16.96,
-   "fim": 17.12
-  },
-  {
-   "palavra": "loss",
-   "inicio": 17.28,
-   "fim": 17.6
-  },
-  {
-   "palavra": "e",
-   "inicio": 17.6,
-   "fim": 17.76
-  },
-  {
-   "palavra": "take",
-   "inicio": 17.76,
-   "fim": 18.08
-  },
-  {
-   "palavra": "profit",
-   "inicio": 18.08,
-   "fim": 18.35
-  },
-  {
-   "palavra": "é",
-   "inicio": 18.64,
-   "fim": 18.8
-  },
-  {
-   "palavra": "o",
-   "inicio": 18.8,
-   "fim": 18.96
-  },
-  {
-   "palavra": "que",
-   "inicio": 18.96,
-   "fim": 19.12
-  },
-  {
-   "palavra": "vai",
-   "inicio": 19.12,
-   "fim": 19.36
-  },
-  {
-   "palavra": "decidir",
-   "inicio": 19.36,
-   "fim": 19.88
-  },
-  {
-   "palavra": "se",
-   "inicio": 20.07,
-   "fim": 20.24
-  },
-  {
-   "palavra": "o",
-   "inicio": 20.24,
-   "fim": 20.32
-  },
-  {
-   "palavra": "nosso",
-   "inicio": 20.32,
-   "fim": 20.64
-  },
-  {
-   "palavra": "sistema",
-   "inicio": 20.64,
-   "fim": 21.03
-  },
-  {
-   "palavra": "é",
-   "inicio": 21.23,
-   "fim": 21.36
-  },
-  {
-   "palavra": "lucrativo",
-   "inicio": 21.36,
-   "fim": 21.96
+   "palavra": "aqui",
+   "inicio": 14.16,
+   "fim": 14.32
   },
   {
    "palavra": "a",
-   "inicio": 22.15,
-   "fim": 22.24
+   "inicio": 14.32,
+   "fim": 14.48
   },
   {
-   "palavra": "médio",
-   "inicio": 22.24,
-   "fim": 22.51
+   "palavra": "explicar",
+   "inicio": 14.48,
+   "fim": 14.96
+  },
+  {
+   "palavra": "a",
+   "inicio": 14.96,
+   "fim": 15.04
+  },
+  {
+   "palavra": "nossa",
+   "inicio": 15.04,
+   "fim": 15.36
+  },
+  {
+   "palavra": "história,",
+   "inicio": 15.36,
+   "fim": 15.92
+  },
+  {
+   "palavra": "como",
+   "inicio": 15.92,
+   "fim": 16.08
+  },
+  {
+   "palavra": "é",
+   "inicio": 16.08,
+   "fim": 16.24
+  },
+  {
+   "palavra": "que",
+   "inicio": 16.24,
+   "fim": 16.32
+  },
+  {
+   "palavra": "nós",
+   "inicio": 16.32,
+   "fim": 16.48
+  },
+  {
+   "palavra": "fomos",
+   "inicio": 16.48,
+   "fim": 16.8
+  },
+  {
+   "palavra": "da",
+   "inicio": 16.8,
+   "fim": 17.04
+  },
+  {
+   "palavra": "inconsistência",
+   "inicio": 17.04,
+   "fim": 17.84
+  },
+  {
+   "palavra": "de",
+   "inicio": 17.84,
+   "fim": 18.0
+  },
+  {
+   "palavra": "perder",
+   "inicio": 18.0,
+   "fim": 18.32
+  },
+  {
+   "palavra": "dinheiro",
+   "inicio": 18.32,
+   "fim": 18.72
+  },
+  {
+   "palavra": "até",
+   "inicio": 18.72,
+   "fim": 19.2
+  },
+  {
+   "palavra": "sermos",
+   "inicio": 19.2,
+   "fim": 19.52
+  },
+  {
+   "palavra": "traders",
+   "inicio": 19.68,
+   "fim": 20.16
+  },
+  {
+   "palavra": "profissionais",
+   "inicio": 20.16,
+   "fim": 20.88
   },
   {
    "palavra": "e",
-   "inicio": 22.51,
+   "inicio": 20.88,
+   "fim": 21.04
+  },
+  {
+   "palavra": "se",
+   "inicio": 21.04,
+   "fim": 21.2
+  },
+  {
+   "palavra": "tu",
+   "inicio": 21.2,
+   "fim": 21.36
+  },
+  {
+   "palavra": "queres",
+   "inicio": 21.36,
+   "fim": 21.68
+  },
+  {
+   "palavra": "aprender",
+   "inicio": 21.68,
+   "fim": 22.16
+  },
+  {
+   "palavra": "como",
+   "inicio": 22.32,
+   "fim": 22.48
+  },
+  {
+   "palavra": "é",
+   "inicio": 22.48,
    "fim": 22.56
   },
   {
-   "palavra": "longo",
+   "palavra": "que",
    "inicio": 22.64,
-   "fim": 22.96
+   "fim": 22.8
   },
   {
-   "palavra": "prazo.",
-   "inicio": 22.96,
-   "fim": 23.18
+   "palavra": "nós",
+   "inicio": 22.8,
+   "fim": 23.04
   },
   {
-   "palavra": "O",
+   "palavra": "conseguimos",
+   "inicio": 23.04,
+   "fim": 23.52
+  },
+  {
+   "palavra": "os",
+   "inicio": 23.92,
+   "fim": 24.16
+  },
+  {
+   "palavra": "erros",
+   "inicio": 24.16,
+   "fim": 24.48
+  },
+  {
+   "palavra": "que",
+   "inicio": 24.48,
+   "fim": 24.64
+  },
+  {
+   "palavra": "nós",
+   "inicio": 24.64,
+   "fim": 24.88
+  },
+  {
+   "palavra": "cometemos",
+   "inicio": 24.88,
+   "fim": 25.36
+  },
+  {
+   "palavra": "para",
+   "inicio": 25.44,
+   "fim": 25.6
+  },
+  {
+   "palavra": "tu",
+   "inicio": 25.6,
+   "fim": 25.76
+  },
+  {
+   "palavra": "não",
+   "inicio": 25.76,
+   "fim": 25.92
+  },
+  {
+   "palavra": "teres",
+   "inicio": 25.92,
+   "fim": 26.24
+  },
+  {
+   "palavra": "de",
+   "inicio": 26.24,
+   "fim": 26.4
+  },
+  {
+   "palavra": "cometer",
    "inicio": 26.4,
    "fim": 26.72
   },
   {
-   "palavra": "problema",
-   "inicio": 26.72,
-   "fim": 27.04
-  },
-  {
-   "palavra": "é",
-   "inicio": 27.52,
-   "fim": 27.68
-  },
-  {
-   "palavra": "que",
-   "inicio": 27.72,
-   "fim": 27.92
-  },
-  {
-   "palavra": "definir",
-   "inicio": 27.92,
-   "fim": 28.32
-  },
-  {
-   "palavra": "esta",
-   "inicio": 28.48,
-   "fim": 28.72
-  },
-  {
-   "palavra": "relação",
-   "inicio": 28.72,
-   "fim": 29.28
-  },
-  {
-   "palavra": "no",
-   "inicio": 29.28,
-   "fim": 29.44
-  },
-  {
-   "palavra": "papel",
-   "inicio": 29.44,
-   "fim": 29.76
-  },
-  {
    "palavra": "e",
-   "inicio": 29.92,
-   "fim": 30.2
-  },
-  {
-   "palavra": "depois",
-   "inicio": 30.34,
-   "fim": 30.56
-  },
-  {
-   "palavra": "chegar",
-   "inicio": 30.56,
-   "fim": 30.88
-  },
-  {
-   "palavra": "à",
-   "inicio": 30.88,
-   "fim": 31.04
-  },
-  {
-   "palavra": "prática",
-   "inicio": 31.04,
-   "fim": 31.44
-  },
-  {
-   "palavra": "e",
-   "inicio": 31.6,
-   "fim": 31.84
-  },
-  {
-   "palavra": "não",
-   "inicio": 31.84,
-   "fim": 32.08
-  },
-  {
-   "palavra": "respeitar,",
-   "inicio": 32.08,
-   "fim": 32.7
-  },
-  {
-   "palavra": "isto",
-   "inicio": 33.12,
-   "fim": 33.31
-  },
-  {
-   "palavra": "não",
-   "inicio": 33.52,
-   "fim": 33.76
-  },
-  {
-   "palavra": "serve",
-   "inicio": 33.76,
-   "fim": 34.24
-  },
-  {
-   "palavra": "de",
-   "inicio": 34.24,
-   "fim": 34.57
-  },
-  {
-   "palavra": "nada.",
-   "inicio": 34.56,
-   "fim": 35.52
-  },
-  {
-   "palavra": "E",
-   "inicio": 39.28,
-   "fim": 39.44
-  },
-  {
-   "palavra": "isso",
-   "inicio": 39.68,
-   "fim": 40.04
-  },
-  {
-   "palavra": "é",
-   "inicio": 40.0,
-   "fim": 40.08
-  },
-  {
-   "palavra": "o",
-   "inicio": 40.32,
-   "fim": 40.48
-  },
-  {
-   "palavra": "que",
-   "inicio": 40.48,
-   "fim": 40.64
-  },
-  {
-   "palavra": "a",
-   "inicio": 40.64,
-   "fim": 40.72
-  },
-  {
-   "palavra": "maior",
-   "inicio": 40.72,
-   "fim": 41.04
-  },
-  {
-   "palavra": "parte",
-   "inicio": 41.04,
-   "fim": 41.2
-  },
-  {
-   "palavra": "dos",
-   "inicio": 41.2,
-   "fim": 41.44
-  },
-  {
-   "palavra": "traders",
-   "inicio": 41.44,
-   "fim": 42.0
-  },
-  {
-   "palavra": "faz,",
-   "inicio": 42.0,
-   "fim": 42.23
-  },
-  {
-   "palavra": "sem",
-   "inicio": 42.92,
-   "fim": 43.2
+   "inicio": 26.96,
+   "fim": 27.12
   },
   {
    "palavra": "se",
-   "inicio": 43.2,
-   "fim": 43.36
+   "inicio": 27.12,
+   "fim": 27.28
   },
   {
-   "palavra": "aperceber.",
-   "inicio": 43.36,
-   "fim": 43.91
+   "palavra": "queres",
+   "inicio": 27.28,
+   "fim": 27.6
   },
   {
-   "palavra": "Olhe",
-   "inicio": 48.9,
-   "fim": 49.28
+   "palavra": "aprender",
+   "inicio": 27.6,
+   "fim": 28.0
   },
   {
-   "palavra": "para",
-   "inicio": 49.28,
-   "fim": 49.52
+   "palavra": "análise",
+   "inicio": 28.0,
+   "fim": 28.56
   },
   {
-   "palavra": "estes",
-   "inicio": 49.52,
-   "fim": 49.92
+   "palavra": "gráfica",
+   "inicio": 28.56,
+   "fim": 29.02
   },
   {
-   "palavra": "números.",
-   "inicio": 49.92,
-   "fim": 50.09
+   "palavra": "avançada,",
+   "inicio": 29.24,
+   "fim": 30.28
   },
   {
-   "palavra": "10",
-   "inicio": 53.55,
-   "fim": 53.92
+   "palavra": "as",
+   "inicio": 30.28,
+   "fim": 30.52
   },
   {
-   "palavra": "trades.",
-   "inicio": 53.92,
-   "fim": 54.32
-  },
-  {
-   "palavra": "6",
-   "inicio": 55.07,
-   "fim": 55.28
-  },
-  {
-   "palavra": "são",
-   "inicio": 55.52,
-   "fim": 55.76
-  },
-  {
-   "palavra": "lucrativas,",
-   "inicio": 55.76,
-   "fim": 56.49
-  },
-  {
-   "palavra": "só",
-   "inicio": 57.06,
-   "fim": 57.36
+   "palavra": "metodologias",
+   "inicio": 30.52,
+   "fim": 31.32
   },
   {
    "palavra": "que",
-   "inicio": 57.36,
-   "fim": 57.6
+   "inicio": 31.32,
+   "fim": 31.48
   },
   {
-   "palavra": "tu",
-   "inicio": 57.6,
-   "fim": 57.76
+   "palavra": "nós",
+   "inicio": 31.48,
+   "fim": 31.72
   },
   {
-   "palavra": "fechas",
-   "inicio": 57.76,
-   "fim": 58.4
-  },
-  {
-   "palavra": "a",
-   "inicio": 58.4,
-   "fim": 58.48
-  },
-  {
-   "palavra": "posição",
-   "inicio": 58.48,
-   "fim": 59.08
-  },
-  {
-   "palavra": "a",
-   "inicio": 59.25,
-   "fim": 59.36
-  },
-  {
-   "palavra": "meio",
-   "inicio": 59.36,
-   "fim": 59.6
-  },
-  {
-   "palavra": "caminho",
-   "inicio": 59.68,
-   "fim": 60.08
-  },
-  {
-   "palavra": "até",
-   "inicio": 60.46,
-   "fim": 60.72
-  },
-  {
-   "palavra": "chegar",
-   "inicio": 60.72,
-   "fim": 61.12
-  },
-  {
-   "palavra": "ao",
-   "inicio": 61.12,
-   "fim": 61.28
-  },
-  {
-   "palavra": "take",
-   "inicio": 61.28,
-   "fim": 61.6
-  },
-  {
-   "palavra": "profit.",
-   "inicio": 61.6,
-   "fim": 62.03
-  },
-  {
-   "palavra": "4",
-   "inicio": 62.82,
-   "fim": 63.31
-  },
-  {
-   "palavra": "são",
-   "inicio": 63.6,
-   "fim": 63.98
-  },
-  {
-   "palavra": "perdas",
-   "inicio": 64.21,
-   "fim": 64.66
-  },
-  {
-   "palavra": "que",
-   "inicio": 64.88,
-   "fim": 65.04
-  },
-  {
-   "palavra": "realmente",
-   "inicio": 65.04,
-   "fim": 65.36
-  },
-  {
-   "palavra": "chegam",
-   "inicio": 65.6,
-   "fim": 66.08
-  },
-  {
-   "palavra": "ao",
-   "inicio": 66.08,
-   "fim": 66.24
-  },
-  {
-   "palavra": "teu",
-   "inicio": 66.24,
-   "fim": 66.56
-  },
-  {
-   "palavra": "stop.",
-   "inicio": 66.56,
-   "fim": 66.74
-  },
-  {
-   "palavra": "Nas",
-   "inicio": 67.69,
-   "fim": 67.84
-  },
-  {
-   "palavra": "trades",
-   "inicio": 67.84,
-   "fim": 68.24
+   "palavra": "precisamos",
+   "inicio": 31.72,
+   "fim": 32.28
   },
   {
    "palavra": "de",
-   "inicio": 68.72,
-   "fim": 68.88
+   "inicio": 32.28,
+   "fim": 32.44
   },
   {
-   "palavra": "Take",
-   "inicio": 68.88,
-   "fim": 69.28
+   "palavra": "fazer",
+   "inicio": 32.44,
+   "fim": 32.68
   },
   {
-   "palavra": "Profit",
-   "inicio": 69.28,
-   "fim": 69.63
+   "palavra": "e",
+   "inicio": 32.76,
+   "fim": 32.92
   },
   {
-   "palavra": "ganhámos",
-   "inicio": 69.85,
-   "fim": 70.35
+   "palavra": "as",
+   "inicio": 32.92,
+   "fim": 33.08
   },
   {
-   "palavra": "3",
-   "inicio": 70.48,
-   "fim": 70.76
+   "palavra": "rotinas",
+   "inicio": 33.08,
+   "fim": 33.48
   },
   {
-   "palavra": "R.",
-   "inicio": 70.78,
-   "fim": 71.05
+   "palavra": "de",
+   "inicio": 33.48,
+   "fim": 33.64
+  },
+  {
+   "palavra": "um",
+   "inicio": 33.64,
+   "fim": 33.72
+  },
+  {
+   "palavra": "trader",
+   "inicio": 33.8,
+   "fim": 34.28
+  },
+  {
+   "palavra": "profissional,",
+   "inicio": 34.28,
+   "fim": 35.0
+  },
+  {
+   "palavra": "conceitos",
+   "inicio": 35.0,
+   "fim": 35.48
+  },
+  {
+   "palavra": "avançados",
+   "inicio": 35.56,
+   "fim": 36.12
+  },
+  {
+   "palavra": "de",
+   "inicio": 36.12,
+   "fim": 36.28
+  },
+  {
+   "palavra": "Smart",
+   "inicio": 36.28,
+   "fim": 36.6
+  },
+  {
+   "palavra": "Money,",
+   "inicio": 36.6,
+   "fim": 37.08
+  },
+  {
+   "palavra": "ICT",
+   "inicio": 37.08,
+   "fim": 37.31
+  },
+  {
+   "palavra": "Concepts,",
+   "inicio": 37.31,
+   "fim": 38.0
+  },
+  {
+   "palavra": "Garante",
+   "inicio": 38.0,
+   "fim": 38.62
+  },
+  {
+   "palavra": "já",
+   "inicio": 38.62,
+   "fim": 38.7
+  },
+  {
+   "palavra": "o",
+   "inicio": 38.7,
+   "fim": 38.77
+  },
+  {
+   "palavra": "teu",
+   "inicio": 38.77,
+   "fim": 39.0
+  },
+  {
+   "palavra": "bilhete,",
+   "inicio": 39.16,
+   "fim": 39.64
+  },
+  {
+   "palavra": "amanhã",
+   "inicio": 39.64,
+   "fim": 40.04
+  },
+  {
+   "palavra": "às",
+   "inicio": 40.12,
+   "fim": 40.36
+  },
+  {
+   "palavra": "14",
+   "inicio": 40.36,
+   "fim": 40.84
+  },
+  {
+   "palavra": "horas",
+   "inicio": 40.84,
+   "fim": 41.32
+  },
+  {
+   "palavra": "são",
+   "inicio": 41.32,
+   "fim": 41.56
+  },
+  {
+   "palavra": "os",
+   "inicio": 41.56,
+   "fim": 41.72
+  },
+  {
+   "palavra": "últimos",
+   "inicio": 41.72,
+   "fim": 42.12
+  },
+  {
+   "palavra": "lugares.",
+   "inicio": 42.12,
+   "fim": 42.52
+  },
+  {
+   "palavra": "Comenta",
+   "inicio": 42.83,
+   "fim": 43.12
+  },
+  {
+   "palavra": "\"evento\"",
+   "inicio": 43.44,
+   "fim": 43.68
+  },
+  {
+   "palavra": "aqui",
+   "inicio": 43.92,
+   "fim": 44.16
+  },
+  {
+   "palavra": "abaixo",
+   "inicio": 44.16,
+   "fim": 44.48
+  },
+  {
+   "palavra": "para",
+   "inicio": 44.56,
+   "fim": 44.72
+  },
+  {
+   "palavra": "estares",
+   "inicio": 44.72,
+   "fim": 44.88
+  },
+  {
+   "palavra": "amanhã",
+   "inicio": 45.12,
+   "fim": 45.52
+  },
+  {
+   "palavra": "connosco",
+   "inicio": 45.52,
+   "fim": 46.04
+  },
+  {
+   "palavra": "nesta",
+   "inicio": 46.17,
+   "fim": 46.56
+  },
+  {
+   "palavra": "sala,",
+   "inicio": 46.56,
+   "fim": 46.95
+  },
+  {
+   "palavra": "neste",
+   "inicio": 47.13,
+   "fim": 47.52
+  },
+  {
+   "palavra": "evento.",
+   "inicio": 47.52,
+   "fim": 48.5
   }
  ],
- "nota": "Gravação termina a meio a partir de 72,7 s (engano); transcrição cortada em 'ganhámos 3R.'"
+ "nota": "Trecho 29–42,6 s retranscrito à parte (o modelo tinha-o saltado)."
 }

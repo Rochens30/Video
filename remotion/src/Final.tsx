@@ -1,11 +1,11 @@
-import { AbsoluteFill, Sequence } from "remotion";
+import { AbsoluteFill, Audio, interpolate, Sequence, staticFile } from "remotion";
 import { Video } from "./Video";
 import { Intro } from "./Intro";
 import { Gancho } from "./Gancho";
 import { CTA as CallToAction } from "./CTA";
 import { COMPLETA, CURTA, MontagemContext } from "./montagem";
 import { EfeitosContext } from "./ui";
-import { CTA, CTA_CURTA, f, GANCHO_FIM, INTRO, MODO, SOBREPOSICAO_CTA } from "./tempo";
+import { CTA, CTA_CURTA, f, GANCHO_FIM, INTRO, MODO, MUSICA, SOBREPOSICAO_CTA } from "./tempo";
 
 export type Versao = "completa" | "curta";
 

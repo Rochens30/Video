@@ -6,8 +6,8 @@ import { f } from "./tempo";
 import { useMontagem } from "./montagem";
 
 // Palavras-chave do vídeo atual: quando ditas ficam verdes em vez de amarelas.
-const CHAVE = new Set(["60", "perdes", "risco", "stop", "loss", "take", "profit", "lucrativo", "problema", "papel", "prática",
-  "respeitar", "traders", "números", "lucrativas", "perdas", "3"]);
+const CHAVE = new Set(["amanhã", "24", "outubro", "sala", "profissionais", "100", "história", "inconsistência", "dinheiro", "erros",
+  "análise", "gráfica", "avançada", "metodologias", "rotinas", "smart", "money", "ict", "bilhete", "14", "últimos", "lugares", "evento"]);
 const limpa = (w: string) => w.toLowerCase().replace(/[^\p{L}\p{N}]/gu, "");
 
 const BRANCO = "#FFFFFF";

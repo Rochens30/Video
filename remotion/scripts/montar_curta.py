@@ -14,12 +14,12 @@ def idx(palavra, depois=0.0):
 
 # Frases mantidas: (primeira palavra, tempo mínimo) → (última palavra, tempo mínimo)
 FRASES = [
-    # Vídeo 3 ("60% de acerto"): tudo até "ganhámos 3R." (o resto da gravação é um engano).
-    # (Vídeo 1: ver videos/01-consistencia/NOTAS.md · vídeo 2: videos/02-lucro-erro/NOTAS.md)
-    (("Acertas", 0), ("R.", 71)),
+    # Vídeo 4 ("Evento Lisboa"): tudo, de "É já amanhã" a "neste evento." (os 5 s iniciais são silêncio).
+    # (Vídeos anteriores: ver videos/NN-*/NOTAS.md)
+    (("É", 5), ("evento.", 47)),
 ]
 PAUSA_MAX = 0.20  # pausas maiores do que isto são encurtadas
-MARGEM = 0.05     # silêncio que fica de cada lado de um corte
+MARGEM = 0.07     # silêncio que fica de cada lado de um corte
 
 def silencio_em(t):
     return next(((a, b) for a, b in SIL if a - 0.05 <= t <= b + 0.05), None)
