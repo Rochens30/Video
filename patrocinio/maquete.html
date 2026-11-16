@@ -42,14 +42,18 @@ h1 span{color:var(--accent)}
 svg{display:block;width:100%;height:auto}
 svg text{font-family:var(--display);font-weight:700;pointer-events:none;text-anchor:middle;dominant-baseline:central}
 .z{cursor:pointer}
-.z path{fill:rgba(9,13,22,.8);stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 3;transition:fill .12s}
-.z:hover path,.z.hl path{fill:rgba(246,179,25,.38)}
+.z{filter:drop-shadow(0 0 1.2px rgba(0,0,0,.95))}
+.z.on{filter:none}
+.z path{fill:rgba(255,255,255,.07);stroke:#fff;stroke-width:1.6;stroke-dasharray:5 3;transition:fill .12s}
+.z:hover path,.z.hl path{fill:rgba(255,255,255,.4)}
+.pill{fill:#0b101a;fill-opacity:.9}
+.stage{border-radius:8px;background:radial-gradient(ellipse 62% 78% at 50% 60%,#33425f 0%,rgba(20,27,42,0) 72%)}
 .z.on path{fill:#fff;stroke:var(--accent);stroke-width:2.5;stroke-dasharray:none}
 .z .nm{fill:#fff;font-weight:600}.z .pr{fill:var(--accent)}
 .z.on .br{fill:#141414;font-weight:800}
 .chip rect{fill:#0b101a;stroke:var(--accent);stroke-width:1}
 .chip.on rect{fill:var(--accent)}.chip text{fill:#fff;font-weight:600}.chip.on text{fill:var(--accent-ink)}
-.lead{stroke:var(--accent);stroke-width:1.2;fill:none}
+.lead{stroke:#fff;stroke-width:1.3;fill:none;stroke-dasharray:3 3}
 .hint{color:var(--muted);font-size:13px;margin:0}
 /* Pacotes */
 .packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
@@ -128,11 +132,11 @@ footer{color:var(--muted);font-size:13px;text-align:center}
               <button id="side-p" type="button">Lado do piloto</button><button id="side-n" type="button">Lado do navegador</button>
             </div>
           </div>
-          <div id="v-side"></div>
+          <div id="v-side" class="stage"></div>
         </div>
-        <div class="view"><div class="vh"><h3>Frente</h3></div><div id="v-front"></div></div>
-        <div class="view"><div class="vh"><h3>Traseira</h3></div><div id="v-rear"></div></div>
-        <div class="view wide"><div class="vh"><h3>Vista de cima</h3><small>capô, tecto e topo do aileron</small></div><div id="v-top"></div></div>
+        <div class="view"><div class="vh"><h3>Frente</h3></div><div id="v-front" class="stage"></div></div>
+        <div class="view"><div class="vh"><h3>Traseira</h3></div><div id="v-rear" class="stage"></div></div>
+        <div class="view wide"><div class="vh"><h3>Vista de cima</h3><small>capô, tecto e topo do aileron</small></div><div id="v-top" class="stage"></div></div>
       </div>
 
       <div class="panel">
@@ -178,6 +182,18 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   <footer>Sunny Sprint · Rodrigo Jasmins (piloto) · Tiago Rocha (navegador) · Madeira</footer>
 </div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="gBody" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe066"/><stop offset=".42" stop-color="#f9c022"/><stop offset="1" stop-color="#d48f06"/></linearGradient>
+  <linearGradient id="gRound" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#cf8b06"/><stop offset=".22" stop-color="#f9c022"/><stop offset=".5" stop-color="#ffe066"/><stop offset=".78" stop-color="#f9c022"/><stop offset="1" stop-color="#cf8b06"/></linearGradient>
+  <linearGradient id="gGlass" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#465a7c"/><stop offset=".5" stop-color="#1a2334"/><stop offset="1" stop-color="#0b111c"/></linearGradient>
+  <linearGradient id="gDark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#444b59"/><stop offset="1" stop-color="#1a1e26"/></linearGradient>
+  <linearGradient id="gRed" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ff6464"/><stop offset="1" stop-color="#a40f1a"/></linearGradient>
+  <linearGradient id="gLamp" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#b4cdf5"/></linearGradient>
+  <linearGradient id="gStreak" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff" stop-opacity=".4"/><stop offset="1" stop-color="#fff" stop-opacity="0"/></linearGradient>
+  <linearGradient id="gShade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".28"/></linearGradient>
+  <filter id="fBlur" x="-30%" y="-150%" width="160%" height="400%"><feGaussianBlur stdDeviation="5"/></filter>
+  <filter id="fGlow" x="-60%" y="-60%" width="220%" height="220%"><feGaussianBlur stdDeviation="3.5"/></filter>
+</defs></svg>
 <script>
 const Z = {
   'pala':   {n:'Pala do para-brisas', s:'PALA', v:'Muito alta', p:null},
@@ -215,72 +231,108 @@ const price = id => Z[id].p == null ? 'a definir' : eur(Z[id].p);
 
 /* ---------- Desenhos do carro ---------- */
 /* Renault Clio (2024) à escala real: 4,05 m de comprimento, 1,80 m de largura, 2,58 m entre eixos. */
-const wheel = (x,y) => `<circle cx="${x}" cy="${y}" r="48" fill="#0e1014"/><circle cx="${x}" cy="${y}" r="31" fill="#e9ecf1"/>
-  <circle cx="${x}" cy="${y}" r="23" fill="#b9c0cc"/>${[0,72,144,216,288].map(a=>`<rect x="${x-3.5}" y="${y-30}" width="7" height="30" fill="#e9ecf1" transform="rotate(${a} ${x} ${y})"/>`).join('')}
-  <circle cx="${x}" cy="${y}" r="8" fill="#2a2f3a"/>`;
+const wheel = (x,y) => `<circle cx="${x}" cy="${y}" r="48" fill="#0b0c0f"/><circle cx="${x}" cy="${y}" r="44.5" fill="none" stroke="#30343c" stroke-width="1.5"/>
+  <circle cx="${x}" cy="${y}" r="33" fill="#121419"/><circle cx="${x}" cy="${y}" r="25" fill="#5b6370"/><circle cx="${x}" cy="${y}" r="17" fill="#3a404a"/>
+  <path d="M${x-22} ${y-10} A24 24 0 0 1 ${x-7} ${y-23}" stroke="#e02431" stroke-width="8" fill="none"/>
+  ${[0,36,72,108,144,180,216,252,288,324].map(a=>`<rect x="${x-2.4}" y="${y-31}" width="4.8" height="25" rx="1.5" fill="#f7f8fa" transform="rotate(${a} ${x} ${y})"/>`).join('')}
+  <circle cx="${x}" cy="${y}" r="31" fill="none" stroke="#f7f8fa" stroke-width="4"/><circle cx="${x}" cy="${y}" r="9.5" fill="#f7f8fa"/><circle cx="${x}" cy="${y}" r="4" fill="#1b1e24"/>
+  <path d="M${x-41} ${y-22} A46.5 46.5 0 0 1 ${x+6} ${y-46}" stroke="#fff" stroke-opacity=".16" stroke-width="2.5" fill="none"/>`;
 const BODY = 'M64 248 L59 218 Q56 186 72 175 Q150 140 250 124 L345 62 Q358 54 410 53 L560 58 Q620 62 652 69 L689 128 Q703 140 705 166 L707 226 Q707 246 696 248 L653.7 248 A56 56 0 1 0 546.3 248 L243.7 248 A56 56 0 1 0 136.3 248 Z';
+const SGLASS = 'M270 125 L352 70 H436 V119Z M448 70 H556 Q575 72 590 92 L606 112 L448 118.5Z';
 const LOWER = 'M136 122 H384 Q404 128 410 150 Q416 180 414 215 L408 262 Q406 270 396 270 H124 Q114 270 112 262 L106 215 Q104 180 110 150 Q116 128 136 122Z';
 const BUMPER = 'M106.5 218 H413.5 L408 262 Q406 270 396 270 H124 Q114 270 112 262Z';
-const TYRES = '<rect x="110" y="236" width="36" height="56" rx="7" fill="#0e1014"/><rect x="374" y="236" width="36" height="56" rx="7" fill="#0e1014"/>';
+const TYRES = '<rect x="108" y="234" width="38" height="58" rx="8" fill="#0b0c0f"/><rect x="374" y="234" width="38" height="58" rx="8" fill="#0b0c0f"/><path d="M114 240 V286 M122 240 V288 M130 240 V288 M138 240 V286 M382 240 V286 M390 240 V288 M398 240 V288 M406 240 V286" stroke="#23262c" stroke-width="2"/>';
+const SHADOW2 = '<ellipse cx="260" cy="292" rx="180" ry="8" fill="#000" opacity=".65" filter="url(#fBlur)"/>';
 const CAR = {
-side:`<defs><clipPath id="sb"><path d="${BODY}"/></clipPath></defs>
-  <ellipse cx="385" cy="283" rx="345" ry="7" fill="#05080d"/>
-  <path d="M626 60 L690 53 L701 61 L695 72 L650 70Z" fill="#171b22"/>
-  <path d="M394 54 Q406 44 442 46 L448 55Z" fill="#171b22"/>
-  <path d="${BODY}" fill="var(--car)"/>
+side:`<defs><clipPath id="sb"><path d="${BODY}"/></clipPath><clipPath id="sg"><path d="${SGLASS}"/></clipPath></defs>
+  <rect x="716" y="92" width="84" height="3" rx="1.5" fill="url(#gStreak)"/><rect x="722" y="128" width="78" height="4" rx="2" fill="url(#gStreak)"/>
+  <rect x="716" y="170" width="84" height="3" rx="1.5" fill="url(#gStreak)"/><rect x="720" y="204" width="80" height="5" rx="2.5" fill="url(#gStreak)"/>
+  <g filter="url(#fBlur)" opacity=".3"><ellipse cx="688" cy="268" rx="36" ry="12" fill="#cdb68c"/><ellipse cx="750" cy="260" rx="42" ry="17" fill="#cdb68c"/></g>
+  <ellipse cx="385" cy="284" rx="345" ry="9" fill="#000" opacity=".7" filter="url(#fBlur)"/>
+  <circle cx="190" cy="232" r="57" fill="#06070a"/><circle cx="600" cy="232" r="57" fill="#06070a"/>
+  <path d="M640 70 L650 50 L660 50 L656 70Z" fill="#0e1014"/>
+  <path d="M604 54 L686 42 L698 48 L694 60 L620 64Z" fill="url(#gDark)"/><path d="M662 33 L700 33 L703 68 L672 68Z" fill="#0e1014"/>
+  <path d="M394 54 Q406 43 442 45 L450 55Z" fill="#0e1014"/>
+  <path d="${BODY}" fill="url(#gBody)"/>
   <g clip-path="url(#sb)">
-    <path d="M470 256 L590 110 H720 V256Z" fill="var(--car-dark)"/><path d="M444 256 L564 110 H580 L460 256Z" fill="#fff"/>
-    <path d="M50 214 H150 V256 H50Z" fill="var(--car-dark)"/><path d="M236 236 H556 V256 H236Z" fill="var(--car-dark)"/>
+    <path d="M470 256 L570 118 H616 L516 256Z M532 256 L632 118 H650 L550 256Z" fill="url(#gDark)"/>
+    <path d="M450 256 L550 118 H559 L459 256Z M564 256 L664 118 H669 L569 256Z" fill="#fff"/>
+    <path d="M40 214 Q100 210 150 222 V256 H40Z" fill="url(#gDark)"/><path d="M236 238 H556 V256 H236Z" fill="url(#gDark)"/>
+    <path d="M60 196 Q160 152 252 133 L612 116 L702 142 V150 L612 123 L252 140 Q160 160 60 205Z" fill="#fff" opacity=".28"/>
+    <path d="M330 62 Q358 55 410 54 L560 59 Q620 63 652 70 L650 74 Q620 67 560 63 L410 58 Q358 59 334 66Z" fill="#fff" opacity=".35"/>
+    <rect x="40" y="200" width="700" height="60" fill="url(#gShade)"/>
   </g>
-  <path d="M270 125 L352 70 H436 V119Z M448 70 H556 Q575 72 590 92 L606 112 L448 118.5Z" fill="var(--glass)" stroke="#3a4760" stroke-width="1.5"/>
-  <path d="M590 92 L613 106 L606 112Z" fill="#171b22"/>
-  <path d="M66 180 Q92 168 124 160 L114 174 Q90 178 68 190Z" fill="#eef2f8"/>
-  <path d="M62 198 L70 203 L66 224 L60 216Z" fill="#eef2f8"/>
-  <path d="M676 134 L690 130 Q703 142 705 166 L694 160 Q690 146 676 142Z" fill="#c8232c"/>
-  <path d="M264 128 Q256 180 258 236 M442 70 V244 M606 112 Q578 150 552 200 M72 176 Q150 141 250 125" stroke="#8a6a12" stroke-width="1.5" fill="none"/>
-  <path d="M398 138 h26" stroke="#2a2f3a" stroke-width="4" stroke-linecap="round"/>
-  <path d="M266 110 H294 Q300 120 295 130 H272Z" fill="#171b22"/>
-  <path d="M136.3 248 A56 56 0 1 1 243.7 248 M546.3 248 A56 56 0 1 1 653.7 248" fill="none" stroke="#171b22" stroke-width="5"/>
-  <rect x="244" y="238" width="8" height="32" fill="#c8232c"/><rect x="655" y="238" width="8" height="32" fill="#c8232c"/>
+  <path d="${SGLASS}" fill="url(#gGlass)" stroke="#0e1014" stroke-width="3" stroke-linejoin="round"/>
+  <g clip-path="url(#sg)"><path d="M372 66 L404 122 M478 66 L506 122" stroke="#6a7791" stroke-opacity=".55" stroke-width="3.5"/>
+    <path d="M336 60 L362 60 L302 132 L276 132Z M506 60 L544 60 L492 126 L454 126Z" fill="#fff" opacity=".14"/></g>
+  <path d="M590 92 L613 106 L606 112Z" fill="#0e1014"/>
+  <path d="M66 180 Q92 168 124 160 L114 174 Q90 178 68 190Z" fill="#cfe2ff" filter="url(#fGlow)" opacity=".7"/>
+  <path d="M66 180 Q92 168 124 160 L114 174 Q90 178 68 190Z" fill="url(#gLamp)"/>
+  <path d="M62 198 L70 203 L66 224 L60 216Z" fill="#fff"/>
+  <path d="M676 134 L690 130 Q703 142 705 166 L694 160 Q690 146 676 142Z" fill="#ff4a4a" filter="url(#fGlow)" opacity=".7"/>
+  <path d="M676 134 L690 130 Q703 142 705 166 L694 160 Q690 146 676 142Z" fill="url(#gRed)"/>
+  <path d="M264 128 Q256 180 258 236 M442 120 V244 M606 112 Q578 150 552 200 M72 176 Q150 141 250 125" stroke="#000" stroke-opacity=".35" stroke-width="1.5" fill="none"/>
+  <path d="M398 138 h26" stroke="#0e1014" stroke-width="4" stroke-linecap="round"/>
+  <path d="M264 110 H294 Q301 120 296 131 H270Z" fill="url(#gDark)"/>
+  <path d="M136.3 248 A56 56 0 1 1 243.7 248 M546.3 248 A56 56 0 1 1 653.7 248" fill="none" stroke="#0e1014" stroke-width="6"/>
+  <path d="M54 242 H139 L137 252 H58Z" fill="#0b0c0f"/>
+  <path d="M243 238 h10 l3 34 h-12z M654 238 h10 l3 34 h-12z" fill="#d3212c"/>
   ${wheel(190,232)}${wheel(600,232)}`,
-front:`<ellipse cx="260" cy="293" rx="175" ry="6" fill="#05080d"/>${TYRES}
-  <rect x="148" y="38" width="224" height="10" rx="3" fill="#171b22"/>
-  <path d="M238 52 Q260 38 282 52Z" fill="#171b22"/>
-  <path d="M170 58 Q260 46 350 58 L384 124 H136Z" fill="var(--car)"/>
-  <path d="M175 64 Q260 55 345 64 L375 120 H145Z" fill="var(--glass)" stroke="#3a4760" stroke-width="1.5"/>
-  <path d="${LOWER}" fill="var(--car)"/>
-  <path d="M136 122 H156 L132 168 L109 164 Q112 132 136 122Z M384 122 H364 L388 168 L411 164 Q408 132 384 122Z" fill="var(--car-dark)"/>
-  <path d="${BUMPER}" fill="var(--car-dark)"/>
-  <path d="M114 168 Q260 180 406 168" stroke="#8a6a12" stroke-width="1.5" fill="none"/>
-  <path d="M116 166 L190 173 L182 187 L124 183Z M404 166 L330 173 L338 187 L396 183Z" fill="#eef2f8"/>
-  <path d="M190 175 H330 L320 216 H200Z" fill="#12161d"/>
-  <path d="M204 186 H316 M207 196 H313 M210 206 H310" stroke="#2f3745" stroke-width="2"/>
-  <path d="M260 180 L273 195 L260 210 L247 195Z" fill="#12161d" stroke="#c9d0dc" stroke-width="3.5"/>
-  <path d="M144 194 L128 212 L140 236 M376 194 L392 212 L380 236" stroke="#eef2f8" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
-  <rect x="176" y="228" width="168" height="22" rx="4" fill="#12161d"/>
-  <path d="M150 254 H370 L362 266 H158Z" fill="var(--car)"/>
-  <path d="M92 110 H116 L120 122 L116 130 H96 Q90 120 92 110Z M428 110 H404 L400 122 L404 130 H424 Q430 120 428 110Z" fill="var(--car)"/>`,
-rear:`<ellipse cx="260" cy="293" rx="175" ry="6" fill="#05080d"/>${TYRES}
-  <path d="M170 58 Q260 46 350 58 L388 126 H132Z" fill="var(--car)"/>
-  <path d="M180 70 Q260 62 340 70 L366 118 H154Z" fill="var(--glass)" stroke="#3a4760" stroke-width="1.5"/>
-  <path d="${LOWER}" fill="var(--car)"/>
-  <path d="M136 122 H196 L218 218 H106.5 L106 215 Q104 180 110 150 Q116 128 136 122Z M384 122 H324 L302 218 H413.5 L414 215 Q416 180 410 150 Q404 128 384 122Z" fill="var(--car-dark)"/>
-  <path d="${BUMPER}" fill="var(--car-dark)"/>
-  <path d="M110 148 L178 142 L184 158 L146 164 L144 182 L109 188Z M410 148 L342 142 L336 158 L374 164 L376 182 L411 188Z" fill="#c8232c"/>
-  <path d="M118 154 L172 149 M402 154 L348 149" stroke="#ff8d8d" stroke-width="2.5"/>
-  <path d="M260 136 L272 150 L260 164 L248 150Z" fill="none" stroke="#2a2f3a" stroke-width="3.5"/>
-  <rect x="216" y="178" width="88" height="22" rx="3" fill="#dfe5ee"/>
-  <rect x="120" y="244" width="30" height="5" rx="2" fill="#c8232c"/><rect x="370" y="244" width="30" height="5" rx="2" fill="#c8232c"/>
-  <path d="M176 62 V44 M344 62 V44" stroke="#171b22" stroke-width="6"/>
-  <rect x="116" y="30" width="12" height="56" rx="3" fill="#171b22"/><rect x="392" y="30" width="12" height="56" rx="3" fill="#171b22"/>
-  <rect x="124" y="34" width="272" height="26" rx="4" fill="#171b22"/>`,
-top:`<path d="M270 12 h26 v22 h-18z M270 328 h26 v-22 h-18z" fill="var(--car)"/>
-  <path d="M150 30 Q92 36 82 110 Q78 170 82 230 Q92 304 150 310 L680 310 Q716 306 720 250 Q724 170 720 90 Q716 34 680 30Z" fill="var(--car)"/>
-  <path d="M90 118 L256 104 V90 L96 96Z M90 222 L256 236 V250 L96 244Z" fill="var(--car-dark)"/>
-  <path d="M94 76 Q106 50 136 40 L132 54 Q112 62 102 88Z M94 264 Q106 290 136 300 L132 286 Q112 278 102 252Z" fill="#eef2f8"/>
-  <path d="M262 62 Q248 170 262 278 L372 252 Q364 170 372 88Z M606 86 Q614 170 606 254 L640 272 Q650 170 640 68Z M296 54 H628 L604 82 H374Z M296 286 H628 L604 258 H374Z" fill="var(--glass)" stroke="#3a4760" stroke-width="1.5"/>
-  <rect x="470" y="154" width="40" height="32" rx="5" fill="#171b22" opacity=".35"/>
-  <rect x="652" y="30" width="56" height="280" rx="5" fill="#171b22"/>`
+front:`${SHADOW2}${TYRES}
+  <rect x="140" y="36" width="240" height="11" rx="3" fill="url(#gDark)"/><rect x="134" y="30" width="10" height="34" rx="3" fill="#0e1014"/><rect x="376" y="30" width="10" height="34" rx="3" fill="#0e1014"/>
+  <path d="M236 53 Q260 36 284 53Z" fill="#0e1014"/>
+  <path d="M170 58 Q260 46 350 58 L384 124 H136Z" fill="url(#gBody)"/>
+  <path d="M175 64 Q260 55 345 64 L375 120 H145Z" fill="url(#gGlass)" stroke="#0e1014" stroke-width="2.5"/>
+  <path d="M196 62 L160 119 M324 62 L360 119" stroke="#6a7791" stroke-opacity=".5" stroke-width="3"/>
+  <path d="M214 60 L250 58 L212 121 L176 121Z" fill="#fff" opacity=".12"/>
+  <path d="${LOWER}" fill="url(#gBody)"/>
+  <path d="M136 122 H384 L407 165 Q260 178 113 165Z" fill="#fff3b0" opacity=".4"/>
+  <path d="M136 122 H158 L134 168 L109 164 Q112 132 136 122Z M384 122 H362 L386 168 L411 164 Q408 132 384 122Z" fill="url(#gDark)"/>
+  <path d="M163 122 H170 L146 169 L139 168Z M357 122 H350 L374 169 L381 168Z" fill="#fff"/>
+  <path d="M238 123 h44 l-3 10 h-38z" fill="#0e1014" opacity=".85"/>
+  <path d="${BUMPER}" fill="url(#gDark)"/>
+  <path d="M114 168 Q260 180 406 168" stroke="#000" stroke-opacity=".4" stroke-width="1.5" fill="none"/>
+  <path d="M116 166 L190 173 L182 187 L124 183Z M404 166 L330 173 L338 187 L396 183Z" fill="#cfe2ff" filter="url(#fGlow)" opacity=".8"/>
+  <path d="M116 166 L190 173 L182 187 L124 183Z M404 166 L330 173 L338 187 L396 183Z" fill="url(#gLamp)"/>
+  <path d="M190 175 H330 L320 216 H200Z" fill="#0b0d11"/>
+  <path d="M202 184 l8 6 l8 -6 l8 6 l8 -6 M286 184 l8 6 l8 -6 l8 6 M204 198 l8 6 l8 -6 l8 6 M288 198 l8 6 l8 -6 l8 6" stroke="#39414f" stroke-width="2" fill="none"/>
+  <path d="M260 179 L274 195 L260 211 L246 195Z" fill="#0b0d11" stroke="#e6eaf0" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M144 194 L128 212 L140 236 M376 194 L392 212 L380 236" stroke="#cfe2ff" stroke-width="7" fill="none" stroke-linejoin="round" stroke-linecap="round" filter="url(#fGlow)" opacity=".7"/>
+  <path d="M144 194 L128 212 L140 236 M376 194 L392 212 L380 236" stroke="#fff" stroke-width="4" fill="none" stroke-linejoin="round" stroke-linecap="round"/>
+  <rect x="176" y="228" width="168" height="22" rx="4" fill="#0b0d11"/>
+  <path d="M150 254 H370 L362 266 H158Z" fill="url(#gBody)"/>
+  <path d="M112 262 Q114 270 124 270 H396 Q406 270 408 262 L410 274 H110Z" fill="#0b0c0f"/>
+  <path d="M92 110 H116 L120 122 L116 130 H96 Q90 120 92 110Z M428 110 H404 L400 122 L404 130 H424 Q430 120 428 110Z" fill="url(#gBody)"/>`,
+rear:`${SHADOW2}${TYRES}
+  <path d="M170 58 Q260 46 350 58 L388 126 H132Z" fill="url(#gBody)"/>
+  <path d="M180 70 Q260 62 340 70 L366 118 H154Z" fill="url(#gGlass)" stroke="#0e1014" stroke-width="2.5"/>
+  <path d="M218 66 L254 64 L222 119 L186 119Z" fill="#fff" opacity=".12"/>
+  <path d="${LOWER}" fill="url(#gBody)"/>
+  <path d="M136 122 H384 L390 134 H130Z" fill="#fff3b0" opacity=".45"/>
+  <path d="M136 122 H196 L218 218 H106.5 L106 215 Q104 180 110 150 Q116 128 136 122Z M384 122 H324 L302 218 H413.5 L414 215 Q416 180 410 150 Q404 128 384 122Z" fill="url(#gDark)"/>
+  <path d="M203 122 H210 L232 218 H225Z M317 122 H310 L288 218 H295Z" fill="#fff"/>
+  <path d="${BUMPER}" fill="url(#gDark)"/>
+  <path d="M110 148 L178 142 L184 158 L146 164 L144 182 L109 188Z M410 148 L342 142 L336 158 L374 164 L376 182 L411 188Z" fill="#ff4a4a" filter="url(#fGlow)" opacity=".8"/>
+  <path d="M110 148 L178 142 L184 158 L146 164 L144 182 L109 188Z M410 148 L342 142 L336 158 L374 164 L376 182 L411 188Z" fill="url(#gRed)"/>
+  <path d="M118 154 L172 149 M402 154 L348 149" stroke="#ffc9c9" stroke-width="3" stroke-linecap="round"/>
+  <path d="M260 134 L273 150 L260 166 L247 150Z" fill="none" stroke="#0e1014" stroke-width="4" stroke-linejoin="round"/>
+  <rect x="216" y="178" width="88" height="22" rx="3" fill="#eef1f6"/>
+  <rect x="120" y="244" width="30" height="5" rx="2" fill="#e02431"/><rect x="370" y="244" width="30" height="5" rx="2" fill="#e02431"/>
+  <circle cx="352" cy="262" r="8" fill="#0b0c0f" stroke="#8c95a3" stroke-width="2.5"/>
+  <path d="M112 262 Q114 270 124 270 H396 Q406 270 408 262 L410 274 H110Z" fill="#0b0c0f"/>
+  <path d="M176 62 V44 M344 62 V44" stroke="#0e1014" stroke-width="7"/>
+  <rect x="114" y="28" width="13" height="60" rx="3" fill="#0e1014"/><rect x="393" y="28" width="13" height="60" rx="3" fill="#0e1014"/>
+  <rect x="124" y="34" width="272" height="26" rx="4" fill="url(#gDark)"/><rect x="124" y="34" width="272" height="5" rx="2.5" fill="#fff" opacity=".12"/>`,
+top:`<path d="M150 30 Q92 36 82 110 Q78 170 82 230 Q92 304 150 310 L680 310 Q716 306 720 250 Q724 170 720 90 Q716 34 680 30Z" fill="#000" opacity=".6" filter="url(#fBlur)" transform="translate(6 8)"/>
+  <path d="M270 12 h26 v22 h-18z M270 328 h26 v-22 h-18z" fill="url(#gDark)"/>
+  <path d="M150 30 Q92 36 82 110 Q78 170 82 230 Q92 304 150 310 L680 310 Q716 306 720 250 Q724 170 720 90 Q716 34 680 30Z" fill="url(#gRound)"/>
+  <path d="M90 122 L256 106 V88 L96 96Z M90 218 L256 234 V252 L96 244Z" fill="url(#gDark)"/>
+  <path d="M92 128 L256 112 V118 L92 134Z M92 212 L256 228 V222 L92 206Z" fill="#fff"/>
+  <path d="M94 76 Q106 50 136 40 L132 54 Q112 62 102 88Z M94 264 Q106 290 136 300 L132 286 Q112 278 102 252Z" fill="url(#gLamp)"/>
+  <path d="M262 62 Q248 170 262 278 L372 252 Q364 170 372 88Z M606 86 Q614 170 606 254 L640 272 Q650 170 640 68Z M296 54 H628 L604 82 H374Z M296 286 H628 L604 258 H374Z" fill="url(#gGlass)" stroke="#0e1014" stroke-width="2.5" stroke-linejoin="round"/>
+  <path d="M300 70 L330 78 L330 150 L300 150Z" fill="#fff" opacity=".1"/>
+  <path d="M470 150 h44 v40 h-44z" fill="#0e1014" opacity=".55"/>
+  <rect x="650" y="26" width="60" height="288" rx="5" fill="url(#gDark)"/><rect x="644" y="22" width="72" height="9" rx="3" fill="#0e1014"/><rect x="644" y="309" width="72" height="9" rx="3" fill="#0e1014"/>`
 };
 /* Zonas por vista. box = caixa do texto [x,y,l,a]; chip = etiqueta fora da peça com linha a partir de from. */
 const VIEWS = {
@@ -289,23 +341,23 @@ const VIEWS = {
     {id:'portas-inf', sh:[{d:'M250 230 H544 V247 H248Z', box:[250,230,294,17]}]},
     {id:'pl-d', sh:[{d:'M118 172 Q170 148 250 132 H266 V226 H250 Q246 190 215 176 Q185 166 150 180 Q130 186 118 190Z', chip:[180,304], from:[258,216]}]},
     {id:'pl-t', sh:[{d:'M556 196 Q572 160 604 119 L676 126 L688 150 V200 H656 Q640 178 600 174 Q575 174 556 196Z', chip:[650,304], from:[674,194]}]},
-    {id:'vidro', sh:[{d:'M450 72 H556 Q575 74 590 93 L604 111 L450 117Z', chip:[540,30], from:[530,74]}]},
+    {id:'vidro', sh:[{d:'M450 72 H556 Q575 74 590 93 L604 111 L450 117Z', chip:[530,26], from:[522,74]}]},
     {id:'esp', sh:[{d:'M262 106 H300 V134 H262Z', chip:[210,44], from:[276,106]}]}
   ]},
-  front:{vb:'0 26 520 280', zones:[
+  front:{vb:'38 20 444 286', zones:[
     {id:'pala', sh:[{d:'M171 66 H349 L357 83 H163Z', box:[171,66,178,17]}]},
     {id:'capo-c', sh:[{d:'M196 127 H324 V167 H196Z', box:[196,127,128,40]}]},
     {id:'capo-l', sh:[{d:'M146 127 H188 V166 H124Z', box:[134,129,54,36]},{d:'M332 127 H374 L396 166 H332Z', box:[332,129,54,36]}]},
-    {id:'esp-n', sh:[{d:'M88 106 H120 V134 H88Z', chip:[66,52], from:[104,106]}]},
-    {id:'esp-p', sh:[{d:'M400 106 H432 V134 H400Z', chip:[454,52], from:[416,106]}]}
+    {id:'esp-n', sh:[{d:'M88 106 H120 V134 H88Z', chip:[92,84], from:[102,106]}]},
+    {id:'esp-p', sh:[{d:'M400 106 H432 V134 H400Z', chip:[428,84], from:[418,106]}]}
   ]},
-  rear:{vb:'0 20 520 286', zones:[
+  rear:{vb:'38 20 444 286', zones:[
     {id:'ail-f', sh:[{d:'M130 36 H390 V58 H130Z', box:[130,36,260,22]}]},
     {id:'pc-c', sh:[{d:'M190 224 H330 V263 H190Z', box:[190,224,140,39]}]},
     {id:'pc-l', sh:[{d:'M116 224 H182 V263 H120Z', box:[119,224,63,39]},{d:'M338 224 H404 L400 263 H338Z', box:[338,224,63,39]}]}
   ]},
   top:{vb:'0 4 800 332', zones:[
-    {id:'capo-c', sh:[{d:'M112 124 H248 V216 H112Z', box:[112,124,136,92]}]},
+    {id:'capo-c', sh:[{d:'M112 138 H248 V202 H112Z', box:[112,138,136,64]}]},
     {id:'capo-l', sh:[{d:'M134 48 H248 V82 H112Z', box:[126,48,122,34]},{d:'M112 258 H248 V292 H134Z', box:[126,258,122,34]}]},
     {id:'pala', sh:[{d:'M268 96 H294 V244 H268Z', box:[268,96,26,148], rot:1}]},
     {id:'tecto-c', sh:[{d:'M392 124 H590 V216 H392Z', box:[392,124,198,92]}]},
@@ -316,26 +368,28 @@ const VIEWS = {
 };
 
 function labelSVG(id, sh, on, mx){
-  const z = Z[id], brand = esc(($('brand').value.trim() || 'A TUA MARCA').toUpperCase());
-  const rawLen = ($('brand').value.trim() || 'A TUA MARCA').length;
+  const z = Z[id], raw = ($('brand').value.trim() || 'A TUA MARCA').toUpperCase(), pr = price(id);
   if (sh.box){
     let [x,y,w,h] = sh.box; if (mx) x = 800 - (x + w);
     const cx = x + w/2, cy = y + h/2, W = sh.rot ? h : w, H = sh.rot ? w : h;
     const tr = sh.rot ? ` transform="rotate(-90 ${cx} ${cy})"` : '';
+    const pill = (pw, ph) => { pw = Math.min(pw, W - 2); ph = Math.min(ph, H - 2);
+      return `<rect class="pill" x="${(cx-pw/2).toFixed(1)}" y="${(cy-ph/2).toFixed(1)}" width="${pw.toFixed(1)}" height="${ph.toFixed(1)}" rx="${Math.min(6, ph/2).toFixed(1)}"/>`; };
     if (on){
-      const fs = Math.min(H*.6, (W-10)/(rawLen*.52), 34);
-      return `<text class="br" x="${cx}" y="${cy}" font-size="${fs.toFixed(1)}"${tr}>${brand}</text>`;
+      const fs = Math.min(H*.6, (W-10)/(raw.length*.52), 34);
+      return `<text class="br" x="${cx}" y="${cy}" font-size="${fs.toFixed(1)}"${tr}>${esc(raw)}</text>`;
     }
     if (H >= 34){
-      const f1 = Math.min(13, (W-8)/(z.s.length*.5)), f2 = Math.min(H*.36, 26, (W-8)/(price(id).length*.5));
-      return `<g${tr}><text class="nm" x="${cx}" y="${cy - f2*.55}" font-size="${f1.toFixed(1)}">${z.s}</text><text class="pr" x="${cx}" y="${cy + f1*.6}" font-size="${f2.toFixed(1)}">${price(id)}</text></g>`;
+      const f1 = Math.min(12.5, (W-12)/(z.s.length*.5)), f2 = Math.min(H*.34, 24, (W-12)/(pr.length*.52));
+      const ph = Math.min(H - 2, f1 + f2 + 10), top = cy - ph/2;
+      return `<g${tr}>${pill(Math.max(z.s.length*f1*.5, pr.length*f2*.54) + 16, ph)}<text class="nm" x="${cx}" y="${(top + 4 + f1/2).toFixed(1)}" font-size="${f1.toFixed(1)}">${z.s}</text><text class="pr" x="${cx}" y="${(top + ph - 4 - f2/2).toFixed(1)}" font-size="${f2.toFixed(1)}">${pr}</text></g>`;
     }
-    const t = z.s + ' · ' + price(id), fs = Math.min(H*.66, 15, (W-8)/(t.length*.47));
-    return `<text class="nm" x="${cx}" y="${cy}" font-size="${fs.toFixed(1)}"${tr}>${z.s} · <tspan class="pr">${price(id)}</tspan></text>`;
+    const t = z.s + ' · ' + pr, fs = Math.min(H*.62, 14, (W-12)/(t.length*.47));
+    return `<g${tr}>${pill(t.length*fs*.47 + 14, fs + 7)}<text class="nm" x="${cx}" y="${cy}" font-size="${fs.toFixed(1)}">${z.s} · <tspan class="pr">${pr}</tspan></text></g>`;
   }
   if (sh.chip){
     let [cx,cy] = sh.chip, [fx,fy] = sh.from; if (mx){ cx = 800 - cx; fx = 800 - fx; }
-    const t = on ? ($('brand').value.trim() || 'A TUA MARCA').toUpperCase() : z.s + ' · ' + price(id), w = t.length*6.3 + 16;
+    const t = on ? raw : z.s + ' · ' + pr, w = t.length*6.3 + 16;
     const ey = fy < cy ? cy - 11 : cy + 11;
     return `<path class="lead" d="M${fx} ${fy} L${cx} ${ey}"/><g class="chip${on?' on':''}"><rect x="${cx-w/2}" y="${cy-11}" width="${w}" height="22" rx="5"/><text x="${cx}" y="${cy}" font-size="12.5">${esc(t)}</text></g>`;
   }
