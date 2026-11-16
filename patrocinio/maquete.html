@@ -77,6 +77,12 @@ svg text{font-family:var(--display);font-weight:700;pointer-events:none;text-anc
 .row .vis{color:var(--muted);font-size:12.5px;white-space:nowrap}
 .row .eur{font-family:var(--display);font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;min-width:62px;text-align:right}
 .row.on .eur{color:var(--accent)}
+.gets{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px 24px}
+.gets li{border-top:1px solid var(--line);padding-top:9px}
+.gets b{display:block;font-family:var(--display);font-size:19px;letter-spacing:.05em;text-transform:uppercase}
+.gets span{color:var(--muted);font-size:13.5px}
+.note b{color:var(--fg)}
+@media (max-width:640px){.gets{grid-template-columns:1fr 1fr}}
 .tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding-top:12px;color:var(--accent)}
 .tot b{font-family:var(--display);font-size:24px}
 /* Orçamento */
@@ -107,7 +113,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
   <header>
     <div>
       <h1>Maquete de Patrocínio · <span>Clio Rally3</span></h1>
-      <div class="sub">Espaços disponíveis no carro · <b>preços por prova</b> · época 2027</div>
+      <div class="sub">Espaços disponíveis no carro · <b>preços por prova, IVA incluído</b> · época 2027 · 8 provas no campeonato</div>
     </div>
     <div class="team"><strong>Sunny Sprint</strong><span>R. Jasmins · T. Rocha</span></div>
   </header>
@@ -129,10 +135,22 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <div class="view wide"><div class="vh"><h3>Vista de cima</h3><small>capô, tecto e topo do aileron</small></div><div id="v-top"></div></div>
       </div>
 
+      <div class="panel">
+        <h2>O que a empresa recebe</h2>
+        <ul class="gets">
+          <li><b>8 provas</b><span>O carro corre o campeonato todo, à frente do público em cada prova.</span></li>
+          <li><b>RTP Madeira</b><span>Transmissão televisiva da super especial.</span></li>
+          <li><b>YouTube</b><span>Vídeos das provas com o carro em destaque.</span></li>
+          <li><b>Imprensa</b><span>Diário de Notícias e jornais.</span></li>
+          <li><b>Redes sociais</b><span>Publicações da equipa ao longo da época.</span></li>
+          <li><b>T-shirts e casacos</b><span>Roupa da equipa nas provas.</span></li>
+        </ul>
+      </div>
+
       <div class="packs" id="packs"></div>
 
       <div class="panel">
-        <h2>Preço por espaço <small>por prova</small></h2>
+        <h2>Preço por espaço <small>por prova, IVA incluído</small></h2>
         <div class="rows" id="rows"></div>
         <div class="tot"><span>Carro todo, soma de todos os espaços (sem a pala)</span><b id="alltot"></b></div>
       </div>
@@ -144,6 +162,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <label for="brand">Nome da empresa<input id="brand" type="text" maxlength="22" value="A TUA MARCA" autocomplete="off"></label>
         <label for="provas">N.º de provas<input id="provas" type="number" min="1" max="12" value="1" inputmode="numeric"></label>
       </div>
+      <button class="btn" id="season" type="button">Campeonato completo · 8 provas</button>
       <ul class="lines" id="lines"></ul>
       <div class="sum"><span>Por prova</span><b id="perprova"></b></div>
       <div class="sum big"><span id="totlabel">Total</span><b id="total"></b></div>
@@ -153,7 +172,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
         <button class="btn" id="clear" type="button">Limpar</button>
       </div>
       <details><summary>Ver o texto do orçamento</summary><pre id="qtext"></pre></details>
-      <p class="note">Valores por prova, com o logótipo do patrocinador no espaço escolhido. Para a época completa fazemos um preço especial. Combinações à medida e valores finais sujeitos a negociação.</p>
+      <p class="note"><b>IVA incluído.</b> Passamos fatura de publicidade pela Sunny Sprint. Valores por prova, com o logótipo do patrocinador no espaço escolhido. Para o campeonato completo fazemos um preço especial. Combinações à medida e valores finais sujeitos a negociação.</p>
     </aside>
   </div>
   <footer>Sunny Sprint · Rodrigo Jasmins (piloto) · Tiago Rocha (navegador) · Madeira</footer>
@@ -358,7 +377,7 @@ function quoteText(q){
   if (q.disc.length){ L.push('Soma dos espaços: ' + eur(q.sub)); q.disc.forEach(d => L.push(d[0] + ': −' + eur(d[1]))); }
   L.push('Total por prova: ' + eur(q.per) + (q.pala ? ' + pala (a definir)' : ''));
   if (q.n > 1){ L.push('Número de provas: ' + q.n); L.push('Total das ' + q.n + ' provas: ' + eur(q.total) + (q.pala ? ' + pala (a definir)' : '')); }
-  L.push('','Valores sujeitos a negociação. Época completa com preço especial.');
+  L.push('','Valores com IVA incluído. Fatura de publicidade emitida pela Sunny Sprint.','Visibilidade: público nas 8 provas, super especial na RTP Madeira, vídeos no YouTube, Diário de Notícias e jornais, redes sociais, t-shirts e casacos da equipa.','Valores sujeitos a negociação. Campeonato completo com preço especial.');
   return L.join('\n');
 }
 function render(){
@@ -396,6 +415,7 @@ $('side-p').onclick = () => { state.side='p'; render(); };
 $('side-n').onclick = () => { state.side='n'; render(); };
 $('brand').oninput = () => { state.example = false; render(); };
 $('provas').oninput = render;
+$('season').onclick = () => { $('provas').value = 8; render(); };
 $('all').onclick = () => { state.sel = new Set(Object.keys(Z).filter(id=>Z[id].p!=null)); state.example=false; render(); };
 $('clear').onclick = () => { state.sel = new Set(); state.example=false; render(); };
 $('copy').onclick = async () => {
