@@ -1,0 +1,395 @@
+<title>Maquete de Patrocínio Clio Rally3</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow:wght@400;500;600;700&family=Barlow+Condensed:wght@500;600;700;800&display=swap">
+<style>
+/* Layout: folha de boxes de rali — vistas técnicas do carro à esquerda, folha de orçamento fixa à direita.
+   Tema único escuro, de propósito: são as cores do carro (amarelo sobre cinza-carvão). */
+:root{
+  color-scheme:dark;
+  --bg:#0c111c; --surface:#141b2a; --surface-2:#1a2335; --line:#27324a;
+  --fg:#eaeef6; --muted:#93a0b8; --accent:#f6b319; --accent-ink:#17120a;
+  --gold:#f6b319; --silver:#c3ccdb; --bronze:#d98a4a; --ok:#58d39a;
+  --car:#f5b81c; --car-dark:#2a2f3a; --glass:#1b2434;
+  --display:"Barlow Condensed","Arial Narrow",Impact,sans-serif;
+  --body:"Barlow","Segoe UI",system-ui,sans-serif;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.45}
+.wrap{max-width:1320px;margin:0 auto;padding-block:28px 40px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  display:flex;flex-direction:column;gap:22px}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance;letter-spacing:.01em}
+header{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:12px 24px;
+  padding-bottom:14px;border-bottom:2px solid var(--accent)}
+h1{font-size:clamp(30px,4.6vw,46px);font-weight:800;text-transform:uppercase;line-height:1}
+h1 span{color:var(--accent)}
+.sub{color:var(--muted);margin-top:6px}
+.sub b{color:var(--accent);font-weight:600}
+.team{text-align:right;font-family:var(--display)}
+.team strong{display:block;color:var(--accent);font-size:24px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;line-height:1}
+.team span{color:var(--muted);font-size:16px}
+.main{display:grid;grid-template-columns:minmax(0,1fr) 350px;gap:22px;align-items:start}
+.col{display:flex;flex-direction:column;gap:22px;min-width:0}
+.views{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.view{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px 6px;min-width:0}
+.view.wide{grid-column:1/-1}
+.vh{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;min-height:30px}
+.vh h3{font-size:17px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.vh small{color:var(--muted);font-size:12.5px}
+.seg{display:flex;border:1px solid var(--line);border-radius:6px;overflow:hidden}
+.seg button{background:none;border:0;color:var(--muted);font:600 13px var(--body);padding:6px 10px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+svg{display:block;width:100%;height:auto}
+svg text{font-family:var(--display);font-weight:700;pointer-events:none;text-anchor:middle;dominant-baseline:central}
+.z{cursor:pointer}
+.z path{fill:rgba(9,13,22,.8);stroke:var(--accent);stroke-width:1.5;stroke-dasharray:5 3;transition:fill .12s}
+.z:hover path,.z.hl path{fill:rgba(246,179,25,.38)}
+.z.on path{fill:#fff;stroke:var(--accent);stroke-width:2.5;stroke-dasharray:none}
+.z .nm{fill:#fff;font-weight:600}.z .pr{fill:var(--accent)}
+.z.on .br{fill:#141414;font-weight:800}
+.chip rect{fill:#0b101a;stroke:var(--accent);stroke-width:1}
+.chip.on rect{fill:var(--accent)}.chip text{fill:#fff;font-weight:600}.chip.on text{fill:var(--accent-ink)}
+.lead{stroke:var(--accent);stroke-width:1.2;fill:none}
+.hint{color:var(--muted);font-size:13px;margin:0}
+/* Pacotes */
+.packs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.pack{border:1.5px solid var(--pc);border-radius:10px;padding:14px 16px;background:var(--surface);display:flex;flex-direction:column;gap:8px}
+.pack h3{font-size:22px;font-weight:800;color:var(--pc);letter-spacing:.06em;text-transform:uppercase}
+.pack ul{margin:0;padding-left:18px;color:var(--fg);flex:1}
+.pack .pp{font-family:var(--display);display:flex;align-items:baseline;gap:8px}
+.pack .pp s{color:var(--muted);font-size:17px}
+.pack .pp b{font-size:32px;font-weight:800;color:var(--pc);line-height:1}
+.pack .pp i{font-style:normal;color:var(--muted);font-size:13px;font-family:var(--body)}
+.btn{font:600 14px var(--body);border-radius:7px;padding:9px 12px;cursor:pointer;border:1px solid var(--line);background:var(--surface-2);color:var(--fg)}
+.btn:hover{border-color:var(--accent)}
+.btn.pri{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:focus-visible,.seg button:focus-visible,.row:focus-visible,input:focus-visible{outline:2px solid #fff;outline-offset:2px}
+/* Tabela */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+.panel h2{font-size:22px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent);margin-bottom:8px}
+.panel h2 small{font:400 13px var(--body);color:var(--muted);text-transform:none;letter-spacing:0;margin-left:6px}
+.rows{display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(9,auto);grid-auto-flow:column;column-gap:26px}
+.row{display:grid;grid-template-columns:20px minmax(0,1fr) auto auto;gap:10px;align-items:center;width:100%;text-align:left;
+  background:none;border:0;border-bottom:1px solid var(--line);color:var(--fg);font:inherit;padding:8px 2px;cursor:pointer}
+.row:hover{background:var(--surface-2)}
+.row .ck{width:16px;height:16px;border:1.5px solid var(--muted);border-radius:4px}
+.row.on .ck{background:var(--accent);border-color:var(--accent);box-shadow:inset 0 0 0 3px var(--surface)}
+.row .vis{color:var(--muted);font-size:12.5px;white-space:nowrap}
+.row .eur{font-family:var(--display);font-weight:700;font-size:18px;font-variant-numeric:tabular-nums;min-width:62px;text-align:right}
+.row.on .eur{color:var(--accent)}
+.tot{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;padding-top:12px;color:var(--accent)}
+.tot b{font-family:var(--display);font-size:24px}
+/* Orçamento */
+aside{position:sticky;top:calc(14px + env(safe-area-inset-top,0px));background:var(--surface);border:1px solid var(--accent);border-radius:10px;padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+aside h2{font-size:24px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;display:flex;justify-content:space-between;align-items:center}
+.tag{font:600 11px var(--body);letter-spacing:.08em;color:var(--accent-ink);background:var(--accent);border-radius:4px;padding:3px 7px}
+label{display:flex;flex-direction:column;gap:4px;font-size:12.5px;color:var(--muted);font-weight:500}
+input{background:var(--bg);border:1px solid var(--line);border-radius:7px;color:var(--fg);font:600 15px var(--body);padding:9px 10px;width:100%}
+.two{display:grid;grid-template-columns:1fr 92px;gap:10px}
+.lines{list-style:none;margin:0;padding:0;font-size:14px}
+.lines li{display:flex;justify-content:space-between;gap:10px;padding:5px 0;border-bottom:1px dashed var(--line)}
+.lines li span:last-child{font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:600}
+.lines .disc{color:var(--ok)}.lines .empty{color:var(--muted);border:0}
+.sum{display:flex;justify-content:space-between;align-items:baseline;color:var(--muted)}
+.sum b{font-family:var(--display);font-size:22px;color:var(--fg);font-variant-numeric:tabular-nums}
+.sum.big{border-top:2px solid var(--accent);padding-top:10px;color:var(--fg);font-weight:600}
+.sum.big b{font-size:38px;color:var(--accent);line-height:1}
+.acts{display:grid;grid-template-columns:1fr auto auto;gap:8px}
+.note{font-size:12.5px;color:var(--muted);margin:0}
+details summary{cursor:pointer;color:var(--muted);font-size:13px}
+pre{white-space:pre-wrap;font:12.5px/1.5 ui-monospace,Menlo,monospace;background:var(--bg);border:1px solid var(--line);border-radius:7px;padding:10px;margin:8px 0 0;user-select:all}
+footer{color:var(--muted);font-size:13px;text-align:center}
+@media (max-width:980px){.main{grid-template-columns:1fr}aside{position:static}}
+@media (max-width:640px){.views,.packs,.rows{grid-template-columns:1fr}.rows{grid-template-rows:none;grid-auto-flow:row}.team{text-align:left}}
+</style>
+
+<div class="wrap">
+  <header>
+    <div>
+      <h1>Maquete de Patrocínio · <span>Clio Rally3</span></h1>
+      <div class="sub">Espaços disponíveis no carro · <b>preços por prova</b> · época 2027</div>
+    </div>
+    <div class="team"><strong>Sunny Sprint</strong><span>R. Jasmins · T. Rocha</span></div>
+  </header>
+
+  <div class="main">
+    <div class="col">
+      <p class="hint">Toca num espaço do carro para o juntar ao orçamento. Os espaços a branco mostram como fica a marca da empresa.</p>
+      <div class="views">
+        <div class="view wide">
+          <div class="vh"><h3>Lateral</h3>
+            <div class="seg" role="group" aria-label="Lado do carro">
+              <button id="side-p" type="button">Lado do piloto</button><button id="side-n" type="button">Lado do navegador</button>
+            </div>
+          </div>
+          <div id="v-side"></div>
+        </div>
+        <div class="view"><div class="vh"><h3>Frente</h3></div><div id="v-front"></div></div>
+        <div class="view"><div class="vh"><h3>Traseira</h3></div><div id="v-rear"></div></div>
+        <div class="view wide"><div class="vh"><h3>Vista de cima</h3><small>capô, tecto e topo do aileron</small></div><div id="v-top"></div></div>
+      </div>
+
+      <div class="packs" id="packs"></div>
+
+      <div class="panel">
+        <h2>Preço por espaço <small>por prova</small></h2>
+        <div class="rows" id="rows"></div>
+        <div class="tot"><span>Carro todo, soma de todos os espaços (sem a pala)</span><b id="alltot"></b></div>
+      </div>
+    </div>
+
+    <aside>
+      <h2>Orçamento <span class="tag" id="extag">EXEMPLO</span></h2>
+      <div class="two">
+        <label for="brand">Nome da empresa<input id="brand" type="text" maxlength="22" value="A TUA MARCA" autocomplete="off"></label>
+        <label for="provas">N.º de provas<input id="provas" type="number" min="1" max="12" value="1" inputmode="numeric"></label>
+      </div>
+      <ul class="lines" id="lines"></ul>
+      <div class="sum"><span>Por prova</span><b id="perprova"></b></div>
+      <div class="sum big"><span id="totlabel">Total</span><b id="total"></b></div>
+      <div class="acts">
+        <button class="btn pri" id="copy" type="button">Copiar orçamento</button>
+        <button class="btn" id="all" type="button">Carro todo</button>
+        <button class="btn" id="clear" type="button">Limpar</button>
+      </div>
+      <details><summary>Ver o texto do orçamento</summary><pre id="qtext"></pre></details>
+      <p class="note">Valores por prova, com o logótipo do patrocinador no espaço escolhido. Para a época completa fazemos um preço especial. Combinações à medida e valores finais sujeitos a negociação.</p>
+    </aside>
+  </div>
+  <footer>Sunny Sprint · Rodrigo Jasmins (piloto) · Tiago Rocha (navegador) · Madeira</footer>
+</div>
+
+<script>
+const Z = {
+  'pala':   {n:'Pala do para-brisas', s:'PALA', v:'Muito alta', p:null},
+  'capo-c': {n:'Capô · centro', s:'CAPÔ', v:'Muito alta', p:600},
+  'capo-l': {n:'Capô · laterais', s:'CAPÔ LAT.', v:'Alta', p:180},
+  'porta-p':{n:'Porta · lado do piloto', s:'PORTA DO PILOTO', v:'Muito alta', p:480},
+  'porta-n':{n:'Porta · lado do navegador', s:'PORTA DO NAVEGADOR', v:'Muito alta', p:480},
+  'portas-inf':{n:'Inferior das portas (2 lados)', s:'INFERIOR DAS PORTAS', v:'Alta', p:180},
+  'pl-d':   {n:'Para-lamas dianteiros', s:'PARA-LAMAS DIANTEIRO', v:'Alta', p:240},
+  'pl-t':   {n:'Para-lamas traseiros', s:'PARA-LAMAS TRASEIRO', v:'Média', p:180},
+  'pc-c':   {n:'Para-choques traseiro · centro', s:'PARA-CHOQUES', v:'Média', p:240},
+  'pc-l':   {n:'Para-choques traseiro · laterais', s:'LATERAL', v:'Média', p:120},
+  'tecto-c':{n:'Tecto · centro', s:'TECTO', v:'Baixa', p:180},
+  'tecto-l':{n:'Tecto · laterais', s:'TECTO LAT.', v:'Baixa', p:60},
+  'vidro-p':{n:'Vidro lateral traseiro · lado do piloto', s:'VIDRO LATERAL', v:'Média', p:120},
+  'vidro-n':{n:'Vidro lateral traseiro · lado do navegador', s:'VIDRO LATERAL', v:'Média', p:120},
+  'esp-p':  {n:'Espelho retrovisor · lado do piloto', s:'ESPELHO', v:'Detalhe', p:90},
+  'esp-n':  {n:'Espelho retrovisor · lado do navegador', s:'ESPELHO', v:'Detalhe', p:90},
+  'ail-t':  {n:'Aileron · topo', s:'AILERON TOPO', v:'Média', p:120},
+  'ail-f':  {n:'Aileron · face frontal', s:'AILERON', v:'Alta', p:120}
+};
+const PACKS = [
+  {id:'ouro', name:'Ouro', color:'var(--gold)', price:1450, full:1680, set:['capo-c','porta-p','porta-n','ail-f'],
+   items:['Capô · centro','Portas dos dois lados','Aileron · face frontal']},
+  {id:'prata', name:'Prata', color:'var(--silver)', price:750, full:840, set:['porta-p','pl-d','vidro-p'],
+   items:['Porta de um lado','Para-lamas dianteiros','Vidro lateral traseiro']},
+  {id:'bronze', name:'Bronze', color:'var(--bronze)', price:350, full:390, set:['tecto-c','esp-p','pc-l'],
+   items:['Tecto · centro','Espelho retrovisor','Para-choques traseiro · laterais']}
+];
+const state = {sel:new Set(PACKS[0].set), side:'p', example:true};
+const $ = id => document.getElementById(id);
+const eur = n => '€' + String(n).replace(/\B(?=(\d{3})+(?!\d))/g,'.');
+const esc = s => s.replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const price = id => Z[id].p == null ? 'a definir' : eur(Z[id].p);
+
+/* ---------- Desenhos do carro ---------- */
+const wheel = (x,y) => `<circle cx="${x}" cy="${y}" r="44" fill="#0e1014"/><circle cx="${x}" cy="${y}" r="28" fill="#e9ecf1"/>
+  <circle cx="${x}" cy="${y}" r="21" fill="#b9c0cc"/>${[0,72,144,216,288].map(a=>`<rect x="${x-3}" y="${y-27}" width="6" height="27" fill="#e9ecf1" transform="rotate(${a} ${x} ${y})"/>`).join('')}
+  <circle cx="${x}" cy="${y}" r="7" fill="#2a2f3a"/>`;
+const BODY = 'M70 262 L62 232 Q58 198 84 186 Q180 162 262 150 L343 96 Q356 84 400 83 L600 81 L642 88 L684 150 Q702 162 705 192 L706 240 L694 262 L645 262 A52 52 0 1 0 555 262 L235 262 A52 52 0 1 0 145 262 Z';
+const CAR = {
+side:`<defs><clipPath id="sb"><path d="${BODY}"/></clipPath></defs>
+  <ellipse cx="385" cy="282" rx="345" ry="7" fill="#05080d"/>
+  <path d="M585 80 L668 77 L682 86 L677 95 L642 90 L600 84Z" fill="#171b22"/>
+  <path d="${BODY}" fill="var(--car)"/>
+  <g clip-path="url(#sb)">
+    <path d="M462 270 L566 150 H720 V270Z" fill="var(--car-dark)"/><path d="M436 270 L540 150 H556 L452 270Z" fill="#fff"/>
+    <path d="M50 238 H150 V270 H50Z" fill="var(--car-dark)"/><path d="M230 254 H560 V270 H230Z" fill="var(--car-dark)"/>
+    <path d="M60 205 Q150 178 262 160 L262 150 Q150 166 60 192Z" fill="var(--car-dark)"/>
+  </g>
+  <path d="M284 148 L350 100 H438 V148Z M446 99 H540 V148 H446Z M548 98 H600 L631 147 H548Z" fill="var(--glass)" stroke="#3a4760" stroke-width="1.5"/>
+  <path d="M66 198 L112 187 L106 201 L68 209Z" fill="#eef2f8"/><path d="M688 160 L704 172 V196 L691 190Z" fill="#c8232c"/>
+  <path d="M300 152 V258 M442 99 V258 M545 150 Q548 200 556 240" stroke="#8a6a12" stroke-width="1.5" fill="none"/>
+  <path d="M266 132 H294 Q298 140 294 148 H270Z" fill="#171b22"/>
+  <rect x="237" y="244" width="8" height="28" fill="#c8232c"/><rect x="646" y="244" width="8" height="28" fill="#c8232c"/>
+  ${wheel(190,236)}${wheel(600,236)}`,
+front:`<ellipse cx="260" cy="293" rx="212" ry="7" fill="#05080d"/>
+  <rect x="70" y="214" width="58" height="78" rx="10" fill="#0e1014"/><rect x="392" y="214" width="58" height="78" rx="10" fill="#0e1014"/>
+  <rect x="138" y="50" width="244" height="11" rx="3" fill="#171b22"/>
+  <path d="M160 66 Q260 55 360 66 L394 130 H126Z" fill="var(--car)"/>
+  <path d="M164 72 H356 L386 128 H134Z" fill="var(--glass)" stroke="#3a4760" stroke-width="1.5"/>
+  <rect x="240" y="55" width="40" height="11" rx="3" fill="#171b22"/>
+  <path d="M126 130 H394 L428 196 H92Z" fill="var(--car)"/>
+  <path d="M126 130 H146 L116 196 H92Z M394 130 H374 L404 196 H428Z" fill="var(--car-dark)"/>
+  <path d="M92 196 H428 Q446 200 446 222 L440 268 Q438 276 428 276 H92 Q82 276 80 268 L74 222 Q74 200 92 196Z" fill="var(--car-dark)"/>
+  <path d="M92 200 H162 L152 222 H84Z M428 200 H358 L368 222 H436Z" fill="#eef2f8"/>
+  <rect x="180" y="202" width="160" height="30" rx="4" fill="#12161d"/>
+  <path d="M260 205 L271 217 L260 229 L249 217Z" fill="none" stroke="#c9d0dc" stroke-width="3"/>
+  <path d="M110 244 H410 L400 268 H120Z" fill="var(--car)"/><rect x="190" y="249" width="140" height="13" rx="3" fill="#12161d"/>
+  <path d="M86 118 H120 L126 132 L122 138 H90Z M434 118 H400 L394 132 L398 138 H430Z" fill="var(--car)"/>`,
+rear:`<ellipse cx="260" cy="293" rx="212" ry="7" fill="#05080d"/>
+  <rect x="70" y="214" width="58" height="78" rx="10" fill="#0e1014"/><rect x="392" y="214" width="58" height="78" rx="10" fill="#0e1014"/>
+  <path d="M152 70 Q260 60 368 70 L412 160 H108Z" fill="var(--car)"/>
+  <path d="M168 88 H352 L384 142 H136Z" fill="var(--glass)" stroke="#3a4760" stroke-width="1.5"/>
+  <path d="M104 156 H416 Q446 166 448 200 L442 266 Q440 276 428 276 H92 Q80 276 78 266 L72 200 Q74 166 104 156Z" fill="var(--car)"/>
+  <path d="M104 156 H190 L214 222 H74 L72 200 Q74 166 104 156Z M416 156 H330 L306 222 H446 L448 200 Q446 166 416 156Z" fill="var(--car-dark)"/>
+  <path d="M75 222 H445 L440 268 Q438 276 428 276 H92 Q82 276 80 268Z" fill="var(--car-dark)"/>
+  <path d="M80 170 L150 164 V192 L78 198Z M440 170 L370 164 V192 L442 198Z" fill="#c8232c"/>
+  <path d="M260 168 L271 181 L260 194 L249 181Z" fill="none" stroke="#2a2f3a" stroke-width="3"/>
+  <rect x="218" y="204" width="84" height="22" rx="3" fill="#dfe5ee"/>
+  <rect x="110" y="44" width="12" height="54" rx="3" fill="#171b22"/><rect x="398" y="44" width="12" height="54" rx="3" fill="#171b22"/>
+  <rect x="118" y="48" width="284" height="28" rx="4" fill="#171b22"/>`,
+top:`<path d="M270 44 h26 v20 h-20z M270 286 h26 v-20 h-20z" fill="var(--car)"/>
+  <path d="M110 62 Q60 70 58 165 Q60 260 110 268 L690 268 Q740 262 742 165 Q740 68 690 62 Z" fill="var(--car)"/>
+  <path d="M70 120 L250 110 V98 L78 100Z M70 210 L250 220 V232 L78 230Z" fill="var(--car-dark)"/>
+  <path d="M262 80 Q250 165 262 250 L338 234 Q330 165 338 96 Z M590 96 Q598 165 590 234 L642 248 Q652 165 642 82Z M290 70 H612 L592 93 H340Z M290 260 H612 L592 237 H340Z" fill="var(--glass)" stroke="#3a4760" stroke-width="1.5"/>
+  <rect x="440" y="150" width="40" height="30" rx="4" fill="#171b22" opacity=".35"/>
+  <rect x="646" y="60" width="56" height="210" rx="5" fill="#171b22"/>`
+};
+/* Zonas por vista. box = caixa do texto [x,y,l,a]; chip = etiqueta fora da peça com linha a partir de from. */
+const VIEWS = {
+  side:{vb:'0 22 800 300', mirror:true, zones:[
+    {id:'porta', sh:[{d:'M302 156 H540 V230 H302Z', box:[302,156,238,74]}]},
+    {id:'portas-inf', sh:[{d:'M250 238 H548 V258 H250Z', box:[250,238,298,20]}]},
+    {id:'pl-d', sh:[{d:'M120 190 Q190 166 250 158 H294 V230 H248 Q242 190 205 180 Q160 172 120 196Z', chip:[190,305], from:[272,222]}]},
+    {id:'pl-t', sh:[{d:'M552 154 H686 Q700 164 703 186 V202 H652 Q640 180 600 178 Q565 180 552 200Z', chip:[640,305], from:[676,196]}]},
+    {id:'vidro', sh:[{d:'M550 100 H599 L629 145 H550Z', chip:[520,42], from:[575,112]}]},
+    {id:'esp', sh:[{d:'M264 130 H296 V150 H264Z', chip:[230,60], from:[278,130]}]}
+  ]},
+  front:{vb:'0 30 520 276', zones:[
+    {id:'pala', sh:[{d:'M166 74 H354 L361 93 H159Z', box:[166,74,188,19]}]},
+    {id:'capo-c', sh:[{d:'M190 138 H330 V190 H190Z', box:[190,138,140,52]}]},
+    {id:'capo-l', sh:[{d:'M134 138 H182 V190 H108Z', box:[128,144,52,42]},{d:'M338 138 H386 L412 190 H338Z', box:[340,144,52,42]}]},
+    {id:'esp-n', sh:[{d:'M84 116 H122 V140 H84Z', chip:[62,62], from:[100,116]}]},
+    {id:'esp-p', sh:[{d:'M398 116 H436 V140 H398Z', chip:[458,62], from:[420,116]}]}
+  ]},
+  rear:{vb:'0 30 520 276', zones:[
+    {id:'ail-f', sh:[{d:'M126 51 H394 V73 H126Z', box:[126,51,268,22]}]},
+    {id:'pc-c', sh:[{d:'M186 234 H334 V270 H186Z', box:[186,234,148,36]}]},
+    {id:'pc-l', sh:[{d:'M92 228 H174 V268 H96Z', box:[96,228,76,40]},{d:'M346 228 H428 L424 268 H346Z', box:[348,228,76,40]}]}
+  ]},
+  top:{vb:'0 18 800 294', zones:[
+    {id:'capo-c', sh:[{d:'M100 122 H244 V208 H100Z', box:[100,122,144,86]}]},
+    {id:'capo-l', sh:[{d:'M116 74 H244 V96 H100Z', box:[112,74,132,22]},{d:'M100 234 H244 V256 H116Z', box:[112,234,132,22]}]},
+    {id:'pala', sh:[{d:'M264 100 H288 V230 H264Z', box:[264,100,24,130], rot:1}]},
+    {id:'tecto-c', sh:[{d:'M370 122 H570 V208 H370Z', box:[370,122,200,86]}]},
+    {id:'tecto-l', sh:[{d:'M370 97 H570 V116 H370Z', box:[370,97,200,19]},{d:'M370 214 H570 V233 H370Z', box:[370,214,200,19]}]},
+    {id:'ail-t', sh:[{d:'M652 68 H696 V262 H652Z', box:[652,68,44,194], rot:1}]},
+    {id:'esp-n', sh:[{d:'M268 42 H298 V66 H268Z'}]},{id:'esp-p', sh:[{d:'M268 264 H298 V288 H268Z'}]}
+  ]}
+};
+
+function labelSVG(id, sh, on, mx){
+  const z = Z[id], brand = esc(($('brand').value.trim() || 'A TUA MARCA').toUpperCase());
+  const rawLen = ($('brand').value.trim() || 'A TUA MARCA').length;
+  if (sh.box){
+    let [x,y,w,h] = sh.box; if (mx) x = 800 - (x + w);
+    const cx = x + w/2, cy = y + h/2, W = sh.rot ? h : w, H = sh.rot ? w : h;
+    const tr = sh.rot ? ` transform="rotate(-90 ${cx} ${cy})"` : '';
+    if (on){
+      const fs = Math.min(H*.6, (W-10)/(rawLen*.52), 34);
+      return `<text class="br" x="${cx}" y="${cy}" font-size="${fs.toFixed(1)}"${tr}>${brand}</text>`;
+    }
+    if (H >= 34){
+      const f1 = Math.min(13, (W-8)/(z.s.length*.5)), f2 = Math.min(H*.36, 26, (W-8)/(price(id).length*.5));
+      return `<g${tr}><text class="nm" x="${cx}" y="${cy - f2*.55}" font-size="${f1.toFixed(1)}">${z.s}</text><text class="pr" x="${cx}" y="${cy + f1*.6}" font-size="${f2.toFixed(1)}">${price(id)}</text></g>`;
+    }
+    const t = z.s + ' · ' + price(id), fs = Math.min(H*.66, 15, (W-8)/(t.length*.47));
+    return `<text class="nm" x="${cx}" y="${cy}" font-size="${fs.toFixed(1)}"${tr}>${z.s} · <tspan class="pr">${price(id)}</tspan></text>`;
+  }
+  if (sh.chip){
+    let [cx,cy] = sh.chip, [fx,fy] = sh.from; if (mx){ cx = 800 - cx; fx = 800 - fx; }
+    const t = on ? ($('brand').value.trim() || 'A TUA MARCA').toUpperCase() : z.s + ' · ' + price(id), w = t.length*6.3 + 16;
+    const ey = fy < cy ? cy - 11 : cy + 11;
+    return `<path class="lead" d="M${fx} ${fy} L${cx} ${ey}"/><g class="chip${on?' on':''}"><rect x="${cx-w/2}" y="${cy-11}" width="${w}" height="22" rx="5"/><text x="${cx}" y="${cy}" font-size="12.5">${esc(t)}</text></g>`;
+  }
+  return '';
+}
+function drawView(key){
+  const v = VIEWS[key], mir = v.mirror && state.side === 'n';
+  const rid = id => key === 'side' && ['porta','vidro','esp'].includes(id) ? id + '-' + state.side : id;
+  let shapes = '', labels = '';
+  for (const zn of v.zones){
+    const id = rid(zn.id), on = state.sel.has(id);
+    shapes += `<g class="z${on?' on':''}" data-z="${id}"><title>${Z[id].n} · ${price(id)}</title>${zn.sh.map(s=>`<path d="${s.d}"/>`).join('')}</g>`;
+    labels += `<g class="z${on?' on':''}" style="pointer-events:none">${zn.sh.map(s=>labelSVG(id, s, on, mir)).join('')}</g>`;
+  }
+  const g = mir ? `<g transform="translate(800 0) scale(-1 1)">` : '<g>';
+  const what = {side:'Lateral do Clio Rally3', front:'Frente do Clio Rally3', rear:'Traseira do Clio Rally3', top:'Clio Rally3 visto de cima'}[key];
+  $('v-'+key).innerHTML = `<svg viewBox="${v.vb}" role="img" aria-label="${what} com os espaços de patrocínio">${g}${CAR[key]}${shapes}</g>${labels}</svg>`;
+}
+
+/* ---------- Contas ---------- */
+function quote(){
+  const s = state.sel, has = id => s.has(id);
+  const ids = Object.keys(Z).filter(has);
+  const sub = ids.reduce((a,id)=>a + (Z[id].p||0), 0);
+  const disc = [];
+  const ouro = has('capo-c') && has('porta-p') && has('porta-n') && has('ail-f');
+  if (ouro) disc.push(['Pacote Ouro', 230]);
+  if (!ouro && (has('porta-p')||has('porta-n')) && has('pl-d') && (has('vidro-p')||has('vidro-n'))) disc.push(['Pacote Prata', 90]);
+  if (has('tecto-c') && (has('esp-p')||has('esp-n')) && has('pc-l')) disc.push(['Pacote Bronze', 40]);
+  const per = sub - disc.reduce((a,d)=>a+d[1],0);
+  const n = Math.min(12, Math.max(1, parseInt($('provas').value,10) || 1));
+  return {ids, sub, disc, per, n, total:per*n, pala:has('pala')};
+}
+function quoteText(q){
+  const L = ['ORÇAMENTO DE PATROCÍNIO · SUNNY SPRINT','Clio Rally3 · Rodrigo Jasmins / Tiago Rocha · Época 2027','',
+    'Empresa: ' + ($('brand').value.trim() || '(por preencher)'),'','Espaços no carro (preço por prova):'];
+  q.ids.forEach(id => L.push('• ' + Z[id].n + ' — ' + price(id)));
+  L.push('');
+  if (q.disc.length){ L.push('Soma dos espaços: ' + eur(q.sub)); q.disc.forEach(d => L.push(d[0] + ': −' + eur(d[1]))); }
+  L.push('Total por prova: ' + eur(q.per) + (q.pala ? ' + pala (a definir)' : ''));
+  if (q.n > 1){ L.push('Número de provas: ' + q.n); L.push('Total das ' + q.n + ' provas: ' + eur(q.total) + (q.pala ? ' + pala (a definir)' : '')); }
+  L.push('','Valores sujeitos a negociação. Época completa com preço especial.');
+  return L.join('\n');
+}
+function render(){
+  Object.keys(VIEWS).forEach(drawView);
+  $('side-p').setAttribute('aria-pressed', state.side==='p'); $('side-n').setAttribute('aria-pressed', state.side==='n');
+  $('rows').innerHTML = Object.keys(Z).map(id => `<button type="button" class="row${state.sel.has(id)?' on':''}" data-z="${id}" aria-pressed="${state.sel.has(id)}">
+    <span class="ck"></span><span>${Z[id].n}</span><span class="vis">${Z[id].v}</span><span class="eur">${price(id)}</span></button>`).join('');
+  $('alltot').textContent = eur(Object.values(Z).reduce((a,z)=>a+(z.p||0),0));
+  const q = quote();
+  $('lines').innerHTML = (q.ids.length ? q.ids.map(id => `<li><span>${Z[id].n}</span><span>${price(id)}</span></li>`).join('')
+      : '<li class="empty"><span>Ainda sem espaços. Toca no carro ou escolhe um pacote.</span></li>')
+    + q.disc.map(d => `<li class="disc"><span>${d[0]} aplicado</span><span>−${eur(d[1])}</span></li>`).join('');
+  const extra = q.pala ? ' + pala' : '';
+  $('perprova').textContent = eur(q.per) + extra;
+  $('totlabel').textContent = q.n > 1 ? 'Total das ' + q.n + ' provas' : 'Total (1 prova)';
+  $('total').textContent = eur(q.total) + extra;
+  $('qtext').textContent = quoteText(q);
+  $('extag').hidden = !state.example;
+}
+$('packs').innerHTML = PACKS.map(p => `<div class="pack" style="--pc:${p.color}"><h3>${p.name}</h3>
+  <div class="pp"><s>${eur(p.full)}</s><b>${eur(p.price)}</b><i>/prova</i></div>
+  <ul>${p.items.map(i=>`<li>${i}</li>`).join('')}</ul>
+  <button class="btn" type="button" data-pack="${p.id}">Ver no carro</button></div>`).join('');
+
+document.addEventListener('click', e => {
+  const z = e.target.closest('[data-z]'), pk = e.target.closest('[data-pack]');
+  if (z){ const id = z.dataset.z; state.sel.has(id) ? state.sel.delete(id) : state.sel.add(id); state.example = false; render(); }
+  else if (pk){ state.sel = new Set(PACKS.find(p=>p.id===pk.dataset.pack).set); state.side = 'p'; state.example = false; render(); }
+});
+document.addEventListener('mouseover', e => {
+  const r = e.target.closest('.row'); document.querySelectorAll('.z.hl').forEach(n=>n.classList.remove('hl'));
+  if (r) document.querySelectorAll(`.z[data-z="${r.dataset.z}"]`).forEach(n=>n.classList.add('hl'));
+});
+$('side-p').onclick = () => { state.side='p'; render(); };
+$('side-n').onclick = () => { state.side='n'; render(); };
+$('brand').oninput = () => { state.example = false; render(); };
+$('provas').oninput = render;
+$('all').onclick = () => { state.sel = new Set(Object.keys(Z).filter(id=>Z[id].p!=null)); state.example=false; render(); };
+$('clear').onclick = () => { state.sel = new Set(); state.example=false; render(); };
+$('copy').onclick = async () => {
+  const b = $('copy'), t = $('qtext').textContent;
+  try { await navigator.clipboard.writeText(t); b.textContent = 'Copiado'; }
+  catch { $('qtext').closest('details').open = true; const r = document.createRange(); r.selectNodeContents($('qtext'));
+    const s = getSelection(); s.removeAllRanges(); s.addRange(r); b.textContent = 'Texto selecionado, copia'; }
+  setTimeout(()=>b.textContent='Copiar orçamento', 2200);
+};
+render();
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(render);
+</script>
