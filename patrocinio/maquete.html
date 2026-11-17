@@ -119,7 +119,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <h1>Maquete de Patrocínio · <span>Clio Rally3</span></h1>
       <div class="sub">Espaços disponíveis no carro · <b>preços por prova, IVA incluído</b> · época 2027 · 8 provas no campeonato</div>
     </div>
-    <div class="team"><strong>Sunny Sprint</strong><span>R. Jasmins · T. Rocha</span></div>
+    <div class="team"><strong>FAC Racing Team</strong><span>R. Jasmins · T. Rocha</span></div>
   </header>
 
   <div class="main">
@@ -179,7 +179,7 @@ footer{color:var(--muted);font-size:13px;text-align:center}
       <p class="note"><b>IVA incluído.</b> Passamos fatura de publicidade pela Sunny Sprint. Valores por prova, com o logótipo do patrocinador no espaço escolhido. Para o campeonato completo fazemos um preço especial. Combinações à medida e valores finais sujeitos a negociação.</p>
     </aside>
   </div>
-  <footer>Sunny Sprint · Rodrigo Jasmins (piloto) · Tiago Rocha (navegador) · Madeira</footer>
+  <footer>FAC Racing Team · Rodrigo Jasmins (piloto) · Tiago Rocha (navegador) · Madeira</footer>
 </div>
 
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
@@ -424,7 +424,7 @@ function quote(){
   return {ids, sub, disc, per, n, total:per*n, pala:has('pala')};
 }
 function quoteText(q){
-  const L = ['ORÇAMENTO DE PATROCÍNIO · SUNNY SPRINT','Clio Rally3 · Rodrigo Jasmins / Tiago Rocha · Época 2027','',
+  const L = ['ORÇAMENTO DE PATROCÍNIO · FAC RACING TEAM','Clio Rally3 · Rodrigo Jasmins / Tiago Rocha · Época 2027','',
     'Empresa: ' + ($('brand').value.trim() || '(por preencher)'),'','Espaços no carro (preço por prova):'];
   q.ids.forEach(id => L.push('• ' + Z[id].n + ' — ' + price(id)));
   L.push('');
